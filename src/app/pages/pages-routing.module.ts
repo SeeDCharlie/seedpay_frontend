@@ -5,13 +5,18 @@ import { PagesComponent } from './pages.component';
 
 
 const routes: Routes = [
-  { 
+  {
     path: '',
-     component: HomeComponent, 
-    }
-  
-  
-  ];
+    component: HomeComponent,
+    children:[
+      {
+        
+      }
+    ]
+  }
+
+
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
