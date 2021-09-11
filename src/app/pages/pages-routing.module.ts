@@ -6,11 +6,11 @@ import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'inicio',
     component: HomeComponent,
     children:[
       {
-        
+
       }
     ]
   }

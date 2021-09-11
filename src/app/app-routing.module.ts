@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: 'inicio',
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
-  }
+  },
+  {
+    path: '**',
+    redirectTo: 'inicio'
+  },
+
 
 
 
