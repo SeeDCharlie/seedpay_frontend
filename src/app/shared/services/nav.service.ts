@@ -34,8 +34,19 @@ export class NavService {
 
 	MENUITEMS: Menu[] = [
 		{ path: '/inicio', title: 'Inicio', type: 'link'},
-		{
-			title: 'Acercade', type: 'link', path: '/aboutus' },
+		{ path: '/productos', title: 'Productos', type: 'sub', active: false, children: [
+			{ path: '/productos/', title: 'ProductoUno', type: 'link' },
+			{ path: '/productos/', title: 'ProductoDos', type: 'link' },
+			{ path: '/productos/', title: 'ProductoTres', type: 'link' }
+		]},
+		{ path: '/servicios', title: 'Servicios', type: 'sub', active: false, children: [
+			{ path: '/servicios/', title: 'serviciosUno', type: 'link' },
+			{ path: '/servicios/', title: 'serviciosDos', type: 'link' },
+			{ path: '/servicios/', title: 'serviciosTres', type: 'link' }
+		]},
+
+		{ path: '/aboutus', title: 'Conocenos', type: 'link' },
+		
 		
 		// {
 		// 	title: 'Features', type: 'sub', megaMenu: true, badge: true, badgeText: 'new', active: false, children: [

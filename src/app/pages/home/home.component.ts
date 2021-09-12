@@ -21,26 +21,19 @@ export class HomeComponent implements OnInit {
 
   constructor(private _sanitizer:DomSanitizer,
     public productService: ProductService) {
-    this.productService.getProducts.subscribe(response => {
-      this.products = response.filter(item => item.type == 'watch');
-      // Get Product Collection
-      this.products.filter((item) => {
-        item.collection.filter((collection) => {
-          const index = this.productCollections.indexOf(collection);
-          if (index === -1) this.productCollections.push(collection);
-        })
-      })
-    });
+
   }
 
   public sliders = [{
-    title: 'every time',
-    subTitle: 'mittnalier',
-    image: 'assets/images/slider/9.jpg'
+    title: 'SeeDPay YA!',
+    subTitle: 'Adquierelo',
+    image: 'assets/images/slider/home_slider_1.jpg',
+    link: '/inicio',
   }, {
-    title: 'welcome to fashion',
-    subTitle: 'Men Watch',
-    image: 'assets/images/slider/10.jpg'
+    title: 'Mas que un catalogo',
+    subTitle: 'Somos tu mano amiga',
+    image: 'assets/images/slider/home_slider_2.jpg',
+    link: '/inicio',
   }];
 
   // Logo
@@ -64,38 +57,48 @@ export class HomeComponent implements OnInit {
 
   // Collection
   public categories = [{
-    image: 'assets/images/categories/1.png',
-    title: 'watch models',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">d1 milano</a></li><li><a href="#">damaskeening</a></li><li><a href="#">diving watch</a></li><li><a href="#">dollar watch</a></li>'),
+    image: 'assets/images/categories/1.jpg',
+    link: '/login',
+    title: 'Comidas rapidas',
+    text:  this._sanitizer.bypassSecurityTrustHtml(''),
   }, {
-    image: 'assets/images/categories/2.png',
-    title: 'calculator watch',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Shock-resistant watch</a></li><li><a href="#">Skeleton watch</a></li><li><a href="#">Slow watch</a></li><li><a href="#">Solar-powered watch</a></li>'),
+    image: 'assets/images/categories/2.jpg',
+    link: '/inicio',
+    title: 'Ropa Deportiva',
+    text:  this._sanitizer.bypassSecurityTrustHtml(''),
   }, {
-    image: 'assets/images/categories/3.png',
-    title: 'Antimagnetic watch',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Watchmaking conglomerates</a></li><li><a href="#">Breitling SA</a></li><li><a href="#">Casio watches</a></li><li><a href="#">Citizen Watch</a></li>'),
+    image: 'assets/images/categories/3.jpg',
+    link: '/inicio',
+    title: 'Fisico Terapia',
+    text:  this._sanitizer.bypassSecurityTrustHtml(''),
   }, {
-    image: 'assets/images/categories/4.png',
-    title: 'History of watches',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">Manufacture dhorlogerie</a></li><li><a href="#">Mechanical watch</a></li><li><a href="#">Microbrand watches</a></li><li><a href="#">MIL-W-46374</a></li>'),
+    image: 'assets/images/categories/4.jpg',
+    link: '/inicio',
+    title: 'Drogerias',
+    text:  this._sanitizer.bypassSecurityTrustHtml(''),
   }, {
-    image: 'assets/images/categories/1.png',
-    title: 'watch models',
-    text:  this._sanitizer.bypassSecurityTrustHtml('<li><a href="#">d1 milano</a></li><li><a href="#">damaskeening</a></li><li><a href="#">diving watch</a></li><li><a href="#">dollar watch</a></li>'),
+    image: 'assets/images/categories/1.jpg',
+    link: '/inicio',
+    title: 'Tiendas',
+    text:  this._sanitizer.bypassSecurityTrustHtml(''),
   }]
 
   // collection
   public collections = [{
-    image: 'assets/images/collection/watch/1.jpg',
-    title: 'minimum 10% off',
-    text: 'new watch'
+    image: 'assets/images/collection/cell_1.png',
+    title: 'Sansung s12',
+    link: '/inicio',
+    text: 'Snsung Galaxy'
   }, {
-    image: 'assets/images/collection/watch/2.jpg',
+    image: 'assets/images/collection/moto_1.png',
+    title: 'XTZ',
+    link: '/inicio',
+    text: 'YAMAHA'
   }, {
-    image: 'assets/images/collection/watch/3.jpg',
-    title: 'minimum 10% off',
-    text: 'gold watch`'
+    image: 'assets/images/collection/pizza_1.jpg',
+    title: 'Pizza Champiñones',
+    link: '/inicio',
+    text: 'PIZZA MANIA'
   }]
 
    // Blog
