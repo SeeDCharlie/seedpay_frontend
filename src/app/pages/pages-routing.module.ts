@@ -6,9 +6,7 @@ import { PagesComponent } from './pages.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    children:[
+ 
       {
         path: 'inicio', component: HomeComponent
       },
@@ -18,8 +16,8 @@ const routes: Routes = [
       {
         path: '', redirectTo: 'inicio', pathMatch: 'full'
       },
-    ]
-  }
+    
+  
 
 
 ];
