@@ -6,20 +6,18 @@ import { PagesComponent } from './pages.component';
 
 
 const routes: Routes = [
- 
+      // Inicio
       {
         path: 'inicio', component: HomeComponent
       },
+      // Login
       {
         path: 'login', component: LoginComponent
       },
+      // Default inicio
       {
         path: '', redirectTo: 'inicio', pathMatch: 'full'
       },
-    
-  
-
-
 ];
 
 @NgModule({
