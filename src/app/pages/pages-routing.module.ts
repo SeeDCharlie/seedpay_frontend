@@ -8,11 +8,16 @@ import { PagesComponent } from './pages.component';
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
     children:[
       {
+        path: 'inicio', component: HomeComponent
+      },
+      {
         path: 'login', component: LoginComponent
-      }
+      },
+      {
+        path: '', redirectTo: 'inicio', pathMatch: 'full'
+      },
     ]
   }
 
