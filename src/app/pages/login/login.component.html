@@ -18,7 +18,7 @@
               <input type="password" class="form-control" id="pass" placeholder="Ingresa tu contraseña"
                 formControlName="pass" required="" autocomplete="on">
             </div>
-            <button type="submit" class="btn btn-solid">Ingresar</button>
+            <button type="submit" class="btn btn-solid btn-login" (click)="loginUsuario()">Ingresar</button>
           </form>
         </div>
       </div>
@@ -37,11 +37,6 @@
               <label for="apellido">Apellido</label>
               <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" formControlName="apellido" required="">
             </div>
-            <!-- Fecha nacimiento -->
-            <div class="form-group">
-              <label for="nacimiento">Fecha nacimiento</label>
-              <input bsDaterangepicker type="date" class="form-control" id="nacimiento" formControlName="nacimiento" required>
-            </div>
             <!-- Correo -->
             <div class="form-group">
               <label for="email2">Correo</label>
@@ -59,7 +54,7 @@
               <input type="password" class="form-control" id="pass3" formControlName="pass3" placeholder="Ingresa tu contraseña nuevamente"
                 required="" autocomplete="on">
             </div>
-            <button class="btn btn-solid">Registrar</button>
+            <button class="btn btn-solid btn-registrar" (click)="registrarUsuario()">Registrar</button>
           </form>
         </div>
       </div>

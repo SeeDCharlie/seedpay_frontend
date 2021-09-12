@@ -540,7 +540,7 @@ button {
     transition: background 300ms ease-in-out;
     &:hover {
         background-position: 100%;
-        color: $black;
+        color: $white;
         background-color: $white;
     }
     &.black-btn {
@@ -14184,10 +14184,10 @@ div#loading-bar {
 .sidenav nav {
     overflow-y: auto;
 }
-    
+
 .sidebar-unset {
   overflow-y: unset !important;
-}  
+}
 
 
 /* modal animation */
