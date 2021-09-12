@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../shared/shared.module';
 import { ElementsModule } from '../elements/elements.module';
 import { LoginComponent } from './login/login.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 
@@ -15,7 +16,8 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     PagesComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    AboutUsComponent
   ],
   imports: [
     CommonModule,
