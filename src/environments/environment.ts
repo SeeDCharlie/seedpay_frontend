@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  url: "http://127.0.0.1:8000/api",
   production: false,
   instagram_token: 'INSTA_TOKEN',
   stripe_token: 'STRIPE_TOKEN',
