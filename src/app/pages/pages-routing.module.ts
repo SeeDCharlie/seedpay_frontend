@@ -6,19 +6,16 @@ import { PagesComponent } from './pages.component';
 
 
 const routes: Routes = [
- 
-      {
-        path: 'inicio', component: HomeComponent
-      },
-      {
-        path: 'login', component: LoginComponent
-      },
-      {
-        path: '', redirectTo: 'inicio', pathMatch: 'full'
-      },
-    
-  
 
+  {
+    path: 'inicio', component: HomeComponent
+  },
+  {
+    path: 'login', component: LoginComponent
+  },
+  {
+    path: '', redirectTo: 'inicio', pathMatch: 'full'
+  },
 
 ];
 
