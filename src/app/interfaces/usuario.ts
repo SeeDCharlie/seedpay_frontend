@@ -6,7 +6,6 @@ export interface Usuario {
   email?: string;
   username?: string;
   celular?: string;
-  telfijo?: string;
   identificacion?: string;
   tipo_identificacion?: number;
   password?: string;

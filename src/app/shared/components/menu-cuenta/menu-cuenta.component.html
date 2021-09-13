@@ -1,0 +1,19 @@
+<div class="account-sidebar" (click)="ToggleDashboard()">
+  <a class="popup-btn">
+    Menú
+  </a>
+</div>
+<div class="dashboard-left" [class.open]="openDashboard">
+  <div class="collection-mobile-back" (click)="ToggleDashboard()">
+    <span class="filter-back">
+      <i class="fa fa-angle-left" aria-hidden="true"></i> back
+    </span>
+  </div>
+  <div class="block-content">
+    <ul>
+      <li [routerLink]="['/perfil']">Perfil</li>
+      <li><u>Negocio</u></li>
+      <!-- <li>Mis compras</li> -->
+    </ul>
+  </div>
+</div>

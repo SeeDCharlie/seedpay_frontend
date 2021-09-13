@@ -15,6 +15,7 @@ import { BlogComponent } from './widgets/blog/blog.component';
 import { LogoComponent } from './widgets/logo/logo.component';
 import { ServicesComponent } from './widgets/services/services.component';
 import { CollectionComponent } from './widgets/collection/collection.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
 
 
 
@@ -31,7 +32,8 @@ import { CollectionComponent } from './widgets/collection/collection.component';
     BlogComponent,
     LogoComponent,
     ServicesComponent,
-    CollectionComponent
+    CollectionComponent,
+    CuentaComponent
   ],
   imports: [
     CommonModule,

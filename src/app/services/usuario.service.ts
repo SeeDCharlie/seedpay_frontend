@@ -26,4 +26,15 @@ export class UsuarioService {
     return this._http.post<any>(`${this._url}/usuarios/`, request);
   }
 
+  // BUSCAR POR ID
+  buscarUsuarioId(id: string): Observable<any> {
+    return this._http.get<any>(`${this._url}/usuarios/${id}/`)
+  }
+
+  // BUSCAR POR ID
+  actualizarUsuario(id: string, request: Usuario): Observable<any> {
+    return this._http.put<any>(`${this._url}/usuarios/${id}/`, request)
+  }
+
+
 }

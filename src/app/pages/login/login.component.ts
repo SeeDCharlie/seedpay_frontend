@@ -81,7 +81,6 @@ export class LoginComponent implements OnInit {
       // VALIDAR CONTRASEÑAS IGUALES
       if (this.formRe.controls.pass2.value === this.formRe.controls.pass3.value) {
         usuario.password = this.formRe.controls.pass2.value;
-
         // REGISTRAR USUARIO
         this._usuarioService.registrarUsuario(usuario).subscribe(
           data => {
@@ -90,9 +89,18 @@ export class LoginComponent implements OnInit {
             });
           },
           error => {
-            this._toast.error("Algo ha salido mal en el proceso, lamentos los invoncenientes.", "Ha sucedido un inconveniente", {
-              timeOut: 5000
-            });
+            // ERRORES
+            if (error.error) {
+              for (let i in error.error) {
+                this._toast.error(error.error[i], "Ha sucedido un inconveniente", {
+                  timeOut: 5000
+                });
+              }
+            } else {
+              this._toast.error("Algo ha salido mal en el proceso, lamentos los invoncenientes.", "Ha sucedido un inconveniente", {
+                timeOut: 5000
+              });
+            }
           },
         );
         // CONTRASEÑAS INVALIDAS
