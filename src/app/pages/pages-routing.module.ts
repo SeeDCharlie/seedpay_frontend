@@ -4,6 +4,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { NegocioComponent } from './negocio/negocio.component';
 import { PagesComponent } from './pages.component';
 
 
@@ -16,8 +17,13 @@ const routes: Routes = [
   {
     path: 'login', component: LoginComponent
   },
+  // Cuenta
   {
     path: 'cuenta', component: CuentaComponent
+  },
+  // Negocio
+  {
+    path: 'negocio', component: NegocioComponent
   },
   {
     path: 'aboutus', component: AboutUsComponent

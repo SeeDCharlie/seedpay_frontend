@@ -16,6 +16,7 @@ import { LogoComponent } from './widgets/logo/logo.component';
 import { ServicesComponent } from './widgets/services/services.component';
 import { CollectionComponent } from './widgets/collection/collection.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
+import { NegocioComponent } from './negocio/negocio.component';
 
 
 
@@ -33,7 +34,8 @@ import { CuentaComponent } from './cuenta/cuenta.component';
     LogoComponent,
     ServicesComponent,
     CollectionComponent,
-    CuentaComponent
+    CuentaComponent,
+    NegocioComponent
   ],
   imports: [
     CommonModule,

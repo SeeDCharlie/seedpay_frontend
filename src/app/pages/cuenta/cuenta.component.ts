@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { TipoIdentificacion } from 'src/app/interfaces/tipoIdentificacion';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { TipoIdentificacionService } from 'src/app/services/tipo-identificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
@@ -16,6 +18,7 @@ export class CuentaComponent implements OnInit {
 
   idUsuario: string = sessionStorage.getItem('id');
   usuario: Usuario;
+  listTipoIdentificacion: TipoIdentificacion[];
   private _passC: string = "";
 
   public openDashboard: boolean = false;
@@ -27,7 +30,8 @@ export class CuentaComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _toast: ToastrService,
-    private _usuarioService: UsuarioService
+    private _usuarioService: UsuarioService,
+    private _tipoIdentificacion: TipoIdentificacionService,
   ) { }
 
   ngOnInit(): void {
@@ -40,11 +44,14 @@ export class CuentaComponent implements OnInit {
 
     this.formUsuario = this._formBuilder.group({
       'direccion': ['', Validators.required],
-      'identificacion': ['', Validators.required],
       'telefono': ['', Validators.required],
+      'identificacion': ['', Validators.required],
+      'TipoIdentificacion': ['', Validators.required],
+
     })
 
     this.buscarUsuarioId(this.idUsuario);
+    this.getTipoIdentificacion();
     this.formCuenta.controls.correo.disable;
   }
 
@@ -120,6 +127,16 @@ export class CuentaComponent implements OnInit {
         timeOut: 5000
       });
     }
+  }
+
+  //Metodo Tipos de identificación
+  getTipoIdentificacion(){
+    this._tipoIdentificacion.getTipoIdentificacion().subscribe(
+      data => {
+        this.listTipoIdentificacion = data;
+
+      }
+    )
   }
 
 

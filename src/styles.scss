@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+.obli{
+  color: red;
+  font-size: 18px;
+}
+
+.info{
+  color: aqua;
+  font-size: 18px;
+}
+
+.btn-green:hover{
+  background-color: rgb(0, 219, 18) !important;
+}
+
+.btn-yellow:hover{
+  background-color: gold !important;
+}
+
+.action:hover{
+  cursor: pointer;
+}
+
+td:hover{
+  cursor: help;
+  caret-color: aqua;
+}
+
