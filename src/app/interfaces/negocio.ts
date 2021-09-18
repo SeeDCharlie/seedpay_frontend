@@ -1,0 +1,12 @@
+export interface Negocio {
+  id?:          number;
+  nombre?:      string;
+  descripcion?: string;
+  nit?:         string;
+  usuario?:     number;
+  telefono?:    number;
+  telefono1?:   number;
+  telefono2?:   number;
+  correo?:      string;
+  direccion?:   string;
+}
