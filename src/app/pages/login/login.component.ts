@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit {
     private _toast: ToastrService,
     private _usuarioService: UsuarioService,
     private _router: Router,
-  ) { }
+  ) {
+    sessionStorage.removeItem('id');
+   }
 
   ngOnInit(): void {
     this.formLo = this._formBuilder.group({
