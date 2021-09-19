@@ -1,0 +1,154 @@
+<app-breadcrumb [title]="'Negocio'" [breadcrumb]="'Negocio'"></app-breadcrumb>
+
+<!-- section start -->
+<section class="section-b-space">
+  <div class="container">
+    <div class="row">
+      <!-- MENU -->
+      <div class="col-lg-3">
+        <app-menu-cuenta></app-menu-cuenta>
+      </div>
+
+      <!-- INFORMACIÓN DE PRODUCTOS -->
+      <div class="col-lg-9">
+        <div class="contact-page register-page">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3>Información de productos</h3>
+                <form class="theme-form" [formGroup]="formProducto">
+                  <div class="form-row">
+                    <!-- NOMBRE -->
+                    <div class="col-md-6">
+                      <label for="nombre">Nombre <span class="obli">*</span></label>
+                      <input type="text" class="form-control" id="nombre" placeholder="Ingresa el nombre del negocio"
+                        formControlName="nombre" required="">
+                    </div>
+                    <!-- PRECIO -->
+                    <div class="col-md-6">
+                      <label for="precio">Precio <span class="obli">*</span></label>
+                      <input type="number" class="form-control" id="precio"
+                        placeholder="Ingresa el telefono del negocio" formControlName="precio" required="">
+                    </div>
+                    <!-- DISPONIBLE -->
+                    <div class="col-md-6 select_input">
+                      <label for="disponible">Disponible <span class="obli">*</span></label>
+                      <select class="form-control" style="padding: 15px;"  formControlName="disponible" size="1" required>
+                        <option disabled selected>Selecciona si el producto será visible al publico.</option>
+                        <option value="true">
+                          Sí
+                        </option>
+                        <option value="false">
+                          No
+                        </option>
+                      </select>
+                    </div>
+                    <!-- DESCRIPCIÓN -->
+                    <div class="col-md-12">
+                      <label for="review">Descripción <span class="obli">*</span></label>
+                      <textarea class="form-control mb-0" formControlName="descripcion" required=""
+                        placeholder="Ingresa la descripción de tu negocio - ¨¿Qué tipo de negocio es?¨ - ¨¿Qué vendes?¨"
+                        rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row btn-negocios" style="margin-top: 30px;">
+                    <!-- GUARDAR -->
+                    <div *ngIf="!idNegocio" class="col-md-6 btn-negocio">
+                      <button class="btn btn-sm btn-solid btn-green" type="submit" (click)="guardarDatos()">Guardar
+                        datos</button>
+                    </div>
+                    <!-- ACTUALIZAR -->
+                    <div *ngIf="idNegocio" class="col-md-6 btn-negocio">
+                      <button class="btn btn-sm btn-solid btn-green" type="submit"
+                        (click)="actualizarDatos()">Actualizar datos</button>
+                    </div>
+                    <!-- LIMPIAR -->
+                    <div class="col-md-6 btn-negocio">
+                      <button class="btn btn-sm btn-solid btn-yellow" style="float: right;"
+                        (click)=limpiar()>Limpiar</button>
+
+                    </div>
+                    <h3 class="mt-4">Mis productos</h3>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA NEGOCIOS -->
+<section class="wishlist-section section-b-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 table-negocio" style="overflow-x:auto;">
+        <table class="table cart-table table-responsive-xs">
+          <thead>
+            <tr class="table-head">
+              <th scope="col">Imagen</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Dirección</th>
+              <th scope="col">action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of listProductos">
+              <!-- IMAGEN -->
+              <td>
+                <a>
+                  <img src="assets/images/product/fashion/1.jpg" alt="negocio">
+                </a>
+              </td>
+              <!-- NOMBRE -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{negocio.nombre}}
+                </p>
+              </td>
+              <!-- DESCRIPCION -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{negocio.descripcion}}
+                </p>
+              </td>
+              <!-- CORREO -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{negocio.correo}}
+                </p>
+              </td>
+              <!-- TELEFONO -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{negocio.telefono}}
+                </p>
+              </td>
+              <!-- DIRECCION -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{negocio.direccion}}
+                </p>
+              </td>
+              <!-- ACCIONES -->
+              <td>
+                <a class="icon mr-4 action" style="font-size: 20px;">
+                  <i class="ti-close" style="color: red;"></i>
+                </a>
+                <a class="cart action" style="font-size: 20px;" (click)="cargarDatos(negocio.id)">
+                  <i class="ti-pencil" style="color: orange;"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

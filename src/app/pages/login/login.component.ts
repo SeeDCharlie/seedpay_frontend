@@ -99,7 +99,7 @@ export class LoginComponent implements OnInit {
                 });
               }
             } else {
-              this._toast.error("Algo ha salido mal en el proceso, lamentos los invoncenientes.", "Ha sucedido un inconveniente", {
+              this._toast.error("Algo ha salido mal en el proceso, lamentamos los inconvenientes.", "Ha sucedido un inconveniente", {
                 timeOut: 5000
               });
             }
