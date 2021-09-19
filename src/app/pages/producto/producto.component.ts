@@ -18,8 +18,8 @@ export class ProductoComponent implements OnInit {
   idNegocio: string = sessionStorage.getItem('negocio');
   idProducto: string = null;
 
-  listProductos: Negocio[] = [];
-  negocio: Negocio;
+  listProductos: Producto[] = [];
+  producto: Producto;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -36,7 +36,6 @@ export class ProductoComponent implements OnInit {
       'descripcion': ['', Validators.required],
 
     });
-
     this.buscarProductosId();
   }
 
@@ -93,12 +92,14 @@ export class ProductoComponent implements OnInit {
     if (this.formProducto.valid) {
 
       let producto: Producto = {
+        negocio: Number(this.idNegocio),
+
         nombre: this.formProducto.controls.nombre.value,
         precio: this.formProducto.controls.precio.value,
         disponible: this.formProducto.controls.disponible.value,
         descripcion: this.formProducto.controls.descripcion.value,
       }
-      this._productoService.actualizarProducto(this.idNegocio, producto).subscribe(
+      this._productoService.actualizarProducto(this.idProducto, producto).subscribe(
         data => {
           // NEGOCIO ACTUALIZADO
           this.buscarProductosId();
@@ -153,22 +154,18 @@ export class ProductoComponent implements OnInit {
 
   // METODO CARGAR DATOS
   cargarDatos(id) {
-    sessionStorage.setItem('negocio', id);
-    this.idNegocio = id;
+    this.idProducto = id;
 
     this._productoService.buscarProductoId(id).subscribe(
       data => {
-        this.negocio = data;
+        this.producto = data;
 
+        this.formProducto.controls.nombre.setValue(this.producto.nombre);
+        this.formProducto.controls.precio.setValue(Number(this.producto.precio));
+        this.formProducto.controls.disponible.setValue(this.producto.disponible);
+        this.formProducto.controls.descripcion.setValue(this.producto.descripcion);
 
-        this.formProducto.controls.nombre.setValue(this.negocio.nombre);
-        this.formProducto.controls.correo.setValue(this.negocio.correo);
-        this.formProducto.controls.telefono.setValue(this.negocio.telefono);
-        this.formProducto.controls.direccion.setValue(this.negocio.direccion);
-        this.formProducto.controls.descripcion.setValue(this.negocio.descripcion);
-
-
-        this._toast.info("Edita los datos del negocio seleccionado.", "Carga exitosa", {
+        this._toast.info("Edita los datos del producto seleccionado.", "Carga exitosa", {
           timeOut: 5000
         });
       }
@@ -179,8 +176,7 @@ export class ProductoComponent implements OnInit {
 
   //METODO LIMPIAR FORMULARIO Y IDPRODUCTO (BOTON)
   limpiar() {
-    sessionStorage.removeItem('negocio');
-    this.idNegocio = null;
+    this.idProducto = null;
 
     this.formProducto.reset();
   }
