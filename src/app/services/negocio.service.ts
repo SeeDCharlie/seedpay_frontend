@@ -15,7 +15,20 @@ export class NegocioService {
     private _http: HttpClient
   ) { }
 
+  buscarNegocioIdUsuario(id: any): Observable<any>{
+    return this._http.get<any>(`${this._url}/negocio/?usuario=${id}`);
+  }
+
+  buscarNegocioId(id: any): Observable<any>{
+    return this._http.get<any>(`${this._url}/negocio/${id}`);
+  }
+
   guardarNegocio(request: Negocio): Observable<any>{
     return this._http.post(`${this._url}/negocio/`, request);
   }
+
+  actualizarNegocio(id: string ,request: Negocio): Observable<any>{
+    return this._http.put(`${this._url}/negocio/${id}/`, request);
+  }
+
 }

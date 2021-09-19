@@ -26,3 +26,9 @@ td:hover{
   caret-color: aqua;
 }
 
+.row::-webkit-scrollbar {
+  width: 8px;     /* Tamaño del scroll en vertical */
+  height: 8px;    /* Tamaño del scroll en horizontal */
+  display: none !important;  /* Ocultar scroll */
+}
+

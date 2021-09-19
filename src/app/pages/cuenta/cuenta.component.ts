@@ -18,11 +18,11 @@ export class CuentaComponent implements OnInit {
 
   idUsuario: string = sessionStorage.getItem('id');
   usuario: Usuario;
-  listTipoIdentificacion: TipoIdentificacion[];
+  listTipoIdentificacion: TipoIdentificacion[] = [];
   private _passC: string = "";
 
   public openDashboard: boolean = false;
-    ToggleDashboard() {
+  ToggleDashboard() {
     this.openDashboard = !this.openDashboard;
   }
 
@@ -107,7 +107,7 @@ export class CuentaComponent implements OnInit {
             },
             error => {
               // ERROR INESPERADO
-              this._toast.error("Algo ha salido mal en el proceso, lamentos los invoncenientes.", "Ha sucedido un inconveniente", {
+              this._toast.error("Algo ha salido mal en el proceso, lamentamos los inconvenientes.", "Ha sucedido un inconveniente", {
                 timeOut: 5000
               });
             }
@@ -130,13 +130,12 @@ export class CuentaComponent implements OnInit {
   }
 
   //Metodo Tipos de identificación
-  getTipoIdentificacion(){
+  getTipoIdentificacion() {
     this._tipoIdentificacion.getTipoIdentificacion().subscribe(
       data => {
         this.listTipoIdentificacion = data;
-
       }
-    )
+    );
   }
 
 
