@@ -32,3 +32,16 @@ td:hover{
   display: none !important;  /* Ocultar scroll */
 }
 
+.uploadImg{
+  opacity: 0%;
+  width: 100%;
+  outline: none;
+  position: absolute;
+  cursor: pointer;
+}
+
+.uploadIcon{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.02);
+}
+

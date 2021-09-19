@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Negocio } from 'src/app/interfaces/negocio';
 import { NegocioService } from 'src/app/services/negocio.service';
+import imageToBase64 from 'image-to-base64/browser';
+import { Observable, Subscribable, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-negocio',
@@ -19,6 +21,8 @@ export class NegocioComponent implements OnInit {
 
   listNegocios: Negocio[] = [];
   negocio: Negocio;
+
+  img: string = null;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -37,10 +41,49 @@ export class NegocioComponent implements OnInit {
       'telefono': ['', Validators.required],
       'direccion': '',
       'descripcion': ['', Validators.required],
-
     });
 
     this.buscarNegociosId();
+  }
+
+  // METODO CAPTURAR IMAGEN
+  onChange($event: Event){
+    const file = ($event.target as HTMLInputElement).files[0];
+    // console.log(file);
+    this.convertBase64(file)
+
+  }
+
+  // METODO CONVERTIDOR A BASE64
+  convertBase64(file: File){
+    const obs = new Observable( (sub: Subscriber<any>) => {
+
+      this.readFile(file, sub);
+
+    });
+    obs.subscribe( data => {
+      console.log(data);
+      this.img = data;
+    });
+
+  }
+
+  // METODO LEER ARCHIVO IMAGEN
+  readFile(file: File, sub: Subscriber<any>){
+
+    const fileReader = new FileReader();
+
+    fileReader.readAsDataURL(file);
+
+    fileReader.onload = () => {
+      sub.next(fileReader.result);
+      sub.complete();
+    };
+
+    fileReader.onerror = (err) => {
+      sub.error(err);
+      sub.complete();
+    };
   }
 
   // METODO GUARDAR
@@ -55,7 +98,11 @@ export class NegocioComponent implements OnInit {
         telefono: this.formNegocio.controls.telefono.value,
         direccion: this.formNegocio.controls.direccion.value || "N/A",
         descripcion: this.formNegocio.controls.descripcion.value,
+        imagen_64: this.img || null,
       }
+
+
+
       this._negocioService.guardarNegocio(negocio).subscribe(
         data => {
           // NEGOCIO CREADO
@@ -75,7 +122,7 @@ export class NegocioComponent implements OnInit {
               });
             }
           } else {
-            this._toast.error("Algo ha salido mal en el proceso, lamentamos los inconvenientes.", "Ha sucedido un inconveniente", {
+            this._toast.error("Algo ha salido mal en el proceso, lamentos los invoncenientes.", "Ha sucedido un inconveniente", {
               timeOut: 5000
             });
           }
@@ -101,6 +148,7 @@ export class NegocioComponent implements OnInit {
         telefono: this.formNegocio.controls.telefono.value,
         direccion: this.formNegocio.controls.direccion.value || " ",
         descripcion: this.formNegocio.controls.descripcion.value,
+        imagen_64: this.img || null,
       }
       this._negocioService.actualizarNegocio(this.idNegocio, negocio).subscribe(
         data => {
@@ -122,7 +170,7 @@ export class NegocioComponent implements OnInit {
               });
             }
           } else {
-            this._toast.error("Algo ha salido mal en el proceso, lamentamos los inconvenientes.", "Ha sucedido un inconveniente", {
+            this._toast.error("Algo ha salido mal en el proceso, lamentos los invoncenientes.", "Ha sucedido un inconveniente", {
               timeOut: 5000
             });
           }
@@ -163,6 +211,7 @@ export class NegocioComponent implements OnInit {
       data => {
         this.negocio = data;
 
+        this.img = this.negocio.imagen_64;
 
         this.formNegocio.controls.nombre.setValue(this.negocio.nombre);
         this.formNegocio.controls.correo.setValue(this.negocio.correo);
@@ -192,6 +241,7 @@ export class NegocioComponent implements OnInit {
   limpiar() {
     sessionStorage.removeItem('negocio');
     this.idNegocio = null;
+    this.img = null;
 
     this.formNegocio.reset();
   }

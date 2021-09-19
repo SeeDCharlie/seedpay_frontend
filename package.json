@@ -45,6 +45,7 @@
     "font-awesome": "^4.7.0",
     "fs": "0.0.1-security",
     "hammerjs": "^2.0.8",
+    "image-to-base64": "^2.2.0",
     "imagesloaded": "^4.1.4",
     "isotope-layout": "^3.0.6",
     "localstorage-polyfill": "^1.0.1",
