@@ -54,6 +54,7 @@ import { TapToTopComponent } from './components/tap-to-top/tap-to-top.component'
 // Pipes
 import { DiscountPipe } from './pipes/discount.pipe';
 import { MenuCuentaComponent } from './components/menu-cuenta/menu-cuenta.component';
+import { SiNoPipe } from './pipes/si-no.pipe';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { MenuCuentaComponent } from './components/menu-cuenta/menu-cuenta.compon
     LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe,
-    MenuCuentaComponent
+    MenuCuentaComponent,
+    SiNoPipe
   ],
   imports: [
     CommonModule,
@@ -141,8 +143,9 @@ import { MenuCuentaComponent } from './components/menu-cuenta/menu-cuenta.compon
     SkeletonProductBoxComponent,
     LayoutBoxComponent,
     TapToTopComponent,
+    MenuCuentaComponent,
     DiscountPipe,
-    MenuCuentaComponent
+    SiNoPipe,
   ]
 })
 export class SharedModule { }

@@ -31,7 +31,7 @@ export class UsuarioService {
     return this._http.get<any>(`${this._url}/usuarios/${id}/`)
   }
 
-  // BUSCAR POR ID
+  // ACTUALIZAR
   actualizarUsuario(id: string, request: Usuario): Observable<any> {
     return this._http.put<any>(`${this._url}/usuarios/${id}/`, request)
   }
