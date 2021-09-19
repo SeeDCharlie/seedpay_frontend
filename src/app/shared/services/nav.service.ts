@@ -34,17 +34,13 @@ export class NavService {
 
 	MENUITEMS: Menu[] = [
 		{ path: '/inicio', title: 'Inicio', type: 'link'},
-		{ path: '/productos', title: 'Productos', type: 'sub', active: false, children: [
-			{ path: '/productos/', title: 'ProductoUno', type: 'link' },
-			{ path: '/productos/', title: 'ProductoDos', type: 'link' },
-			{ path: '/productos/', title: 'ProductoTres', type: 'link' }
+		{ path: '/compra', title: 'Categorias', type: 'sub', active: false, children: [
+			{ path: '/comidasRapidas/', title: 'Comidas Rapidas', type: 'link' },
+			{ path: '/licores/', title: 'Licores', type: 'link' },
+			{ path: '/tiendas/', title: 'Tiendas', type: 'link' }
 		]},
-		{ path: '/servicios', title: 'Servicios', type: 'sub', active: false, children: [
-			{ path: '/servicios/', title: 'serviciosUno', type: 'link' },
-			{ path: '/servicios/', title: 'serviciosDos', type: 'link' },
-			{ path: '/servicios/', title: 'serviciosTres', type: 'link' }
-		]},
-
+	
+		{ path: '/adquiere', title: 'Adquiere SeeDPay', type: 'link' },
 		{ path: '/aboutus', title: 'Conocenos', type: 'link' },
 		
 		
