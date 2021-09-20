@@ -5,7 +5,8 @@
 <ng-container *ngFor="let negocio of negocios | slice:0:7">
 
     <app-product-slider [nombreNegocio]="negocio.nombre" 
-                        [idNegocio]="negocio.id">
+                        [idNegocio]="negocio.id"
+                        [imgNegocio]="negocio.imagen_64">
     </app-product-slider>
 
 </ng-container>

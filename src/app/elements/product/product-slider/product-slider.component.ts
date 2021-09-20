@@ -14,6 +14,7 @@ export class ProductSliderComponent implements OnInit {
 
   @Input() nombreNegocio: string = 'Cat';
   @Input() idNegocio: number = 0;
+  @Input() imgNegocio: string;
 
 
   public products: Producto[];

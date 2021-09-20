@@ -1,3 +1,14 @@
 .tituloNegocio{
-    padding-left: 50px;
+    padding:50px;
+    h2{
+        color: rgb(63, 63, 63);
+    }
+}
+
+.imgresponsive{
+    height: auto; 
+    width: auto; 
+    max-width: 150px; 
+    max-height: 150px;
+    border-radius:50px
 }
