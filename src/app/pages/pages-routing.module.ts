@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth.guard';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { HomeComponent } from './home/home.component';
@@ -20,15 +21,18 @@ const routes: Routes = [
   },
   // Cuenta
   {
-    path: 'cuenta', component: CuentaComponent
+    path: 'cuenta', component: CuentaComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // Negocio
   {
-    path: 'negocio', component: NegocioComponent
+    path: 'negocio', component: NegocioComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // Producto
   {
-    path: 'producto', component: ProductoComponent
+    path: 'producto', component: ProductoComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   {
     path: 'aboutus', component: AboutUsComponent

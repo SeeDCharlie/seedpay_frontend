@@ -49,12 +49,12 @@ export class NegocioComponent implements OnInit {
   // METODO CAPTURAR IMAGEN
   onChange($event: Event){
     const file = ($event.target as HTMLInputElement).files[0];
-    // console.log(file);
+    console.log($event.target);
     this.convertBase64(file)
 
   }
 
-  // METODO CONVERTIDOR A BASE64
+  // METODO RETORNA IMAGEN
   convertBase64(file: File){
     const obs = new Observable( (sub: Subscriber<any>) => {
 
@@ -62,7 +62,7 @@ export class NegocioComponent implements OnInit {
 
     });
     obs.subscribe( data => {
-      console.log(data);
+      // console.log(data);
       this.img = data;
     });
 

@@ -58,7 +58,7 @@ export class ProductoComponent implements OnInit {
 
     });
     obs.subscribe( data => {
-      console.log(data);
+      // console.log(data);
       this.img = data;
     });
 
