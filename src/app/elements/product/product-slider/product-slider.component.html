@@ -1,7 +1,17 @@
 
 <!-- Product slider start-->
-<div class="tituloNegocio section-t-space">
-    <h2 class="title-inner1">{{nombreNegocio}}</h2>
+<div class="section-t-space">
+  <div class="row tituloNegocio">
+    <div class="col-2">
+      <img           
+        [lazyLoad]="imgNegocio" 
+        class="img-fluid imgresponsive" >
+    </div>
+    <div class="col-10"><br>
+      <h2 class="title-inner1">{{nombreNegocio}}</h2><br><hr>
+    </div>
+  </div>
+    
 </div>
   <section class="section-b-space p-t-0">
     <div class="container">
