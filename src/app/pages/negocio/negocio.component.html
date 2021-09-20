@@ -17,6 +17,20 @@
               <div class="col-sm-12">
                 <h3>Información del negocio</h3>
                 <form class="theme-form" [formGroup]="formNegocio">
+
+                  <!-- IMAGEN -->
+                  <label for="imagen">Imagen</label>
+                  <div class="form-control">
+                    <a class="icon mr-4 action uploadIcon" style="font-size: 20px;">
+                      <i class="ti-image " style="color: rgb(35, 197, 197);"> Carga tu imagen</i>
+                    </a>
+                    <input type="file" class="uploadImg" (change)=onChange($event) accept="image/*">
+                  </div>
+
+                  <img *ngIf="img" class="rounded mx-auto d-block m-3" [src]="img" width="180px" height="150px" style="border: 3px aqua solid;"
+                    alt="img">
+
+
                   <div class="form-row">
                     <!-- NOMBRE -->
                     <div class="col-md-6">
@@ -94,7 +108,7 @@
               <th scope="col">Correo</th>
               <th scope="col">Telefono</th>
               <th scope="col">Dirección</th>
-              <th scope="col">action</th>
+              <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -102,7 +116,7 @@
               <!-- IMAGEN -->
               <td (click)="getIdNegocio(negocio.id)">
                 <a>
-                  <img src="assets/images/product/fashion/1.jpg" alt="negocio">
+                  <img [src]="negocio.imagen_64">
                 </a>
               </td>
               <!-- NOMBRE -->
