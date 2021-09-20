@@ -6,5 +6,5 @@ export interface Producto {
   negocio?:     number;
   disponible?:  boolean;
   categorias?:  any[];
-  imagen_64?:   null;
+  imagen_64?:   string;
 }

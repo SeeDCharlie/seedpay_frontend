@@ -17,6 +17,19 @@
               <div class="col-sm-12">
                 <h3>Información de productos</h3>
                 <form class="theme-form" [formGroup]="formProducto">
+
+                  <!-- IMAGEN -->
+                  <label for="imagen">Imagen</label>
+                  <div class="form-control">
+                    <a class="icon mr-4 action uploadIcon" style="font-size: 20px;">
+                      <i class="ti-image " style="color: rgb(35, 197, 197);"> Carga tu imagen</i>
+                    </a>
+                    <input type="file" class="uploadImg" (change)=onChange($event) accept="image/*">
+                  </div>
+
+                  <img *ngIf="img" class="rounded mx-auto d-block m-3" [src]="img" width="180px" height="150px"
+                    style="border: 3px aqua solid;" alt="img">
+
                   <div class="form-row">
                     <!-- NOMBRE -->
                     <div class="col-md-6">
@@ -27,13 +40,14 @@
                     <!-- PRECIO -->
                     <div class="col-md-6">
                       <label for="precio">Precio <span class="obli">*</span></label>
-                      <input type="number" class="form-control" id="precio"
-                        placeholder="Ingresa el precio del producto" formControlName="precio" required="">
+                      <input type="number" class="form-control" id="precio" placeholder="Ingresa el precio del producto"
+                        formControlName="precio" required="">
                     </div>
                     <!-- DISPONIBLE -->
                     <div class="col-md-6 select_input">
                       <label for="disponible">Disponible <span class="obli">*</span></label>
-                      <select class="form-control" style="padding: 15px;"  formControlName="disponible" size="1" required>
+                      <select class="form-control" style="padding: 15px;" formControlName="disponible" size="1"
+                        required>
                         <option disabled selected>Selecciona si el producto será visible al publico.</option>
                         <option value="true">
                           Sí
@@ -100,9 +114,9 @@
           <tbody>
             <tr *ngFor="let producto of listProductos">
               <!-- IMAGEN -->
-              <td>
+              <td >
                 <a>
-                  <img src="assets/images/product/fashion/1.jpg" alt="negocio">
+                  <img [src]="producto.imagen_64">
                 </a>
               </td>
               <!-- NOMBRE -->
