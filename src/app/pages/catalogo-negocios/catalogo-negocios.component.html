@@ -1,7 +1,15 @@
 <app-header-one [themeLogo]="themeLogo"></app-header-one>
 <app-breadcrumb [title]="'Categoria'" [breadcrumb]="nombreCategoria"></app-breadcrumb>
 
-<app-product-slider [nombreNegocio]="nombreCategoria"></app-product-slider>
+
+<ng-container *ngFor="let negocio of negocios">
+
+    <app-product-slider [nombreNegocio]="negocio.nombre" 
+                        [idNegocio]="negocio.id">
+    </app-product-slider>
+
+</ng-container>
+
 
 
 <app-footer-one [themeLogo]="themeLogo"></app-footer-one>

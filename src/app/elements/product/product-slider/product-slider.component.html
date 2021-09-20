@@ -23,8 +23,8 @@
               <ng-template carouselSlide>
                 <div class="product-box">
                   <app-product-box-one 
-                    [product]="product" 
-                    [currency]="productService?.Currency"
+                    [product]="product.nombre" 
+                    [currency]="product.precio"
                     [thumbnail]="true"
                     [cartModal]="true">
                   </app-product-box-one>

@@ -3,6 +3,7 @@ import { QuickViewComponent } from "../../modal/quick-view/quick-view.component"
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
 import { Product } from "../../../classes/product";
 import { ProductService } from "../../../services/product.service";
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-product-box-one',
@@ -11,7 +12,7 @@ import { ProductService } from "../../../services/product.service";
 })
 export class ProductBoxOneComponent implements OnInit {
 
-  @Input() product: Product;
+  @Input() product: Producto;
   @Input() currency: any = this.productService.Currency; // Default Currency 
   @Input() thumbnail: boolean = false; // Default False 
   @Input() onHowerChangeImage: boolean = false; // Default False

@@ -35,4 +35,8 @@ export class NegocioService {
     return this._http.put(`${this._url}/negocio/${id}/`, request);
   }
 
+  getNegocios():Observable<Negocio[]>{
+    return this._http.get<Negocio[]>(`${this._url}/negocio/`);
+  }
+
 }
