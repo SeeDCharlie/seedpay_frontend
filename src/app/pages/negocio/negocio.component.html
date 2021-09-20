@@ -56,8 +56,8 @@
                       <select class="form-control" style="padding: 15px;" formControlName="categoria" size="1"
                       required>
                         <option disabled selected value>Selecciona la categoría en la que se encuentra tu negocio.</option>
-                        <option *ngFor="let categoria of listaCategorias" value="categoria.id">
-                          {{categoria.nombre}}
+                        <option *ngFor="let cateNegocio of listaCategorias" [value]="cateNegocio.id">
+                          {{cateNegocio.nombre}}
                         </option>
                       </select>
                     </div>

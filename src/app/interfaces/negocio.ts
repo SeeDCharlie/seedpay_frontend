@@ -9,5 +9,6 @@ export interface Negocio {
   telefono2?: number;
   correo?: string;
   direccion?: string;
-  imagen_64?: string,
+  imagen_64?: string;
+  categorias?: number[];
 }

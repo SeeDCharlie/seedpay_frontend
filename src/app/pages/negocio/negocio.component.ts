@@ -96,6 +96,10 @@ export class NegocioComponent implements OnInit {
   guardarDatos() {
     if (this.formNegocio.valid) {
 
+      let listCateNego: number[] = []
+
+      listCateNego.push(this.formNegocio.controls.categoria.value);
+
       let negocio: Negocio = {
         usuario: Number(this.idUsuario),
 
@@ -105,6 +109,7 @@ export class NegocioComponent implements OnInit {
         direccion: this.formNegocio.controls.direccion.value || "N/A",
         descripcion: this.formNegocio.controls.descripcion.value,
         imagen_64: this.img || null,
+        categorias: listCateNego,
       }
 
 
@@ -148,6 +153,11 @@ export class NegocioComponent implements OnInit {
 
     if (this.formNegocio.valid) {
 
+      let listCateNego: number[] = []
+
+      listCateNego.push(this.formNegocio.controls.categoria.value);
+
+
       let negocio: Negocio = {
         nombre: this.formNegocio.controls.nombre.value,
         correo: this.formNegocio.controls.correo.value,
@@ -155,6 +165,7 @@ export class NegocioComponent implements OnInit {
         direccion: this.formNegocio.controls.direccion.value || " ",
         descripcion: this.formNegocio.controls.descripcion.value,
         imagen_64: this.img || null,
+        categorias: listCateNego,
       }
       this._negocioService.actualizarNegocio(this.idNegocio, negocio).subscribe(
         data => {
@@ -224,7 +235,7 @@ export class NegocioComponent implements OnInit {
         this.formNegocio.controls.telefono.setValue(this.negocio.telefono);
         this.formNegocio.controls.direccion.setValue(this.negocio.direccion);
         this.formNegocio.controls.descripcion.setValue(this.negocio.descripcion);
-
+        this.formNegocio.controls.categoria.setValue(this.negocio.categorias[0]);
 
         this._toast.info("Edita los datos del negocio seleccionado.", "Carga exitosa", {
           timeOut: 5000
