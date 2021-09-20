@@ -27,8 +27,8 @@
                     <input type="file" class="uploadImg" (change)=onChange($event) accept="image/*">
                   </div>
 
-                  <img *ngIf="img" class="rounded mx-auto d-block m-3" [src]="img" width="180px" height="150px" style="border: 3px aqua solid;"
-                    alt="img">
+                  <img *ngIf="img" class="rounded mx-auto d-block m-3" [src]="img" width="180px" height="150px"
+                    style="border: 3px aqua solid;" alt="img">
 
 
                   <div class="form-row">
@@ -49,6 +49,17 @@
                       <label for="telefono">Telefono <span class="obli">*</span></label>
                       <input type="number" class="form-control" id="telefono"
                         placeholder="Ingresa el telefono del negocio" formControlName="telefono" required="">
+                    </div>
+                    <!-- CATEGORIAS NEGOCIO -->
+                    <div class="col-md-6 select_input">
+                      <label for="categoria">Categoría del negocio <span class="obli">*</span></label>
+                      <select class="form-control" style="padding: 15px;" formControlName="categoria" size="1"
+                      required>
+                        <option disabled selected value>Selecciona la categoría en la que se encuentra tu negocio.</option>
+                        <option *ngFor="let categoria of listaCategorias" value="categoria.id">
+                          {{categoria.nombre}}
+                        </option>
+                      </select>
                     </div>
                     <!-- DIRECCIÓN -->
                     <div class="col-md-6 mt-1">

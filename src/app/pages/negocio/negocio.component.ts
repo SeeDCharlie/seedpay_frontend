@@ -6,6 +6,8 @@ import { Negocio } from 'src/app/interfaces/negocio';
 import { NegocioService } from 'src/app/services/negocio.service';
 import imageToBase64 from 'image-to-base64/browser';
 import { Observable, Subscribable, Subscriber } from 'rxjs';
+import { CategoriaNegocio } from 'src/app/interfaces/categoriaNegocio';
+import { CategoriaNegocioService } from 'src/app/services/categoria-negocio.service';
 
 @Component({
   selector: 'app-negocio',
@@ -20,6 +22,7 @@ export class NegocioComponent implements OnInit {
   idNegocio: string = null;
 
   listNegocios: Negocio[] = [];
+  listaCategorias: CategoriaNegocio[] = [];
   negocio: Negocio;
 
   img: string = null;
@@ -28,7 +31,8 @@ export class NegocioComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _toast: ToastrService,
     private _router: Router,
-    private _negocioService: NegocioService
+    private _negocioService: NegocioService,
+    private _cateNegoService: CategoriaNegocioService,
 
   ) {
     sessionStorage.removeItem('negocio');
@@ -40,14 +44,16 @@ export class NegocioComponent implements OnInit {
       'correo': ['', Validators.required],
       'telefono': ['', Validators.required],
       'direccion': '',
+      'categoria': ['', Validators.required],
       'descripcion': ['', Validators.required],
     });
 
     this.buscarNegociosId();
+    this.consultarCategoriaNegocio();
   }
 
   // METODO CAPTURAR IMAGEN
-  onChange($event: Event){
+  onChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files[0];
     console.log($event.target);
     this.convertBase64(file)
@@ -55,13 +61,13 @@ export class NegocioComponent implements OnInit {
   }
 
   // METODO RETORNA IMAGEN
-  convertBase64(file: File){
-    const obs = new Observable( (sub: Subscriber<any>) => {
+  convertBase64(file: File) {
+    const obs = new Observable((sub: Subscriber<any>) => {
 
       this.readFile(file, sub);
 
     });
-    obs.subscribe( data => {
+    obs.subscribe(data => {
       // console.log(data);
       this.img = data;
     });
@@ -69,7 +75,7 @@ export class NegocioComponent implements OnInit {
   }
 
   // METODO LEER ARCHIVO IMAGEN
-  readFile(file: File, sub: Subscriber<any>){
+  readFile(file: File, sub: Subscriber<any>) {
 
     const fileReader = new FileReader();
 
@@ -244,5 +250,14 @@ export class NegocioComponent implements OnInit {
     this.img = null;
 
     this.formNegocio.reset();
+  }
+
+  // METODO GET CAPTEGORIAS
+  consultarCategoriaNegocio() {
+    this._cateNegoService.consultarCategoriaNegocio().subscribe(
+      data => {
+        this.listaCategorias = data;
+      }
+    )
   }
 }
