@@ -25,6 +25,9 @@ const routes: Routes = [
   {
     path: 'categorias/:categoria', component: CatalogoNegociosComponent
   },
+  {     
+    path: 'cuenta', component: CuentaComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]   },
   {
     path: 'negocio', component: NegocioComponent,
     canLoad: [AuthGuard], canActivate: [AuthGuard]
