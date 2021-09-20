@@ -5,26 +5,26 @@
       <span class="lable4" *ngIf="product.sale">on sale</span>
     </div> -->
     <div class="front">
-      <a [routerLink]="['/shop/product/left/sidebar/', product.nombre.replace(' ', '-')]">
+      <a [routerLink]="['/', product.nombre.replace(' ', '-')]">
         <img 
-          [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" 
-          [lazyLoad]="ImageSrc ? ImageSrc : product.imagen_64" 
-          class="img-fluid lazy-loading" 
+          
+          [lazyLoad]="product.imagen_64" 
+          class="img-fluid  maxwith" 
           alt="{{ product.imagen_64 }}" />
       </a>
     </div>
-    <div class="back" *ngIf="onHowerChangeImage">
+    <!-- <div class="back" *ngIf="onHowerChangeImage">
       <a [routerLink]="['/shop/product/left/sidebar/', product.nombre.replace(' ', '-')]">
         <img [src]="ImageSrc ? ImageSrc : product.imagen_64" class="img-fluid lazy-loading" alt="{{ product.imagen_64 }}">
       </a>
-    </div>
-    <ul class="product-thumb-list" *ngIf="thumbnail">
+    </div> -->
+    <!-- <ul class="product-thumb-list" *ngIf="thumbnail">
       <li class="grid_thumb_img" [class.active]="ImageSrc == image.src" *ngFor="let image of product.imagen_64">
         <a href="javascript:void(0)" (mouseover)="ChangeVariantsImage(image.src)">
           <img [lazyLoad]="image.src">
         </a>
       </li>
-    </ul>
+    </ul> -->
     <div class="cart-info cart-wrap">
       <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(product)"
         *ngIf="cartModal">
@@ -53,7 +53,7 @@
       </a>
       <p>{{ product?.descripcion }}</p>
       <h4>
-        {{ product?.precio * currency?.price | discount:product | currency:currency?.currency:'symbol' }}
+        {{ product?.precio  }} $
         <!-- <del *ngIf="product?.discount"><span class="money"> {{ product?.precio * currency?.price | currency:currency?.currency:'symbol' }}</span></del> -->
       </h4>
       <!-- <ul class="color-variant" *ngIf="Color(product?.variants).length">
@@ -64,7 +64,7 @@
     </div>
   </div>
 </div>
-<app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box>
-<app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view>
-<app-cart-modal #cartModal [product]="product" [currency]="currency" *ngIf="cartModal"></app-cart-modal>
+<!-- <app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box> -->
+<!-- <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view> -->
+<!-- <app-cart-modal #cartModal [product]="product" [currency]="currency" *ngIf="cartModal"></app-cart-modal> -->
 

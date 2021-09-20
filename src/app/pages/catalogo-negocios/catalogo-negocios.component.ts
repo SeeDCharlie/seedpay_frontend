@@ -34,7 +34,7 @@ export class CatalogoNegociosComponent implements OnInit {
 
 
   private cargarNegocios(){
-    this.negocioService.getNegocios().subscribe(
+    this.negocioService.buscarNegociosPorNombreCategoria(this.nombreCategoria).subscribe(
 
       data => {
 				this.negocios = data;
