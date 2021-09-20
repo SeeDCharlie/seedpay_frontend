@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductSlider } from '../../../shared/data/slider';
 import { Product } from '../../../shared/classes/product';
 import { ProductService } from '../../../shared/services/product.service';
@@ -9,6 +9,9 @@ import { ProductService } from '../../../shared/services/product.service';
   styleUrls: ['./product-slider.component.scss']
 })
 export class ProductSliderComponent implements OnInit {
+
+  @Input() nombreNegocio: String = 'Cat';
+
 
   public products: Product[] = [];
 

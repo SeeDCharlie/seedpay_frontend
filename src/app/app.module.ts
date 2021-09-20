@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { ShopComponent } from './shop/shop.component';
 // import { PagesComponent } from './pages/pages.component';
-import { ElementsComponent } from './elements/elements.component';
+import { ElementsModule } from './elements/elements.module';
 
 
 // AoT requires an exported function for factories
@@ -27,7 +27,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     // ShopComponent,
     // PagesComponent,
-    ElementsComponent
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -49,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         }
     }),
     SharedModule,
+    ElementsModule,
     AppRoutingModule
   ],
   providers: [],

@@ -25,12 +25,24 @@ import { MultiSliderComponent } from './product/multi-slider/multi-slider.compon
     ProductSliderComponent,
     BannersComponent,
     ProductTabsComponent,
-    MultiSliderComponent
+    MultiSliderComponent,
   ],
+  
   imports: [
     CommonModule,
     SharedModule,
     ElementsRoutingModule
+  ],
+  exports: [
+    TitleComponent,
+    CollectionBannerComponent,
+    HomeSliderComponent,
+    CategoryComponent,
+    ServicesComponent,
+    ProductSliderComponent,
+    BannersComponent,
+    ProductTabsComponent,
+    MultiSliderComponent,
   ]
 })
 export class ElementsModule { }
