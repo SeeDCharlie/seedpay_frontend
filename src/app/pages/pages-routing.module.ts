@@ -13,33 +13,41 @@ import { ProductoComponent } from './producto/producto.component';
 
 const routes: Routes = [
 
+  // INICIO
   {
     path: 'inicio', component: HomeComponent
   },
+  // LOGIN
   {
     path: 'login', component: LoginComponent
   },
+  // ABOUT US
   {
     path: 'aboutus', component: AboutUsComponent
   },
+  // CATEGORIA
   {
     path: 'categorias/:categoria', component: CatalogoNegociosComponent
   },
-  {     
+  // CUENTA
+  {
     path: 'cuenta', component: CuentaComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]   },
+    canLoad: [AuthGuard], canActivate: [AuthGuard]},
+    // NEOGIO
   {
     path: 'negocio', component: NegocioComponent,
     canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
-  // Producto
+  // PRODUCTO
   {
     path: 'producto', component: ProductoComponent,
     canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
+  // LOGIN
   {
     path: 'login', component: LoginComponent
   },
+  // DEFAULT
   {
     path: '', redirectTo: 'inicio', pathMatch: 'full'
   },
