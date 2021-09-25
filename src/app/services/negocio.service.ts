@@ -9,34 +9,34 @@ import { Negocio } from '../interfaces/negocio';
 })
 export class NegocioService {
 
-  private _url = environment.url;
+  private _url = environment.url + "/negocio/";
 
   constructor(
     private _http: HttpClient
   ) { }
 
   buscarNegociosPorNombreCategoria(nombre: String){
-    return this._http.get<any>(`${this._url}/negocio/?categorias__nombre=${nombre}`);
+    return this._http.get<any>(`${this._url}?categorias__nombre=${nombre}`);
   }
 
   buscarNegocioIdUsuario(id: any): Observable<any>{
-    return this._http.get<any>(`${this._url}/negocio/?usuario=${id}`);
+    return this._http.get<any>(`${this._url}?usuario=${id}`);
   }
 
   buscarNegocioId(id: any): Observable<any>{
-    return this._http.get<any>(`${this._url}/negocio/${id}`);
+    return this._http.get<any>(`${this._url}${id}`);
   }
 
   guardarNegocio(request: Negocio): Observable<any>{
-    return this._http.post(`${this._url}/negocio/`, request);
+    return this._http.post(`${this._url}`, request);
   }
 
   actualizarNegocio(id: string ,request: Negocio): Observable<any>{
-    return this._http.put(`${this._url}/negocio/${id}/`, request);
+    return this._http.put(`${this._url}${id}/`, request);
   }
 
   getNegocios():Observable<Negocio[]>{
-    return this._http.get<Negocio[]>(`${this._url}/negocio/`);
+    return this._http.get<Negocio[]>(`${this._url}`);
   }
 
 }

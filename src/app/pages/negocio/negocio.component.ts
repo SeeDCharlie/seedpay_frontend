@@ -8,6 +8,8 @@ import imageToBase64 from 'image-to-base64/browser';
 import { Observable, Subscribable, Subscriber } from 'rxjs';
 import { CategoriaNegocio } from 'src/app/interfaces/categoriaNegocio';
 import { CategoriaNegocioService } from 'src/app/services/categoria-negocio.service';
+import { Ciiu } from 'src/app/interfaces/ciiu';
+import { CiiuService } from 'src/app/services/ciiu.service';
 
 @Component({
   selector: 'app-negocio',
@@ -16,16 +18,43 @@ import { CategoriaNegocioService } from 'src/app/services/categoria-negocio.serv
 })
 export class NegocioComponent implements OnInit {
 
+  // ATRIBUTOS
   formNegocio: FormGroup;
 
   idUsuario: string = sessionStorage.getItem('id');
   idNegocio: string = null;
 
-  listNegocios: Negocio[] = [];
-  listaCategorias: CategoriaNegocio[] = [];
+  img: string = null;
+
   negocio: Negocio;
 
-  img: string = null;
+  listNegocios: Negocio[] = [];
+  listaCategorias: CategoriaNegocio[] = [];
+  listaCiiu: Ciiu[] = [];
+
+
+  // CONFIGURACIÓN SELECT MULTI
+  config = {
+    displayKey: "nombre",
+    search: true,
+    height: 'auto',
+    placeholder: "Selecciona las diferentes categorías que apliquen a tu negocio",
+    moreText: "Más...",
+    searchPlaceholder: "Buscar categoría",
+    noResultsFound: "No se encontraron resultados",
+  }
+
+  // CONFIGURACIÓN SELECT MULTI
+  configCiiu = {
+    displayKey: "coDes",
+    search: true,
+    height: 'auto',
+    placeholder: "Selecciona las diferentes CIIU que apliquen a tu negocio",
+    moreText: "Más...",
+    searchPlaceholder: "Buscar CIIU",
+    noResultsFound: "No se encontraron resultados",
+
+  }
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -33,29 +62,33 @@ export class NegocioComponent implements OnInit {
     private _router: Router,
     private _negocioService: NegocioService,
     private _cateNegoService: CategoriaNegocioService,
+    private _ciiuService: CiiuService,
 
   ) {
     sessionStorage.removeItem('negocio');
   }
 
+  // ONINIT
   ngOnInit(): void {
     this.formNegocio = this._formBuilder.group({
       'nombre': ['', Validators.required],
       'correo': ['', Validators.required],
       'telefono': ['', Validators.required],
       'direccion': '',
-      'categoria': ['', Validators.required],
+      'categorias': ['', Validators.required],
+      'ciiu': ['', Validators.required],
       'descripcion': ['', Validators.required],
     });
 
     this.buscarNegociosId();
     this.consultarCategoriaNegocio();
+    this.consultarCiiuNegocios();
   }
 
   // METODO CAPTURAR IMAGEN
   onChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files[0];
-    console.log($event.target);
+    // console.log($event.target);
     this.convertBase64(file)
 
   }
@@ -96,9 +129,14 @@ export class NegocioComponent implements OnInit {
   guardarDatos() {
     if (this.formNegocio.valid) {
 
-      let listCateNego: number[] = []
+      let lisCategorias: number[] = [];
 
-      listCateNego.push(this.formNegocio.controls.categoria.value);
+      lisCategorias.push(this.formNegocio.controls.categorias.value);
+
+      let listCiiu: number[] = [];
+
+      lisCategorias.push(this.formNegocio.controls.ciiu.value);
+
 
       let negocio: Negocio = {
         usuario: Number(this.idUsuario),
@@ -109,11 +147,9 @@ export class NegocioComponent implements OnInit {
         direccion: this.formNegocio.controls.direccion.value || "N/A",
         descripcion: this.formNegocio.controls.descripcion.value,
         imagen_64: this.img || null,
-        categorias: listCateNego,
+        categorias: lisCategorias,
+        negocio_ciiu: listCiiu,
       }
-
-
-
       this._negocioService.guardarNegocio(negocio).subscribe(
         data => {
           // NEGOCIO CREADO
@@ -153,10 +189,13 @@ export class NegocioComponent implements OnInit {
 
     if (this.formNegocio.valid) {
 
-      let listCateNego: number[] = []
+      let lisCategorias: number[] = [];
 
-      listCateNego.push(this.formNegocio.controls.categoria.value);
+      lisCategorias.push(this.formNegocio.controls.categorias.value);
 
+      let listCiiu: number[] = [];
+
+      lisCategorias.push(this.formNegocio.controls.ciiu.value);
 
       let negocio: Negocio = {
         nombre: this.formNegocio.controls.nombre.value,
@@ -165,7 +204,8 @@ export class NegocioComponent implements OnInit {
         direccion: this.formNegocio.controls.direccion.value || " ",
         descripcion: this.formNegocio.controls.descripcion.value,
         imagen_64: this.img || null,
-        categorias: listCateNego,
+        categorias: lisCategorias,
+        negocio_ciiu: listCiiu,
       }
       this._negocioService.actualizarNegocio(this.idNegocio, negocio).subscribe(
         data => {
@@ -224,6 +264,8 @@ export class NegocioComponent implements OnInit {
     sessionStorage.setItem('negocio', id);
     this.idNegocio = id;
 
+    let listCategoriaFilter: CategoriaNegocio[] = [];
+
     this._negocioService.buscarNegocioId(id).subscribe(
       data => {
         this.negocio = data;
@@ -235,15 +277,28 @@ export class NegocioComponent implements OnInit {
         this.formNegocio.controls.telefono.setValue(this.negocio.telefono);
         this.formNegocio.controls.direccion.setValue(this.negocio.direccion);
         this.formNegocio.controls.descripcion.setValue(this.negocio.descripcion);
-        this.formNegocio.controls.categoria.setValue(this.negocio.categorias[0]);
+
+        this.cargarListadoEspecifico(listCategoriaFilter, this.listaCategorias);
+        this.formNegocio.controls.categorias.setValue(listCategoriaFilter);
+
+        this.formNegocio.controls.ciiu.setValue(this.negocio.negocio_ciiu);
 
         this._toast.info("Edita los datos del negocio seleccionado.", "Carga exitosa", {
           timeOut: 5000
         });
       }
     );
+  }
 
-
+  // METODO PARA CARGAR UN LISTADO
+  cargarListadoEspecifico(listaEspecifica: any[], listaCargada: any[]) {
+    this.negocio.categorias.forEach(id => {
+      listaCargada.find(cate => {
+        if (cate.id == id) {
+          listaEspecifica.push(cate);
+        }
+      });
+    });
   }
 
   //METODO GET ID NEGOCIO (CLICK REGISTRO)
@@ -263,12 +318,23 @@ export class NegocioComponent implements OnInit {
     this.formNegocio.reset();
   }
 
-  // METODO GET CAPTEGORIAS
+  // METODO GET CATEGORIAS
   consultarCategoriaNegocio() {
     this._cateNegoService.consultarCategoriaNegocio().subscribe(
       data => {
         this.listaCategorias = data;
-      }
-    )
+      });
+  }
+
+  // METODO GET CIIU'S
+  consultarCiiuNegocios() {
+    this._ciiuService.consultarCiiu().subscribe(
+      data => {
+        this.listaCiiu = data;
+
+        this.listaCiiu.forEach(ciiu => {
+          ciiu["coDes"] = ciiu.ciiu + " - " + ciiu.descripcion
+        });
+      });
   }
 }

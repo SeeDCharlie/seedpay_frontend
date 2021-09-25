@@ -9,13 +9,13 @@ import { TipoIdentificacion } from '../interfaces/tipoIdentificacion';
 })
 export class TipoIdentificacionService {
 
-  private _url = environment.url;
+  private _url = environment.url + "/tipoIdentificacion/";
 
   constructor(
     private _http: HttpClient
   ) { }
 
     getTipoIdentificacion(): Observable<TipoIdentificacion[]>{
-      return this._http.get<TipoIdentificacion[]>(`${this._url}/tipoIdentificacion/`);
+      return this._http.get<TipoIdentificacion[]>(`${this._url}`);
     }
 }

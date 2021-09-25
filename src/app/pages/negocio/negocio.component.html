@@ -50,8 +50,8 @@
                       <input type="number" class="form-control" id="telefono"
                         placeholder="Ingresa el telefono del negocio" formControlName="telefono" required="">
                     </div>
-                    <!-- CATEGORIAS NEGOCIO -->
-                    <div class="col-md-6 select_input">
+
+                    <!-- <div class="col-md-6 select_input">
                       <label for="categoria">Categoría del negocio <span class="obli">*</span></label>
                       <select class="form-control" style="padding: 15px;" formControlName="categoria" size="1"
                       required>
@@ -60,7 +60,25 @@
                           {{cateNegocio.nombre}}
                         </option>
                       </select>
+                    </div> -->
+
+                    <!-- CATEGORIAS NEGOCIO -->
+                    <div class="col-md-6 select_input">
+                      <label for="categoria">Categoría del negocio <span class="obli">*</span></label>
+                      <ngx-select-dropdown formControlName="categorias" [multiple]="true" [config]="config"
+                        [options]="listaCategorias" required>
+                      </ngx-select-dropdown>
                     </div>
+
+
+                    <!-- CIIU NEGOCIO -->
+                    <div class="col-md-6 select_input">
+                      <label for="categoria">Código CIIU del negocio <span class="obli">*</span></label>
+                      <ngx-select-dropdown  formControlName="ciiu" [multiple]="true" [config]="configCiiu"
+                        [options]="listaCiiu" required>
+                      </ngx-select-dropdown>
+                    </div>
+
                     <!-- DIRECCIÓN -->
                     <div class="col-md-6 mt-1">
                       <label for="direccion">Dirección </label>
