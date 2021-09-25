@@ -265,6 +265,7 @@ export class NegocioComponent implements OnInit {
     this.idNegocio = id;
 
     let listCategoriaFilter: CategoriaNegocio[] = [];
+    let listCiiuFilter: Ciiu[] = [];
 
     this._negocioService.buscarNegocioId(id).subscribe(
       data => {
@@ -281,7 +282,8 @@ export class NegocioComponent implements OnInit {
         this.cargarListadoEspecifico(listCategoriaFilter, this.listaCategorias);
         this.formNegocio.controls.categorias.setValue(listCategoriaFilter);
 
-        this.formNegocio.controls.ciiu.setValue(this.negocio.negocio_ciiu);
+        this.cargarListadoEspecifico(listCiiuFilter, this.listaCiiu);
+        this.formNegocio.controls.ciiu.setValue(listCiiuFilter);
 
         this._toast.info("Edita los datos del negocio seleccionado.", "Carga exitosa", {
           timeOut: 5000
