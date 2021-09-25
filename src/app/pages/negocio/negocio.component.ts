@@ -295,9 +295,9 @@ export class NegocioComponent implements OnInit {
   // METODO PARA CARGAR UN LISTADO
   cargarListadoEspecifico(listaEspecifica: any[], listaCargada: any[]) {
     this.negocio.categorias.forEach(id => {
-      listaCargada.find(cate => {
-        if (cate.id == id) {
-          listaEspecifica.push(cate);
+      listaCargada.find(campo => {
+        if (campo.id == id) {
+          listaEspecifica.push(campo);
         }
       });
     });
