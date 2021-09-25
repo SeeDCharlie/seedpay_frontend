@@ -125,18 +125,20 @@ export class NegocioComponent implements OnInit {
     };
   }
 
+  // METODO RETORNA ARREGLO DE ID'S FORM SELECT
+  getListadoIdForm(formulario: any){
+   return formulario.map(({id}) => id) ;
+  }
+
   // METODO GUARDAR
   guardarDatos() {
     if (this.formNegocio.valid) {
 
-      let lisCategorias: number[] = [];
+      let listaIdCategoria: number[] = [];
+      listaIdCategoria = this.getListadoIdForm(this.formNegocio.controls.categorias.value);
 
-      lisCategorias.push(this.formNegocio.controls.categorias.value);
-
-      let listCiiu: number[] = [];
-
-      lisCategorias.push(this.formNegocio.controls.ciiu.value);
-
+      let listaIdCiiu: number[] = [];
+      listaIdCiiu = this.getListadoIdForm(this.formNegocio.controls.ciiu.value);
 
       let negocio: Negocio = {
         usuario: Number(this.idUsuario),
@@ -147,8 +149,8 @@ export class NegocioComponent implements OnInit {
         direccion: this.formNegocio.controls.direccion.value || "N/A",
         descripcion: this.formNegocio.controls.descripcion.value,
         imagen_64: this.img || null,
-        categorias: lisCategorias,
-        negocio_ciiu: listCiiu,
+        categorias: listaIdCategoria,
+        negocio_ciiu: listaIdCiiu,
       }
       this._negocioService.guardarNegocio(negocio).subscribe(
         data => {
@@ -279,10 +281,10 @@ export class NegocioComponent implements OnInit {
         this.formNegocio.controls.direccion.setValue(this.negocio.direccion);
         this.formNegocio.controls.descripcion.setValue(this.negocio.descripcion);
 
-        this.cargarListadoEspecifico(listCategoriaFilter, this.listaCategorias);
+        this.cargarListadoEspecifico(listCategoriaFilter, this.listaCategorias, this.negocio.categorias);
         this.formNegocio.controls.categorias.setValue(listCategoriaFilter);
 
-        this.cargarListadoEspecifico(listCiiuFilter, this.listaCiiu);
+        this.cargarListadoEspecifico(listCiiuFilter, this.listaCiiu, this.negocio.categorias);
         this.formNegocio.controls.ciiu.setValue(listCiiuFilter);
 
         this._toast.info("Edita los datos del negocio seleccionado.", "Carga exitosa", {
@@ -293,11 +295,11 @@ export class NegocioComponent implements OnInit {
   }
 
   // METODO PARA CARGAR UN LISTADO
-  cargarListadoEspecifico(listaEspecifica: any[], listaCargada: any[]) {
-    this.negocio.categorias.forEach(id => {
-      listaCargada.find(campo => {
+  cargarListadoEspecifico(listaVacia: any[], listaSelector: any[], listaCargada: any[] = []) {
+    listaCargada.forEach(id => {
+      listaSelector.find(campo => {
         if (campo.id == id) {
-          listaEspecifica.push(campo);
+          listaVacia.push(campo);
         }
       });
     });
