@@ -11,18 +11,6 @@ export class S3ImagenesService {
 
   private _url = environment.urlS3;
 
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Cookie': 'csrftoken=94iHNosxOaWYDo1nVVwT71yq8XV9gcp3wN9fKJTLsj8kxIffoq6sLJkCKT0yDMS4'
-  //   })
-  // };
-
-  httpOptions = {
-    headers: new HttpHeaders({
- 
-    })
-  };
-
   constructor(
     private _http: HttpClient
   ) { }
@@ -31,7 +19,7 @@ export class S3ImagenesService {
     const formData = new FormData();
     formData.append("media", archivo);
 
-    return this._http.post<any>(`${this._url}/negocios`, formData, this.httpOptions)
+    return this._http.post<any>(`${this._url}/negocios`, formData)
   }
 
 }

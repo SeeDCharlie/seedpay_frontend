@@ -12,6 +12,7 @@ import { Ciiu } from 'src/app/interfaces/ciiu';
 import { CiiuService } from 'src/app/services/ciiu.service';
 import { S3ImagenesService } from 'src/app/services/s3-imagenes.service';
 import { Archivo } from 'src/app/interfaces/archivo';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-negocio',
@@ -95,46 +96,13 @@ export class NegocioComponent implements OnInit {
     console.log(file);
 
     this._s3.cargarImagenNegocio(file).subscribe( dataImg => {
-      console.log(dataImg);
 
-      this.img = dataImg;
+      let dtImg = dataImg;
+
+      this.img = environment.amazonS3 + dtImg.urlImagen;
+
+      // console.log(environment.amazonS3 + dtImg.urlImagen);
     })
-
-    // console.log($event.target);
-    // this.convertBase64(file)
-
-  }
-
-  // METODO RETORNA IMAGEN
-  convertBase64(file: File) {
-    const obs = new Observable((sub: Subscriber<any>) => {
-
-      this.readFile(file, sub);
-
-    });
-    obs.subscribe(data => {
-      // console.log(data);
-
-    });
-
-  }
-
-  // METODO LEER ARCHIVO IMAGEN
-  readFile(file: File, sub: Subscriber<any>) {
-
-    const fileReader = new FileReader();
-
-    fileReader.readAsBinaryString(file);
-
-    fileReader.onload = () => {
-      sub.next(fileReader.result);
-      sub.complete();
-    };
-
-    fileReader.onerror = (err) => {
-      sub.error(err);
-      sub.complete();
-    };
   }
 
   // METODO RETORNA ARREGLO DE ID'S FORM SELECT
@@ -296,7 +264,7 @@ export class NegocioComponent implements OnInit {
         this.cargarListadoEspecifico(listCategoriaFilter, this.listaCategorias, this.negocio.categorias);
         this.formNegocio.controls.categorias.setValue(listCategoriaFilter);
 
-        this.cargarListadoEspecifico(listCiiuFilter, this.listaCiiu, this.negocio.categorias);
+        this.cargarListadoEspecifico(listCiiuFilter, this.listaCiiu, this.negocio.negocio_ciiu);
         this.formNegocio.controls.ciiu.setValue(listCiiuFilter);
 
         this._toast.info("Edita los datos del negocio seleccionado.", "Carga exitosa", {

@@ -5,6 +5,7 @@
 export const environment = {
   url: "http://127.0.0.1:8000/api",
   urlS3: "http://127.0.0.1:8081/uploadimage",
+  amazonS3: "https://seedpaybuck.s3.sa-east-1.amazonaws.com/",
   production: false,
   instagram_token: 'INSTA_TOKEN',
   stripe_token: 'STRIPE_TOKEN',
