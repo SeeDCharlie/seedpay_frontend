@@ -10,6 +10,8 @@ import { CategoriaNegocio } from 'src/app/interfaces/categoriaNegocio';
 import { CategoriaNegocioService } from 'src/app/services/categoria-negocio.service';
 import { Ciiu } from 'src/app/interfaces/ciiu';
 import { CiiuService } from 'src/app/services/ciiu.service';
+import { S3ImagenesService } from 'src/app/services/s3-imagenes.service';
+import { Archivo } from 'src/app/interfaces/archivo';
 
 @Component({
   selector: 'app-negocio',
@@ -63,6 +65,7 @@ export class NegocioComponent implements OnInit {
     private _negocioService: NegocioService,
     private _cateNegoService: CategoriaNegocioService,
     private _ciiuService: CiiuService,
+    private _s3: S3ImagenesService
 
   ) {
     sessionStorage.removeItem('negocio');
@@ -88,8 +91,17 @@ export class NegocioComponent implements OnInit {
   // METODO CAPTURAR IMAGEN
   onChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files[0];
+
+    console.log(file);
+
+    this._s3.cargarImagenNegocio(file).subscribe( dataImg => {
+      console.log(dataImg);
+
+      this.img = dataImg;
+    })
+
     // console.log($event.target);
-    this.convertBase64(file)
+    // this.convertBase64(file)
 
   }
 
@@ -102,7 +114,7 @@ export class NegocioComponent implements OnInit {
     });
     obs.subscribe(data => {
       // console.log(data);
-      this.img = data;
+
     });
 
   }
@@ -112,7 +124,7 @@ export class NegocioComponent implements OnInit {
 
     const fileReader = new FileReader();
 
-    fileReader.readAsDataURL(file);
+    fileReader.readAsBinaryString(file);
 
     fileReader.onload = () => {
       sub.next(fileReader.result);
