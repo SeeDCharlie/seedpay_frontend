@@ -56,6 +56,9 @@ import { DiscountPipe } from './pipes/discount.pipe';
 import { MenuCuentaComponent } from './components/menu-cuenta/menu-cuenta.component';
 import { SiNoPipe } from './pipes/si-no.pipe';
 
+// Select multiple
+import { SelectDropDownModule } from 'ngx-select-dropdown'
+
 @NgModule({
   declarations: [
     HeaderOneComponent,
@@ -104,7 +107,8 @@ import { SiNoPipe } from './pipes/si-no.pipe';
       // preset: scrollPreset // <-- tell LazyLoadImage that you want to use scrollPreset
     }),
     NgxSkeletonLoaderModule,
-    TranslateModule
+    TranslateModule,
+    SelectDropDownModule
   ],
   exports: [
     CommonModule,
@@ -146,6 +150,7 @@ import { SiNoPipe } from './pipes/si-no.pipe';
     MenuCuentaComponent,
     DiscountPipe,
     SiNoPipe,
+    SelectDropDownModule
   ]
 })
 export class SharedModule { }

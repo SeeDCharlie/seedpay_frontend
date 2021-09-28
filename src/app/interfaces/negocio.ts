@@ -11,4 +11,5 @@ export interface Negocio {
   direccion?: string;
   imagen_64?: string;
   categorias?: number[];
+  negocio_ciiu?: number[];
 }
