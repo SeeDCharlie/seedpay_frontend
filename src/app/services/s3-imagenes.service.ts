@@ -19,7 +19,7 @@ export class S3ImagenesService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+ 
     })
   };
 
