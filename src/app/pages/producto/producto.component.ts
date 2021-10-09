@@ -5,6 +5,8 @@ import { Observable, Subscriber } from 'rxjs';
 import { Negocio } from 'src/app/interfaces/negocio';
 import { Producto } from 'src/app/interfaces/producto';
 import { ProductoService } from 'src/app/services/producto.service';
+import { S3ImagenesService } from 'src/app/services/s3-imagenes.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-producto',
@@ -27,7 +29,8 @@ export class ProductoComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _toast: ToastrService,
-    private _productoService: ProductoService
+    private _productoService: ProductoService,
+    private _s3: S3ImagenesService
   ) {
   }
 
@@ -42,44 +45,20 @@ export class ProductoComponent implements OnInit {
     this.buscarProductosId();
   }
 
-   // METODO CAPTURAR IMAGEN
-   onChange($event: Event){
+  // METODO CAPTURAR IMAGEN
+  onChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files[0];
-    // console.log(file);
-    this.convertBase64(file)
 
-  }
+    console.log(file);
 
-  // METODO CONVERTIDOR A BASE64
-  convertBase64(file: File){
-    const obs = new Observable( (sub: Subscriber<any>) => {
+    this._s3.cargarImagenNegocio(file).subscribe( dataImg => {
 
-      this.readFile(file, sub);
+      let dtImg = dataImg;
 
-    });
-    obs.subscribe( data => {
-      // console.log(data);
-      this.img = data;
-    });
+      this.img = environment.amazonS3 + dtImg.urlImagen;
 
-  }
-
-  // METODO LEER ARCHIVO IMAGEN
-  readFile(file: File, sub: Subscriber<any>){
-
-    const fileReader = new FileReader();
-
-    fileReader.readAsDataURL(file);
-
-    fileReader.onload = () => {
-      sub.next(fileReader.result);
-      sub.complete();
-    };
-
-    fileReader.onerror = (err) => {
-      sub.error(err);
-      sub.complete();
-    };
+      // console.log(environment.amazonS3 + dtImg.urlImagen);
+    })
   }
 
   // METODO GUARDAR

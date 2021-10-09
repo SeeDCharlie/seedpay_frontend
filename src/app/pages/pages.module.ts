@@ -20,6 +20,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { CatalogoNegociosComponent } from './catalogo-negocios/catalogo-negocios.component';
 import { ProductSliderComponent } from '../elements/product/product-slider/product-slider.component';
 import { ElementsModule } from '../elements/elements.module';
+import { RegistrarVentaComponent } from './registrar-venta/registrar-venta.component';
 
 
 
@@ -39,6 +40,7 @@ import { ElementsModule } from '../elements/elements.module';
     CuentaComponent,
     NegocioComponent,
     ProductoComponent,
+    RegistrarVentaComponent,
   ],
   imports: [
     CommonModule,

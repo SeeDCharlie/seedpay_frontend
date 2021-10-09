@@ -16,6 +16,16 @@ export class UsuarioService {
     private _http: HttpClient
   ) { }
 
+  // BUSCAR POR ID
+  buscarUsuarioId(id: string): Observable<any> {
+    return this._http.get<any>(`${this._url}/usuarios/${id}/`)
+  }
+
+  // BUSCAR NEGOCIOS Y SUS PRODUCTOS POR ID USUARIO
+  buscarNegociosProductos(id: string): Observable<any> {
+    return this._http.get<any>(`${this._url}/usuarios/${id}/negociosProductos/`)
+  }
+
   // LOGIN
   loginUsuario(request: Usuario): Observable<any> {
     return this._http.post<any>(`${this._url}/token-auth/`, request);
@@ -26,10 +36,6 @@ export class UsuarioService {
     return this._http.post<any>(`${this._url}/usuarios/`, request);
   }
 
-  // BUSCAR POR ID
-  buscarUsuarioId(id: string): Observable<any> {
-    return this._http.get<any>(`${this._url}/usuarios/${id}/`)
-  }
 
   // ACTUALIZAR
   actualizarUsuario(id: string, request: Usuario): Observable<any> {

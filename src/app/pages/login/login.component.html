@@ -29,28 +29,28 @@
           <form class="theme-form" [formGroup]="formRe">
             <div class="form-group">
               <!-- Nombre -->
-              <label for="nombre">Nombre</label>
+              <label for="nombre">Nombre <span class="obli">*</span></label>
               <input type="text" class="form-control" id="nombre" placeholder="Ingresa tu nombre" formControlName="nombre" required="">
             </div>
             <!-- Apellido -->
             <div class="form-group">
-              <label for="apellido">Apellido</label>
+              <label for="apellido">Apellido <span class="obli">*</span></label>
               <input type="text" class="form-control" id="apellido" placeholder="Ingresa tu apellido" formControlName="apellido" required="">
             </div>
             <!-- Correo -->
             <div class="form-group">
-              <label for="email2">Correo</label>
+              <label for="email2">Correo <span class="obli">*</span></label>
               <input type="text" class="form-control" id="email2" placeholder="Ingresa tu correo" formControlName="email2" required="">
             </div>
             <!-- Contraseña -->
             <div class="form-group">
-              <label for="pass2">Contraseña</label>
+              <label for="pass2">Contraseña <span class="obli">*</span></label>
               <input type="password" class="form-control" id="pass2" placeholder="Ingresa tu contraseña" formControlName="pass2" required=""
                 autocomplete="on">
             </div>
             <!-- Contraseña confirmacion-->
             <div class="form-group">
-              <label for="pass3">Confirmar contraseña</label>
+              <label for="pass3">Confirmar contraseña <span class="obli">*</span></label>
               <input type="password" class="form-control" id="pass3" formControlName="pass3" placeholder="Ingresa tu contraseña nuevamente"
                 required="" autocomplete="on">
             </div>
