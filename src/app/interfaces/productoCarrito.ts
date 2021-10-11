@@ -1,4 +1,9 @@
 export interface ProductoCarrito {
   cantidad: number;
-  idProducto: number;
+  producto: number;
+}
+
+export interface registrarVenta {
+  producto: ProductoCarrito[];
+
 }
