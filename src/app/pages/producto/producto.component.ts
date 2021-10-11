@@ -2,9 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subscriber } from 'rxjs';
+import { categoriaProducto } from 'src/app/interfaces/categoriaProducto';
 import { Negocio } from 'src/app/interfaces/negocio';
 import { Producto } from 'src/app/interfaces/producto';
+import { CategoriaProductoService } from 'src/app/services/categoria-producto.service';
+import { NegocioService } from 'src/app/services/negocio.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { QrService } from 'src/app/services/qr.service';
 import { S3ImagenesService } from 'src/app/services/s3-imagenes.service';
 import { environment } from 'src/environments/environment';
 
@@ -22,17 +26,34 @@ export class ProductoComponent implements OnInit {
   idProducto: string = null;
 
   listProductos: Producto[] = [];
+  listaCategorias: categoriaProducto[] = [];
+  listaCategoriasNegocio: number[] = [];
+
   producto: Producto;
 
-  img: string = null;
+  file: File = null;
+  img: any = null;
+  qr: any = null;
+
+  // CONFIGURACIÓN SELECT MULTI
+  config = {
+    displayKey: "nombre",
+    search: true,
+    height: 'auto',
+    placeholder: "Selecciona las diferentes categorías que apliquen a tu producto",
+    moreText: "Más...",
+    searchPlaceholder: "Buscar categoría",
+    noResultsFound: "No se encontraron resultados",
+  }
 
   constructor(
     private _formBuilder: FormBuilder,
     private _toast: ToastrService,
     private _productoService: ProductoService,
-    private _s3: S3ImagenesService
-  ) {
-  }
+    private _cateProductos: CategoriaProductoService,
+    private _s3: S3ImagenesService,
+    private _qr: QrService,
+  ) { }
 
   ngOnInit(): void {
     this.formProducto = this._formBuilder.group({
@@ -40,30 +61,58 @@ export class ProductoComponent implements OnInit {
       'precio': ['', Validators.required],
       'disponible': ['', Validators.required],
       'descripcion': ['', Validators.required],
-
+      'categorias': ['', Validators.required],
     });
     this.buscarProductosId();
+    this.consultarCategoriaNegocio();
+    this.consultarQrNegocio();
   }
 
   // METODO CAPTURAR IMAGEN
   onChange($event: Event) {
-    const file = ($event.target as HTMLInputElement).files[0];
+    this.file = ($event.target as HTMLInputElement).files[0];
 
-    console.log(file);
+    console.log(this.file);
 
-    this._s3.cargarImagenNegocio(file).subscribe( dataImg => {
+    // Preview IMG
+    if (this.file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.file);
 
-      let dtImg = dataImg;
+      reader.onload = () => {
+        this.img = reader.result;
+      }
+    }
+  }
 
-      this.img = environment.amazonS3 + dtImg.urlImagen;
+  // METODO GET CATEGORIAS
+  consultarCategoriaNegocio() {
+    this._cateProductos.consultarCategoriaProducto(this.idNegocio).subscribe(
+      data => {
+        this.listaCategorias = data;
+      });
+  }
 
-      // console.log(environment.amazonS3 + dtImg.urlImagen);
-    })
+  // METODO RETORNA ARREGLO DE ID'S FORM SELECT
+  getListadoIdForm(formulario: any) {
+    return formulario.map(({ id }) => id);
   }
 
   // METODO GUARDAR
   guardarDatos() {
     if (this.formProducto.valid) {
+
+      this._s3.cargarImagenNegocio(this.file).subscribe(dataImg => {
+
+        let dtImg = dataImg;
+
+        this.img = environment.amazonS3 + dtImg.urlImagen;
+
+        // console.log(environment.amazonS3 + dtImg.urlImagen);
+      });
+
+      let listaIdCategoria: number[] = [];
+      listaIdCategoria = this.getListadoIdForm(this.formProducto.controls.categorias.value);
 
       let producto: Producto = {
         negocio: Number(this.idNegocio),
@@ -72,6 +121,7 @@ export class ProductoComponent implements OnInit {
         precio: this.formProducto.controls.precio.value,
         disponible: this.formProducto.controls.disponible.value,
         descripcion: this.formProducto.controls.descripcion.value,
+        categorias: listaIdCategoria,
         imagen_64: this.img || null,
 
       }
@@ -114,6 +164,18 @@ export class ProductoComponent implements OnInit {
 
     if (this.formProducto.valid) {
 
+      this._s3.cargarImagenNegocio(this.file).subscribe(dataImg => {
+
+        let dtImg = dataImg;
+
+        this.img = environment.amazonS3 + dtImg.urlImagen;
+
+        // console.log(environment.amazonS3 + dtImg.urlImagen);
+      });
+
+      let listaIdCategoria: number[] = [];
+      listaIdCategoria = this.getListadoIdForm(this.formProducto.controls.categorias.value);
+
       let producto: Producto = {
         negocio: Number(this.idNegocio),
 
@@ -121,6 +183,7 @@ export class ProductoComponent implements OnInit {
         precio: this.formProducto.controls.precio.value,
         disponible: this.formProducto.controls.disponible.value,
         descripcion: this.formProducto.controls.descripcion.value,
+        categorias: listaIdCategoria,
         imagen_64: this.img || null,
       }
       this._productoService.actualizarProducto(this.idProducto, producto).subscribe(
@@ -179,6 +242,7 @@ export class ProductoComponent implements OnInit {
   // METODO CARGAR DATOS
   cargarDatos(id) {
     this.idProducto = id;
+    let listCategoriaFilter: categoriaProducto[] = [];
 
     this._productoService.buscarProductoId(id).subscribe(
       data => {
@@ -190,14 +254,25 @@ export class ProductoComponent implements OnInit {
         this.formProducto.controls.precio.setValue(Number(this.producto.precio));
         this.formProducto.controls.disponible.setValue(this.producto.disponible);
         this.formProducto.controls.descripcion.setValue(this.producto.descripcion);
+        this.cargarListadoEspecifico(listCategoriaFilter, this.listaCategorias, this.producto.categorias);
+        this.formProducto.controls.categorias.setValue(this.producto.descripcion);
 
         this._toast.info("Edita los datos del producto seleccionado.", "Carga exitosa", {
           timeOut: 5000
         });
       }
     );
+  }
 
-
+  // METODO PARA CARGAR UN LISTADO
+  cargarListadoEspecifico(listaVacia: any[], listaSelector: any[], listaCargada: any[] = []) {
+    listaCargada.forEach(id => {
+      listaSelector.find(campo => {
+        if (campo.id == id) {
+          listaVacia.push(campo);
+        }
+      });
+    });
   }
 
   //METODO LIMPIAR FORMULARIO Y IDPRODUCTO (BOTON)
@@ -207,5 +282,10 @@ export class ProductoComponent implements OnInit {
 
     this.formProducto.reset();
   }
+
+  consultarQrNegocio() {
+    this.qr = "http://127.0.0.1:8000/api/qr/" + this.idNegocio
+  }
+
 
 }
