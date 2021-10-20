@@ -160,7 +160,9 @@ export class RegistrarVentaComponent implements OnInit {
     });
 
     let carrito: registrarVenta = {
-      producto: this.listaCarrito
+      producto: this.listaCarrito,
+      total_pagar: this.totalPagar,
+      metodo_pago: 1,
     }
 
     this._carritoCompras.registrarVenta(carrito).subscribe(
