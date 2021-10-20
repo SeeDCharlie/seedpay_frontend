@@ -15,11 +15,20 @@ export class S3ImagenesService {
     private _http: HttpClient
   ) { }
 
+  // NEGOCIO
   cargarImagenNegocio(archivo: File): Observable<any> {
     const formData = new FormData();
     formData.append("media", archivo);
 
     return this._http.post<any>(`${this._url}/negocios`, formData)
+  }
+
+  // PRODUCTO
+  cargarImagenProducto(archivo: File): Observable<any> {
+    const formData = new FormData();
+    formData.append("media", archivo);
+
+    return this._http.post<any>(`${this._url}/productos`, formData)
   }
 
 }

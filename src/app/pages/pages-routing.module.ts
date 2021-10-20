@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { NegocioComponent } from './negocio/negocio.component';
 import { PagesComponent } from './pages.component';
 import { ProductoComponent } from './producto/producto.component';
+import { RegistrarVentaComponent } from './registrar-venta/registrar-venta.component';
 
 
 const routes: Routes = [
@@ -32,8 +33,9 @@ const routes: Routes = [
   // CUENTA
   {
     path: 'cuenta', component: CuentaComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]},
-    // NEOGIO
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
+  // NEOGIO
   {
     path: 'negocio', component: NegocioComponent,
     canLoad: [AuthGuard], canActivate: [AuthGuard]
@@ -41,6 +43,11 @@ const routes: Routes = [
   // PRODUCTO
   {
     path: 'producto', component: ProductoComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
+  // REGISTRAR VENTA
+  {
+    path: 'registrarVenta', component: RegistrarVentaComponent,
     canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // LOGIN

@@ -24,7 +24,7 @@ export interface Menu {
 export class NavService {
 
 	constructor(private categoriaNegocioService: CategoriaNegocioService,
-		private _toast: ToastrService) { 
+		private _toast: ToastrService) {
 
 		this.cargarCategorias();
 	}
@@ -51,16 +51,10 @@ export class NavService {
 					);
 				}
 			},
-			error => {
-				this._toast.error("lista de categorias vacia", "no hay categorias que mostrar", {
-					timeOut: 5000
-				});
-			}
-	
 		);
 	}
-	
-	
+
+
 
 	MENUITEMS: Menu[] = [
 		{ path: '/inicio', title: 'Inicio', type: 'link' },

@@ -20,7 +20,11 @@ import { ProductoComponent } from './producto/producto.component';
 import { CatalogoNegociosComponent } from './catalogo-negocios/catalogo-negocios.component';
 import { ProductSliderComponent } from '../elements/product/product-slider/product-slider.component';
 import { ElementsModule } from '../elements/elements.module';
+<<<<<<< HEAD
 import { CatalogoComponent } from './catalogo/catalogo.component';
+=======
+import { RegistrarVentaComponent } from './registrar-venta/registrar-venta.component';
+>>>>>>> c454094ba35c609c15a9436e7f468d219997a9dd
 
 
 
@@ -40,7 +44,11 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
     CuentaComponent,
     NegocioComponent,
     ProductoComponent,
+<<<<<<< HEAD
     CatalogoComponent,
+=======
+    RegistrarVentaComponent,
+>>>>>>> c454094ba35c609c15a9436e7f468d219997a9dd
   ],
   imports: [
     CommonModule,

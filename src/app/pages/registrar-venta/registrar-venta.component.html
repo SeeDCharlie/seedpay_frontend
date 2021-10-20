@@ -1,0 +1,220 @@
+<app-breadcrumb [title]="'Registrar una venta'" [breadcrumb]="'Registrar una venta'"></app-breadcrumb>
+
+<!-- section start -->
+<section class="section-b-space">
+  <div class="container">
+    <div class="row">
+      <!-- MENU -->
+      <div class="col-lg-3">
+        <app-menu-cuenta></app-menu-cuenta>
+      </div>
+      <!-- FACTURA -->
+      <div class="col-lg-9">
+        <div class="contact-page register-page">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3 class="text-center">Cotiza los productos y registra una venta</h3>
+                <hr>
+                <!-- CARRITO -->
+                <div *ngIf="listaProductosCarrito.length">
+                  <section>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-sm-12 table-negocio" style="overflow-x:auto;">
+                          <h3 class="title mb-4" style="color: aqua;"> <strong><i> Carrito </i></strong> </h3>
+                          <table class="table cart-table table-responsive-xs">
+                            <thead>
+                              <tr class="table-head">
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Descripción</th>
+                                <th scope="col">Valor por unidad</th>
+                                <th scope="col">Valor acumulado</th>
+                                <th scope="col">Acciones</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let productoCarro of listaProductosCarrito, let i = index"
+                                class="wishlist-section animate__animated animate__fadeInLeft animate__slow">
+                                <!-- NOMBRE -->
+                                <td style="max-width: 1px; word-wrap: break-word;">
+                                  <p>
+                                    {{productoCarro.nombre}}
+                                  </p>
+                                </td>
+                                <!-- DESCRIPCION -->
+                                <td style="max-width: 1px; word-wrap: break-word;">
+                                  <p>
+                                    {{productoCarro.descripcion}}
+                                  </p>
+                                </td>
+                                <!-- PRECIO -->
+                                <td style="max-width: 1px; word-wrap: break-word;">
+                                  <p>
+                                    <strong>${{productoCarro.precio | number}}</strong>
+                                  </p>
+                                </td>
+                                <!-- PRECIO POR CANTIDAD-->
+                                <td style="max-width: 1px; word-wrap: break-word;">
+                                  <p>
+                                    <strong>${{productoCarro.precioCantidad | number}} - {{productoCarro.cantidad}}
+                                      uds.</strong>
+                                  </p>
+                                </td>
+                                <!-- ACCIONES -->
+                                <td>
+                                  <a class="icon mr-4 action" style="font-size: 20px;" (click)="eliminarProducto(i)">
+                                    <i class="ti-close" style="color: red;"></i>
+                                  </a>
+                                  <a class="cart action" style="font-size: 20px;" (click)="cargarEditarProducto(i)">
+                                    <i class="ti-pencil" style="color: orange;"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="col-md-12  mt-1 d-inline btn-negocio d-flex justify-content-between">
+                            <h5 class="d-inline"> <strong>Total a pagar: ${{totalPagar | number}}</strong></h5>
+                            <!-- VENDER CARRITO -->
+                            <button class="btn btn-sm btn-solid btn-green ml-1" type="submit"
+                              (click)="registrarVenta()">
+                              Registrar venta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA AGREGAR CARRITO -->
+<section *ngIf="producto" class="wishlist-section animate__animated animate__backInUp animate__slow">
+  <div class="container">
+    <div class="row">
+      <h3 class="title mb-4" style="color: aqua;"> <strong><i> Añadir al carrito </i></strong> </h3>
+      <div class="col-sm-12 table-negocio" style="overflow-x:auto;">
+        <table class="table cart-table table-responsive-xs">
+          <thead>
+            <tr class="table-head">
+              <th scope="col">Producto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Valor por unidad</th>
+              <th scope="col">Valor x{{cantidad}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <!-- IMAGEN -->
+              <td>
+                <a>
+                  <img [src]="producto.imagen_64">
+                </a>
+              </td>
+              <!-- NOMBRE -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{producto.nombre}}
+                </p>
+              </td>
+              <!-- DESCRIPCION -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{producto.descripcion}}
+                </p>
+              </td>
+              <!-- PRECIO -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  <strong>${{producto.precio | number}}</strong>
+                </p>
+              </td>
+              <!-- PRECIO POR CANTIDAD-->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  <strong>${{valorCantidad | number}}</strong>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <form class="theme-form d-flex flex-row-reverse" [formGroup]="formProducto">
+          <!-- LIMPIAR -->
+          <div class="col-md-3  mt-1 d-inline btn-negocio">
+            <button class="btn btn-sm btn-solid btn-yellow" style="float: left;" (click)="limpiar()">Limpiar</button>
+            <!-- AGREGAR CARRO -->
+            <button *ngIf="!edicionProducto" class="btn btn-sm btn-solid btn-green ml-1" type="submit"
+              (click)="agregarCarrito()">Agregar al
+              carrito</button>
+            <!-- EDITAR EN EL CARRO -->
+            <button *ngIf="edicionProducto" class="btn btn-sm btn-solid btn-green ml-1" type="submit"
+              (click)="editarProducto()">Editar en el
+              carrito</button>
+
+          </div>
+          <div class="col-md-3 mt-1 d-inline">
+            <input type="number" class="form-control" placeholder="Ingresa la cantidad de unidades"
+              formControlName="cantidad" min="1" (keyup)="actualizarCantidad()">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- TABLA NEGOCIOS -->
+<section *ngFor="let negocio of listaNegocioProductos, let i = index" class="wishlist-section">
+  <div *ngIf="listaNegocioProductos[i].productos.length" class="container">
+    <div class="row">
+      <h3 class="title mb-4"> <i>{{negocio.nombre}} </i> </h3>
+      <div class="col-sm-12 table-negocio" style="overflow-x:auto;">
+        <table class="table cart-table table-responsive-xs">
+          <thead>
+            <tr class="table-head">
+              <th scope="col">Producto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of listaNegocioProductos[i].productos">
+              <!-- IMAGEN -->
+              <td (click)="getIdProducto(producto.id)">
+                <a>
+                  <img [src]="producto.imagen_64">
+                </a>
+              </td>
+              <!-- NOMBRE -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdProducto(producto.id)">
+                <p>
+                  {{producto.nombre}}
+                </p>
+              </td>
+              <!-- DESCRIPCION -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdProducto(producto.id)">
+                <p>
+                  {{producto.descripcion}}
+                </p>
+              </td>
+              <!-- PRECIO -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdProducto(producto.id)">
+                <p>
+                  <strong>${{producto.precio | number}}</strong>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

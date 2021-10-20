@@ -27,7 +27,8 @@ export class NegocioComponent implements OnInit {
   idUsuario: string = sessionStorage.getItem('id');
   idNegocio: string = null;
 
-  img: string = null;
+  img: any = null;
+  file: File = null;
 
   negocio: Negocio;
 
@@ -91,18 +92,19 @@ export class NegocioComponent implements OnInit {
 
   // METODO CAPTURAR IMAGEN
   onChange($event: Event) {
-    const file = ($event.target as HTMLInputElement).files[0];
+    this.file = ($event.target as HTMLInputElement).files[0];
 
-    console.log(file);
+    console.log(this.file);
 
-    this._s3.cargarImagenNegocio(file).subscribe( dataImg => {
+    // Preview IMG
+    if(this.file){
+      const reader = new FileReader();
+      reader.readAsDataURL(this.file);
 
-      let dtImg = dataImg;
-
-      this.img = environment.amazonS3 + dtImg.urlImagen;
-
-      // console.log(environment.amazonS3 + dtImg.urlImagen);
-    })
+      reader.onload = () => {
+        this.img = reader.result;
+      }
+    }
   }
 
   // METODO RETORNA ARREGLO DE ID'S FORM SELECT
@@ -113,6 +115,15 @@ export class NegocioComponent implements OnInit {
   // METODO GUARDAR
   guardarDatos() {
     if (this.formNegocio.valid) {
+
+      this._s3.cargarImagenNegocio(this.file).subscribe( dataImg => {
+
+        let dtImg = dataImg;
+
+        this.img = environment.amazonS3 + dtImg.urlImagen;
+
+        // console.log(environment.amazonS3 + dtImg.urlImagen);
+      });
 
       let listaIdCategoria: number[] = [];
       listaIdCategoria = this.getListadoIdForm(this.formNegocio.controls.categorias.value);
@@ -170,6 +181,16 @@ export class NegocioComponent implements OnInit {
   actualizarDatos() {
 
     if (this.formNegocio.valid) {
+
+      this._s3.cargarImagenNegocio(this.file).subscribe( dataImg => {
+
+        let dtImg = dataImg;
+
+        this.img = environment.amazonS3 + dtImg.urlImagen;
+
+        // console.log(environment.amazonS3 + dtImg.urlImagen);
+      });
+
 
       let lisCategorias: number[] = [];
 
