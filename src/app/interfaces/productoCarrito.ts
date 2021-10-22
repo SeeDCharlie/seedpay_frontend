@@ -4,9 +4,10 @@ export interface ProductoCarrito {
 }
 
 export interface registrarVenta {
-  producto: ProductoCarrito[];
+  productos: ProductoCarrito[];
   usuario?: number;
-  total_pagar: number;
+  valor_total: number;
+  valor_recibido: number;
   metodo_pago?: number;
 
 }
