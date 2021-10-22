@@ -93,7 +93,6 @@ export class ProductoComponent implements OnInit {
         precio: this.formProducto.controls.precio.value,
         disponible: this.formProducto.controls.disponible.value,
         descripcion: this.formProducto.controls.descripcion.value,
-        imagen_64: this.img || null,
 
       }
       this._productoService.guardarProducto(producto).subscribe(

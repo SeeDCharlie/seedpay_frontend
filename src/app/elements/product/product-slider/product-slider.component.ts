@@ -15,9 +15,7 @@ export class ProductSliderComponent implements OnInit {
   @Input() nombreNegocio: string = 'Cat';
   @Input() idNegocio: number = 0;
   @Input() imgNegocio: string;
-
-
-  public products: Producto[];
+  @Input() products: Producto[];;
 
   public ProductSliderConfig: any = ProductSlider;
   
@@ -27,7 +25,7 @@ export class ProductSliderComponent implements OnInit {
 
   ngOnInit(): void {
     
-    this.productService.buscarProductoIdNegocio(this.idNegocio).subscribe(response => this.products = response);
+    // this.productService.buscarProductoIdNegocio(this.idNegocio).subscribe(response => this.products = response);
   }
 
 }

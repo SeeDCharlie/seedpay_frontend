@@ -1,3 +1,5 @@
+import { Producto } from "./producto";
+
 export interface Negocio {
   id?: number;
   nombre?: string;
@@ -12,4 +14,5 @@ export interface Negocio {
   imagen_64?: string;
   categorias?: number[];
   negocio_ciiu?: number[];
+  productos?:Producto[];
 }
