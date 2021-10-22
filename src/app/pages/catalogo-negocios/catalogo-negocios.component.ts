@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Negocio } from 'src/app/interfaces/negocio';
 import { Producto } from 'src/app/interfaces/producto';
-import { NegocioService } from 'src/app/services/negocio.service';
+import { BusquedaService } from 'src/app/services/busqueda.service';
 
 @Component({
   selector: 'app-catalogo-negocios',
@@ -15,15 +15,15 @@ import { NegocioService } from 'src/app/services/negocio.service';
 export class CatalogoNegociosComponent implements OnInit {
 
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
-  public nombreCategoria: String  ;
+  public palabra: String  ;
   public negocios: Negocio[];
   private productos: Producto[][];
 
   constructor(private _activatedRoute: ActivatedRoute,
-              private negocioService: NegocioService,
+              private busquedaService: BusquedaService,
               private _toast: ToastrService ) {
 
-    this.nombreCategoria = this._activatedRoute.snapshot.params.categoria;
+    this.palabra = this._activatedRoute.snapshot.params.categoria;
 
     
   }
@@ -34,7 +34,7 @@ export class CatalogoNegociosComponent implements OnInit {
 
 
   private cargarNegocios(){
-    this.negocioService.buscarNegociosPorNombreCategoria(this.nombreCategoria).subscribe(
+    this.busquedaService.buscarNegocioFiltroGeneral(this.palabra).subscribe(
 
       data => {
 				this.negocios = data;
