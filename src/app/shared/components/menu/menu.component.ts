@@ -19,6 +19,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   mainMenuToggle(): void {
@@ -31,7 +32,8 @@ export class MenuComponent implements OnInit {
   }
 
   saveOptionCategorias(palabra: string){
-		localStorage.setItem('palabraBusqueda', palabra);
+    localStorage.setItem('palabraBusqueda', palabra);
+    window.location.reload();
 	}
 
 }

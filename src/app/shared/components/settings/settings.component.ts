@@ -74,6 +74,7 @@ export class SettingsComponent implements OnInit {
 
   guardarPalabraBusqueda(palabrita){
     localStorage.setItem('palabraBusqueda', palabrita);
+    window.location.reload();
   }
 
 }

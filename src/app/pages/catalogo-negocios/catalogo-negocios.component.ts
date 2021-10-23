@@ -20,7 +20,8 @@ export class CatalogoNegociosComponent implements OnInit {
 
   constructor(private _activatedRoute: ActivatedRoute,
               private busquedaService: BusquedaService,
-              private _toast: ToastrService ) {
+              private _toast: ToastrService,
+              private router:Router) {
 
     //this.palabra = this._activatedRoute.snapshot.params.categoria;
 
