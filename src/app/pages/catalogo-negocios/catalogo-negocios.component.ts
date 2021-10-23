@@ -17,13 +17,14 @@ export class CatalogoNegociosComponent implements OnInit {
   public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
   public palabra: String  ;
   public negocios: Negocio[];
-  private productos: Producto[][];
 
   constructor(private _activatedRoute: ActivatedRoute,
               private busquedaService: BusquedaService,
               private _toast: ToastrService ) {
 
-    this.palabra = this._activatedRoute.snapshot.params.categoria;
+    //this.palabra = this._activatedRoute.snapshot.params.categoria;
+
+    this.palabra = localStorage.getItem('palabraBusqueda');
 
     
   }

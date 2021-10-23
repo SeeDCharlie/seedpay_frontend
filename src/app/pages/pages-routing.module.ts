@@ -28,7 +28,7 @@ const routes: Routes = [
   },
   // CATEGORIA
   {
-    path: 'categorias/:categoria', component: CatalogoNegociosComponent
+    path: 'buscar', component: CatalogoNegociosComponent
   },
   // CUENTA
   {

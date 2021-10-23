@@ -14,7 +14,6 @@ export class SettingsComponent implements OnInit {
 
   public products: Product[] = [];
   public search: boolean = false;
-  public searchWord:string;
   
   public languages = [{ 
     name: 'English',
@@ -71,6 +70,10 @@ export class SettingsComponent implements OnInit {
 
   changeCurrency(currency: any) {
     this.productService.Currency = currency
+  }
+
+  guardarPalabraBusqueda(palabrita){
+    localStorage.setItem('palabraBusqueda', palabrita);
   }
 
 }

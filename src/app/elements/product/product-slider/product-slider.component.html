@@ -1,18 +1,23 @@
-
 <!-- Product slider start-->
-<div class="section-t-space">
-  <div class="row tituloNegocio">
-    <div class="col-2">
-      <img           
-        [lazyLoad]="imgNegocio" 
-        class="img-fluid imgresponsive" >
-    </div>
-    <div class="col-10"><br>
-      <h2 class="title-inner1">{{nombreNegocio}}</h2><br><hr>
+<div class="negocioMinicatalogo">
+  <div class="section-t-space">
+    <div class="row tituloNegocio">
+      <div class="col-auto imgresponsive">
+        <img [lazyLoad]="imgNegocio" class="img-fluid">
+      </div>
+      <div class="col-10 itemsabajo"><br>
+        <div class="row">
+          <div class="col-auto itemsabajo">
+            <h2 class="tituloNegocio">{{nombreNegocio}}</h2><br>
+          </div>
+          <div class="col-auto">
+            <h4 class="verTodos">Ver todos</h4>
+          </div>
+        </div>
+        <hr>
+      </div>
     </div>
   </div>
-    
-</div>
   <section class="section-b-space p-t-0">
     <div class="container">
       <div class="row">
@@ -21,10 +26,7 @@
             <ng-container *ngFor="let product of products | slice:0:15">
               <ng-template carouselSlide>
                 <div class="product-box">
-                  <app-product-box-one 
-                    [product]="product" 
-                    [thumbnail]="true"
-                    [cartModal]="true">
+                  <app-product-box-one [product]="product" [thumbnail]="true" [cartModal]="true">
                   </app-product-box-one>
                 </div>
               </ng-template>
@@ -34,4 +36,5 @@
       </div>
     </div>
   </section>
-  <!-- Product slider End -->
+</div>
+<!-- Product slider End -->

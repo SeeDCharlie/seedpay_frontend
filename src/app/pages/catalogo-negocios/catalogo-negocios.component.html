@@ -1,16 +1,18 @@
 <app-header-one [themeLogo]="themeLogo"></app-header-one>
 <app-breadcrumb [title]="'Categoria'" [breadcrumb]="palabra"></app-breadcrumb>
 
+<div style="background-color: aliceblue;">
+    <ng-container *ngFor="let negocio of negocios | slice:0:7">
 
-<ng-container *ngFor="let negocio of negocios | slice:0:7">
+        <app-product-slider [nombreNegocio]="negocio.nombre" 
+                            [idNegocio]="negocio.id"
+                            [imgNegocio]="negocio.imagen_64"
+                            [products]="negocio.productos">
+        </app-product-slider>
+    
+    </ng-container>
+</div>
 
-    <app-product-slider [nombreNegocio]="negocio.nombre" 
-                        [idNegocio]="negocio.id"
-                        [imgNegocio]="negocio.imagen_64"
-                        [products]="negocio.productos">
-    </app-product-slider>
-
-</ng-container>
 
 
 

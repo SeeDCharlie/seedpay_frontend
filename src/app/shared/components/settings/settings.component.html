@@ -14,10 +14,13 @@
                         <div class="col-xl-12">
                             <form>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="exampleInputPassword1" [(ngModel)]="searchWord" placeholder="Busca productos o servicios">
+                                    <input type="text" class="form-control" (keyup)="0" #searchWord placeholder="Busca productos o servicios">
                                 </div>
-                                <button type="submit" class="btn btn-primary" [routerLink]="['/categorias/sandwich']" 
+                                <button type="submit" class="btn btn-primary" [routerLink]="['/buscar/']" (click)="guardarPalabraBusqueda(searchWord.value)"
                                 ><i class="fa fa-search"></i>Buscar</button>
+                                <div>
+                                  {{searchWord.value}}asdsa
+                                </div>
                             </form>
                         </div>
                     </div>

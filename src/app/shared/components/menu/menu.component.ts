@@ -30,4 +30,8 @@ export class MenuComponent implements OnInit {
     item.active = !item.active;
   }
 
+  saveOptionCategorias(palabra: string){
+		localStorage.setItem('palabraBusqueda', palabra);
+	}
+
 }
