@@ -47,7 +47,7 @@ export class NavService {
 				console.log(data);
 				for (var cat in data) {
 					this.categorias.push(
-						{ path: '/buscar/' , title: data[cat].nombre , type: 'link', nombreCategoria: data[cat].nombre }
+						{ path: '/buscar' , title: data[cat].nombre , type: 'link', nombreCategoria: data[cat].nombre }
 					);
 				}
 			},

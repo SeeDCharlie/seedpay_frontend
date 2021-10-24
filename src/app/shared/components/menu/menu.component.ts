@@ -16,6 +16,7 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
     });
+
   }
 
   ngOnInit(): void {
@@ -33,7 +34,7 @@ export class MenuComponent implements OnInit {
 
   saveOptionCategorias(palabra: string){
     localStorage.setItem('palabraBusqueda', palabra);
-    window.location.reload();
+
 	}
 
 }

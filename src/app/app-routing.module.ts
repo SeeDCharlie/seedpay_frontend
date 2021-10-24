@@ -9,6 +9,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
   },
   {
+    path: '',
+    loadChildren: () => import('./admin-pages/admin-pages.module').then(m => m.AdminPagesModule)
+  },
+
+  {
     path: '', redirectTo: '', pathMatch: 'full'
   },
 
@@ -19,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

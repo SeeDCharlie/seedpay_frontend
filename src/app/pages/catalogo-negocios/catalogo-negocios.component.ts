@@ -23,10 +23,11 @@ export class CatalogoNegociosComponent implements OnInit {
               private _toast: ToastrService,
               private router:Router) {
 
-    //this.palabra = this._activatedRoute.snapshot.params.categoria;
-
     this.palabra = localStorage.getItem('palabraBusqueda');
-
+    
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
     
   }
 
