@@ -16,7 +16,7 @@ export class ProductBoxOneComponent implements OnInit {
   @Input() currency: any = this.productService.Currency; // Default Currency 
   @Input() thumbnail: boolean = false; // Default False 
   @Input() onHowerChangeImage: boolean = false; // Default False
-  @Input() cartModal: boolean = false; // Default False
+  @Input() cartModal: boolean = true; // Default False
   @Input() loader: boolean = false;
   
   @ViewChild("quickView") QuickView: QuickViewComponent;

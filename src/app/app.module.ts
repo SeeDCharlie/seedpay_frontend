@@ -15,6 +15,7 @@ import { AppComponent } from './app.component';
 // import { ShopComponent } from './shop/shop.component';
 // import { PagesComponent } from './pages/pages.component';
 import { ElementsModule } from './elements/elements.module';
+import { AdminPagesModule } from './admin-pages/admin-pages.module';
 
 
 // AoT requires an exported function for factories
@@ -50,7 +51,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     SharedModule,
     ElementsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AdminPagesModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,9 +16,11 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe((event) => {
       this.navServices.mainMenuToggle = false;
     });
+
   }
 
   ngOnInit(): void {
+
   }
 
   mainMenuToggle(): void {
@@ -29,5 +31,10 @@ export class MenuComponent implements OnInit {
   toggletNavActive(item) {
     item.active = !item.active;
   }
+
+  saveOptionCategorias(palabra: string){
+    localStorage.setItem('palabraBusqueda', palabra);
+
+	}
 
 }

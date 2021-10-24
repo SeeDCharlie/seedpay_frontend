@@ -47,7 +47,7 @@ export class NavService {
 				console.log(data);
 				for (var cat in data) {
 					this.categorias.push(
-						{ path: `/categorias/${data[cat].nombre}` , title: data[cat].nombre , type: 'link' }
+						{ path: '/buscar' , title: data[cat].nombre , type: 'link', nombreCategoria: data[cat].nombre }
 					);
 				}
 			},
@@ -58,7 +58,7 @@ export class NavService {
 
 	MENUITEMS: Menu[] = [
 		{ path: '/inicio', title: 'Inicio', type: 'link' },
-		{ path: '/compra', title: 'Categorias', type: 'sub', active: false, children: this.categorias},
+		{ path: '/compra', title: 'Categorias', type: 'sub',  children: this.categorias},
 
 		{ path: '/adquiere', title: 'Adquiere SeeDPay', type: 'link' },
 
@@ -175,6 +175,8 @@ export class NavService {
 			path: '/home/fashion', title: 'kitchen', type: 'link'
 		}
 	];
+
+
 
 	// Array
 	items = new BehaviorSubject<Menu[]>(this.MENUITEMS);

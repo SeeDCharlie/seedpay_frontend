@@ -1,0 +1,195 @@
+
+<!-- section start -->
+<section class="section-b-space">
+  <div class="container">
+    <div class="row">
+      <!-- MENU -->
+      <div class="col-lg-3">
+        <!-- <app-menu-cuenta></app-menu-cuenta> -->
+      </div>
+
+      <!-- INFORMACIÓN DEL NEGOCIO -->
+      <div class="col-lg-9">
+        <div class="contact-page register-page">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3>Información del negocio</h3>
+                <form class="theme-form" [formGroup]="formNegocio">
+
+                  <!-- IMAGEN -->
+                  <label for="imagen">Imagen</label>
+                  <div class="form-control">
+                    <a class="icon mr-4 action uploadIcon" style="font-size: 20px;">
+                      <i class="ti-image " style="color: rgb(35, 197, 197);"> Carga tu imagen</i>
+                    </a>
+                    <input type="file" class="uploadImg" (change)=onChange($event) accept="image/*">
+                  </div>
+
+                  <img *ngIf="img" class="rounded mx-auto d-block m-3" [src]="img" width="180px" height="150px"
+                    style="border: 3px aqua solid;" alt="img">
+
+
+                  <div class="form-row">
+                    <!-- NOMBRE -->
+                    <div class="col-md-6">
+                      <label for="nombre">Nombre <span class="obli">*</span></label>
+                      <input type="text" class="form-control" id="nombre" placeholder="Ingresa el nombre del negocio"
+                        formControlName="nombre" required="">
+                    </div>
+                    <!-- CORREO -->
+                    <div class="col-md-6">
+                      <label for="correo">Correo <span class="obli">*</span></label>
+                      <input type="text" class="form-control" id="correo" placeholder="Ingresa el correo del negocio"
+                        formControlName="correo" required="">
+                    </div>
+                    <!-- TELEFONO -->
+                    <div class="col-md-6">
+                      <label for="telefono">Telefono <span class="obli">*</span></label>
+                      <input type="number" class="form-control" id="telefono"
+                        placeholder="Ingresa el telefono del negocio" formControlName="telefono" required="">
+                    </div>
+
+                    <!-- <div class="col-md-6 select_input">
+                      <label for="categoria">Categoría del negocio <span class="obli">*</span></label>
+                      <select class="form-control" style="padding: 15px;" formControlName="categoria" size="1"
+                      required>
+                        <option disabled selected value>Selecciona la categoría en la que se encuentra tu negocio.</option>
+                        <option *ngFor="let cateNegocio of listaCategorias" [value]="cateNegocio.id">
+                          {{cateNegocio.nombre}}
+                        </option>
+                      </select>
+                    </div> -->
+
+                    <!-- CATEGORIAS NEGOCIO -->
+                    <div class="col-md-6 select_input">
+                      <label for="categoria">Categoría del negocio <span class="obli">*</span></label>
+                      <ngx-select-dropdown formControlName="categorias" [multiple]="true" [config]="config"
+                        [options]="listaCategorias" required>
+                      </ngx-select-dropdown>
+                    </div>
+
+
+                    <!-- CIIU NEGOCIO -->
+                    <div class="col-md-6 select_input">
+                      <label for="categoria">Código CIIU del negocio <span class="obli">*</span></label>
+                      <ngx-select-dropdown  formControlName="ciiu" [multiple]="true" [config]="configCiiu"
+                        [options]="listaCiiu" required>
+                      </ngx-select-dropdown>
+                    </div>
+
+                    <!-- DIRECCIÓN -->
+                    <div class="col-md-6 mt-1">
+                      <label for="direccion">Dirección </label>
+                      <input type="text" class="form-control" id="direccion"
+                        placeholder="Ingresa la dirección del negocio" formControlName="direccion">
+                    </div>
+                    <!-- DESCRIPCIÓN -->
+                    <div class="col-md-12">
+                      <label for="review">Descripción <span class="obli">*</span></label>
+                      <textarea class="form-control mb-0" formControlName="descripcion" required=""
+                        placeholder="Ingresa la descripción de tu negocio - ¨¿Qué tipo de negocio es?¨ - ¨¿Qué vendes?¨"
+                        rows="4"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="row btn-negocios" style="margin-top: 30px;">
+                    <!-- GUARDAR -->
+                    <div *ngIf="!idNegocio" class="col-md-6 btn-negocio">
+                      <button class="btn btn-sm btn-solid btn-green" type="submit" (click)="guardarDatos()">Guardar
+                        datos</button>
+                    </div>
+                    <!-- ACTUALIZAR -->
+                    <div *ngIf="idNegocio" class="col-md-6 btn-negocio">
+                      <button class="btn btn-sm btn-solid btn-green" type="submit"
+                        (click)="actualizarDatos()">Actualizar datos</button>
+                    </div>
+                    <!-- LIMPIAR -->
+                    <div class="col-md-6 btn-negocio">
+                      <button class="btn btn-sm btn-solid btn-yellow" style="float: right;"
+                        (click)=limpiar()>Limpiar</button>
+
+                    </div>
+                    <h3 class="mt-4">Mis negocios</h3>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TABLA NEGOCIOS -->
+<section class="wishlist-section section-b-space">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 table-negocio" style="overflow-x:auto;">
+        <table class="table cart-table table-responsive-xs">
+          <thead>
+            <tr class="table-head">
+              <th scope="col">Imagen</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+              <th scope="col">Correo</th>
+              <th scope="col">Telefono</th>
+              <th scope="col">Dirección</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let negocio of listNegocios">
+              <!-- IMAGEN -->
+              <td (click)="getIdNegocio(negocio.id)">
+                <a>
+                  <img [src]="negocio.imagen_64">
+                </a>
+              </td>
+              <!-- NOMBRE -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdNegocio(negocio.id)">
+                <p>
+                  {{negocio.nombre}}
+                </p>
+              </td>
+              <!-- DESCRIPCION -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdNegocio(negocio.id)">
+                <p>
+                  {{negocio.descripcion}}
+                </p>
+              </td>
+              <!-- CORREO -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdNegocio(negocio.id)">
+                <p>
+                  {{negocio.correo}}
+                </p>
+              </td>
+              <!-- TELEFONO -->
+              <td style="max-width: 1px; word-wrap: break-word;" (click)="getIdNegocio(negocio.id)">
+                <p>
+                  {{negocio.telefono}}
+                </p>
+              </td>
+              <!-- DIRECCION -->
+              <td style="max-width: 1px; word-wrap: break-word;">
+                <p>
+                  {{negocio.direccion}}
+                </p>
+              </td>
+              <!-- ACCIONES -->
+              <td>
+                <a class="icon mr-4 action" style="font-size: 20px;">
+                  <i class="ti-close" style="color: red;"></i>
+                </a>
+                <a class="cart action" style="font-size: 20px;" (click)="cargarDatos(negocio.id)">
+                  <i class="ti-pencil" style="color: orange;"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>

@@ -15,8 +15,8 @@ export class NegocioService {
     private _http: HttpClient
   ) { }
 
-  buscarNegociosPorNombreCategoria(nombre: String){
-    return this._http.get<any>(`${this._url}?categorias__nombre=${nombre}`);
+  buscarNegociosPorNombreCategoria(palabra: String){
+    return this._http.get<any>(`${this._url}?categorias__nombre=${palabra}`);
   }
 
   buscarNegocioIdUsuario(id: any): Observable<any>{
