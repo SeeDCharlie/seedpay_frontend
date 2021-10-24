@@ -53,6 +53,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ElementsModule,
     AppRoutingModule,
     AdminPagesModule,
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]

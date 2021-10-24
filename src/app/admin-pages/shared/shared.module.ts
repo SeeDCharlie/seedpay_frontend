@@ -14,6 +14,7 @@ import { NavService } from './service/nav.service';
 import { WINDOW_PROVIDERS } from './service/windows.service';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.component';
+import { SiNoPipe } from './pipes/si-no.pipe';
 
 @NgModule({
   declarations: [
@@ -24,13 +25,14 @@ import { RightSidebarComponent } from './components/right-sidebar/right-sidebar.
     SidebarComponent,
     ContentLayoutComponent,
     BreadcrumbComponent,
-    RightSidebarComponent
+    RightSidebarComponent,
+    SiNoPipe
   ],
   imports: [
     CommonModule,
     RouterModule
   ],
   providers: [NavService, WINDOW_PROVIDERS],
-  exports: [FeatherIconsComponent, ToggleFullscreenDirective]
+  exports: [FeatherIconsComponent, ToggleFullscreenDirective, SiNoPipe]
 })
 export class SharedModule { }

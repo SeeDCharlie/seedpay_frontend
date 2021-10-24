@@ -37,8 +37,18 @@ export class NavService {
 	}
 
 	MENUITEMS: Menu[] = [
+
 		{
 			path: '/dashboard/default', title: 'Dashboard', icon: 'home', type: 'link', badgeType: 'primary', active: false
+		},
+		{
+			path: '/cuenta', title: 'Cuenta', icon: 'home', type: 'link', badgeType: 'primary', active: false
+		},
+		{
+			path: '/negocio', title: 'Negocio', icon: 'home', type: 'link', badgeType: 'primary', active: false
+		},
+		{
+			path: '/registrarVenta', title: 'Registrar Venta', icon: 'home', type: 'link', badgeType: 'primary', active: false
 		},
 		{
 			title: 'Products', icon: 'box', type: 'sub', active: false, children: [

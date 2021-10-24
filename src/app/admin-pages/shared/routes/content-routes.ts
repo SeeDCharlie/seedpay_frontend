@@ -1,6 +1,31 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { CuentaComponent } from '../../cuenta/cuenta.component';
+import { NegocioComponent } from '../../negocio/negocio.component';
+import { ProductoComponent } from '../../producto/producto.component';
+import { RegistrarVentaComponent } from '../../registrar-venta/registrar-venta.component';
 
 export const content: Routes = [
+  // CUENTA
+  {
+    path: 'cuenta', component: CuentaComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
+  // NEOGIO
+  {
+    path: 'negocio', component: NegocioComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
+  // PRODUCTO
+  {
+    path: 'producto', component: ProductoComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
+  // REGISTRAR VENTA
+  {
+    path: 'registrarVenta', component: RegistrarVentaComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
   {
     path: 'dashboard',
     loadChildren: () => import('../../components/dashboard/dashboard.module').then(m => m.DashboardModule),

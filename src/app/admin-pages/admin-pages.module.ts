@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DashboardModule } from './components/dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { ProductsModule } from './components/products/products.module';
@@ -20,13 +18,26 @@ import { AuthModule } from './components/auth/auth.module';
 import { AdminpagesComponent } from './admin-pages.component';
 
 import { AdminPagesRoutingModule } from './admin-pages-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegistrarVentaComponent } from './registrar-venta/registrar-venta.component';
+import { ProductoComponent } from './producto/producto.component';
+import { NegocioComponent } from './negocio/negocio.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
+import { SelectDropDownModule } from 'ngx-select-dropdown';
 
 @NgModule({
   declarations: [
     AdminpagesComponent,
+    RegistrarVentaComponent,
+    ProductoComponent,
+    NegocioComponent,
+    CuentaComponent,
+    
   ],
   imports: [
-
+    FormsModule,
+    ReactiveFormsModule,
+    CommonModule,
     AdminPagesRoutingModule,
     DashboardModule,
     InvoiceModule,
@@ -42,7 +53,10 @@ import { AdminPagesRoutingModule } from './admin-pages-routing.module';
     PagesModule,
     MediaModule,
     MenusModule,
-    UsersModule
+    UsersModule,
+    SelectDropDownModule,
+    PagesModule,
+
   ],
   providers: [],
   bootstrap: [AdminpagesComponent]

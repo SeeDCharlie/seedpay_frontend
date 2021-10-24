@@ -11,6 +11,8 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { QrService } from 'src/app/services/qr.service';
 import { S3ImagenesService } from 'src/app/services/s3-imagenes.service';
 import { environment } from 'src/environments/environment';
+import { SiNoPipe } from '../shared/pipes/si-no.pipe';
+
 
 @Component({
   selector: 'app-producto',
@@ -53,6 +55,7 @@ export class ProductoComponent implements OnInit {
     private _cateProductos: CategoriaProductoService,
     private _s3: S3ImagenesService,
     private _qr: QrService,
+    public siNo: SiNoPipe
   ) { }
 
   ngOnInit(): void {
