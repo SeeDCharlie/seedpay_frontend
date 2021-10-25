@@ -17,6 +17,7 @@ import { CollectionComponent } from './widgets/collection/collection.component';
 import { CatalogoNegociosComponent } from './catalogo-negocios/catalogo-negocios.component';
 import { ElementsModule } from '../elements/elements.module';
 import { CatalogoComponent } from './catalogo/catalogo.component';
+import { CartComponent } from './cart/cart.component';
 
 
 
@@ -27,6 +28,7 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
     LoginComponent,
     AboutUsComponent,
     CatalogoNegociosComponent,
+    CartComponent,
     //wigets components
     SliderComponent,
     BlogComponent,

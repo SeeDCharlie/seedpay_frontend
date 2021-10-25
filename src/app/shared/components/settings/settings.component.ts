@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductService } from "../../services/product.service";
 import { Product } from "../../classes/product";
+import { Producto } from 'src/app/interfaces/producto';
+import { CarritoComprasLocalService } from 'src/app/services/carrito-compras-local.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +14,7 @@ import { Product } from "../../classes/product";
 })
 export class SettingsComponent implements OnInit {
 
-  public products: Product[] = [];
+  public products: Producto[] = [];
   public search: boolean = false;
   
   public languages = [{ 
@@ -43,7 +45,7 @@ export class SettingsComponent implements OnInit {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
-    public productService: ProductService) {
+    public productService: CarritoComprasLocalService) {
     this.productService.cartItems.subscribe(response => this.products = response);
   }
 
@@ -74,7 +76,11 @@ export class SettingsComponent implements OnInit {
 
   guardarPalabraBusqueda(palabrita){
     localStorage.setItem('palabraBusqueda', palabrita);
-    window.location.reload();
+    this.searchToggle();
+  }
+
+  getCarrito(){
+    
   }
 
 }

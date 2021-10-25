@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pages.component.scss']
 })
 export class PagesComponent implements OnInit {
-
-  constructor() { }
+  public themeLogo: string = 'assets/images/icon/logo-14.png'; // Change Logo
+  constructor() { 
+    if (!localStorage.getItem('cartItems')){
+      localStorage.setItem('cartItems', '[]');
+    }
+    
+  }
 
   ngOnInit(): void {
   }
