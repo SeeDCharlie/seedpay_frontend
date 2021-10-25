@@ -50,9 +50,6 @@ export class NavService {
 			path: '/registrarVenta', title: 'Registrar Venta', icon: 'dollar-sign', type: 'link', badgeType: 'primary', active: false
 		},
 		{
-			path: '/informeVenta', title: 'Informe de Ventas', icon: 'clipboard', type: 'link', badgeType: 'primary', active: false
-		},
-		{
 			title: 'Products', icon: 'box', type: 'sub', active: false, children: [
 				{
 					title: 'Physical', type: 'sub', children: [
