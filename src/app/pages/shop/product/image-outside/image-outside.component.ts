@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { response } from 'express';
 import { Producto } from 'src/app/interfaces/producto';
 import { CarritoComprasLocalService } from 'src/app/services/carrito-compras-local.service';
+import { ProductoService } from 'src/app/services/producto.service';
 import { SizeModalComponent } from 'src/app/shared/components/modal/size-modal/size-modal.component';
 import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from 'src/app/shared/data/slider';
 
@@ -12,7 +14,7 @@ import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from 'src/app/sha
 })
 export class ImageOutsideComponent implements OnInit {
 
-  public product: Producto = {};
+  public product: Producto ;
   public counter: number = 1;
   public activeSlide: any = 0;
   public selectedSize: any;
@@ -23,9 +25,13 @@ export class ImageOutsideComponent implements OnInit {
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
 
   constructor(private route: ActivatedRoute, private router: Router,
-    public productService: CarritoComprasLocalService) { 
+    public productService: CarritoComprasLocalService,
+    private productoServiceApi: ProductoService ) { 
       this.route.params.subscribe(params => {
-        this.product = JSON.parse(params.product) as Producto;
+        this.productoServiceApi.buscarProductoId(params.producto).subscribe(response => {
+          this.product = response;
+        });
+
     });
     }
 
@@ -73,7 +79,7 @@ export class ImageOutsideComponent implements OnInit {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
     if(status)
-      this.router.navigate(['/shop/cart']);
+      this.router.navigate(['/cart']);
   }
 
   // Buy Now
@@ -81,7 +87,7 @@ export class ImageOutsideComponent implements OnInit {
     product.quantity = this.counter || 1;
     const status = await this.productService.addToCart(product);
     if(status)
-      this.router.navigate(['/shop/checkout']);
+      this.router.navigate(['/preCompra']);
   }
 
   // Add to Wishlist

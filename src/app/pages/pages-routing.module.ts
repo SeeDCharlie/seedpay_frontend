@@ -44,7 +44,7 @@ const routes: Routes = [
         path: 'catalogo', component: CollectionNoSidebarComponent
       },
       {
-        path: 'producto' , component: ImageOutsideComponent
+        path: 'producto/:producto' , component: ImageOutsideComponent
       },
       {
         path: '', redirectTo: 'inicio', pathMatch: 'full'

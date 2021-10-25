@@ -5,7 +5,7 @@
       <!-- <span class="lable4" *ngIf="product.sale">on sale</span> -->
     </div>
     <div class="front">
-        <a [routerLink]="['/producto']" [queryParams]="{product:product | json }" >
+        <a [routerLink]="['/producto', product.id]" >
 
           <img 
           [lazyLoad]="product.imagen_64" 
