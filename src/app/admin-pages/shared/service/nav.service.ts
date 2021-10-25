@@ -42,40 +42,17 @@ export class NavService {
 			path: '/dashboard/default', title: 'Dashboard', icon: 'home', type: 'link', badgeType: 'primary', active: false
 		},
 		{
-			path: '/cuenta', title: 'Cuenta', icon: 'home', type: 'link', badgeType: 'primary', active: false
-		},
-		{
-			path: '/negocio', title: 'Negocio', icon: 'home', type: 'link', badgeType: 'primary', active: false
-		},
-		{
-			path: '/registrarVenta', title: 'Registrar Venta', icon: 'home', type: 'link', badgeType: 'primary', active: false
-		},
-		{
-			title: 'Products', icon: 'box', type: 'sub', active: false, children: [
-				{
-					title: 'Physical', type: 'sub', children: [
-						{ path: '/products/physical/category', title: 'Category', type: 'link' },
-						{ path: '/products/physical/sub-category', title: 'Sub Category', type: 'link' },
-						{ path: '/products/physical/product-list', title: 'Product List', type: 'link' },
-						{ path: '/products/physical/product-detail', title: 'Product Detail', type: 'link' },
-						{ path: '/products/physical/add-product', title: 'Add Product', type: 'link' },
-					]
-				},
-				{
-					title: 'digital', type: 'sub', children: [
-						{ path: '/products/digital/digital-category', title: 'Category', type: 'link' },
-						{ path: '/products/digital/digital-sub-category', title: 'Sub Category', type: 'link' },
-						{ path: '/products/digital/digital-product-list', title: 'Product List', type: 'link' },
-						{ path: '/products/digital/digital-add-product', title: 'Add Product', type: 'link' },
-					]
-				},
-			]
-		},
-		{
 			title: 'Ventas', icon: 'dollar-sign', type: 'sub', active: false, children: [
 				{ path: '/ventas/pedidos', title: 'Pedidos', type: 'link' },
+				{
+					path: '/registrarVenta', title: 'Registrar Venta', type: 'link', badgeType: 'primary', active: false
+				},
 			]
 		},
+		{
+			path: '/negocio', title: 'Negocio', icon: 'archive', type: 'link', badgeType: 'primary', active: false
+		},
+
 		// {
 		// 	title: 'Coupons', icon: 'tag', type: 'sub', active: false, children: [
 		// 		{ path: '/coupons/list-coupons', title: 'List Coupons', type: 'link' },
@@ -124,8 +101,11 @@ export class NavService {
 		// 		{ path: '/settings/profile', title: 'Profile', type: 'link' },
 		// 	]
 		// },
+		// {
+		// 	title: 'Invoice', path: '/invoice', icon: 'archive', type: 'link', active: false
+		// },
 		{
-			title: 'Invoice', path: '/invoice', icon: 'archive', type: 'link', active: false
+			path: '/cuenta', title: 'Cuenta', icon: 'settings', type: 'link', badgeType: 'primary', active: false
 		},
 		{
 			title: 'Login',path: '/auth/login', icon: 'log-in', type: 'link', active: false
