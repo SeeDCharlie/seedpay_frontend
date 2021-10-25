@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { CuentaComponent } from '../../cuenta/cuenta.component';
+import { InformeVentaComponent } from '../../informe-venta/informe-venta.component';
 import { NegocioComponent } from '../../negocio/negocio.component';
 import { ProductoComponent } from '../../producto/producto.component';
 import { RegistrarVentaComponent } from '../../registrar-venta/registrar-venta.component';
@@ -24,6 +25,11 @@ export const content: Routes = [
   // REGISTRAR VENTA
   {
     path: 'registrarVenta', component: RegistrarVentaComponent,
+    canLoad: [AuthGuard], canActivate: [AuthGuard]
+  },
+  // INFORME VENTA
+  {
+    path: 'informeVenta', component: InformeVentaComponent,
     canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   {
