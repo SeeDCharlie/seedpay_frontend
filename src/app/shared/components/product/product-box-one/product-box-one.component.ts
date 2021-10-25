@@ -4,6 +4,7 @@ import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component"
 import { Producto } from 'src/app/interfaces/producto';
 import { CarritoComprasLocalService } from 'src/app/services/carrito-compras-local.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-box-one',
@@ -25,7 +26,8 @@ export class ProductBoxOneComponent implements OnInit {
   public ImageSrc : string
 
   constructor(private productService: CarritoComprasLocalService,
-              private _toast: ToastrService) { }
+              private _toast: ToastrService,
+              private _router: Router) { }
 
   ngOnInit(): void {
     if(this.loader) {
@@ -68,6 +70,10 @@ export class ProductBoxOneComponent implements OnInit {
     this._toast.success(product.nombre,  "Se Añadio Un Producto al Carrito", {
       timeOut: 4000
     });
+  }
+
+  viewDetail(){
+    this._router.navigate(['/producto/', this.product]);
   }
 
   // addToWishlist(product: any) {

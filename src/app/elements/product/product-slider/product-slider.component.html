@@ -2,13 +2,18 @@
 <div class="negocioMinicatalogo">
   <div class="section-t-space">
     <div class="row tituloNegocio">
+      
       <div class="col-auto imgresponsive">
-        <img [lazyLoad]="imgNegocio" class="img-fluid">
+        <a [routerLink]="['/catalogo/']">
+          <img [lazyLoad]="imgNegocio" class="img-fluid">
+        </a>
       </div>
       <div class="col-10 itemsabajo"><br>
         <div class="row">
           <div class="col-auto itemsabajo">
-            <h2 class="tituloNegocio">{{nombreNegocio}}</h2><br>
+            <a [routerLink]="['/catalogo/']" (click)="guardarNegocioCatalogo()">
+              <h2 class="tituloNegocio">{{nombreNegocio}}</h2><br>
+            </a>
           </div>
           <div class="col-auto">
             <h4 class="verTodos">Ver todos</h4>

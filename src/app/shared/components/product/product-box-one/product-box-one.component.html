@@ -5,10 +5,16 @@
       <!-- <span class="lable4" *ngIf="product.sale">on sale</span> -->
     </div>
     <div class="front">
-        <img 
+        <a [routerLink]="['/producto']" [queryParams]="{product:product | json }" >
+
+          <img 
           [lazyLoad]="product.imagen_64" 
           class="img-fluid  maxwith" 
           alt="{{ product.imagen_64 }}" />
+        </a>
+
+
+
     </div>
     <div class="cart-info cart-wrap">
       <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(product)"

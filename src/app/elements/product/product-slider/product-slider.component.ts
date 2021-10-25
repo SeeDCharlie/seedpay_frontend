@@ -23,6 +23,10 @@ export class ProductSliderComponent implements OnInit {
 
   }
 
+  guardarNegocioCatalogo(){
+    localStorage.setItem('negocioCatalogo', this.idNegocio.toString());
+  }
+
   ngOnInit(): void {
     
     // this.productService.buscarProductoIdNegocio(this.idNegocio).subscribe(response => this.products = response);

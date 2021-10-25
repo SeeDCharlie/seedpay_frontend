@@ -109,5 +109,42 @@ export class CarritoComprasLocalService {
       }
     
 
+        /*
+    ---------------------------------------------
+    ---------------  Wish List  -----------------
+    ---------------------------------------------
+  */
+
+  // Get Wishlist Items
+  public get wishlistItems(): Observable<Producto[]> {
+    const itemsStream = new Observable(observer => {
+      observer.next(state.wishlist);
+      observer.complete();
+    });
+    return <Observable<Producto[]>>itemsStream;
+  }
+
+  // Add to Wishlist
+  public addToWishlist(product): any {
+    const wishlistItem = state.wishlist.find(item => item.id === product.id)
+    if (!wishlistItem) {
+      state.wishlist.push({
+        ...product
+      })
+    }
+    this.toastrService.success('Product has been added in wishlist.');
+    localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+    return true
+  }
+
+  // Remove Wishlist items
+  public removeWishlistItem(product: Producto): any {
+    const index = state.wishlist.indexOf(product);
+    state.wishlist.splice(index, 1);
+    localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+    return true
+  }
+
+
 
 }

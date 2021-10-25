@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../auth/auth.guard';
+import { ProductBoxVerticalSliderComponent } from '../shared/components/product/product-box-vertical-slider/product-box-vertical-slider.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { CartComponent } from './cart/cart.component';
 import { CatalogoNegociosComponent } from './catalogo-negocios/catalogo-negocios.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages.component';
+import { CartComponent } from './shop/cart/cart.component';
+import { CheckoutComponent } from './shop/checkout/checkout.component';
+import { CollectionNoSidebarComponent } from './shop/collection/collection-no-sidebar/collection-no-sidebar.component';
+import { ImageOutsideComponent } from './shop/product/image-outside/image-outside.component';
+import { Producto } from '../interfaces/producto';
 
 
 const routes: Routes = [
@@ -31,6 +36,15 @@ const routes: Routes = [
       },
       {
         path: 'cart',  component: CartComponent
+      },
+      {
+        path: 'preCompra', component: CheckoutComponent
+      },
+      {
+        path: 'catalogo', component: CollectionNoSidebarComponent
+      },
+      {
+        path: 'producto' , component: ImageOutsideComponent
       },
       {
         path: '', redirectTo: 'inicio', pathMatch: 'full'
