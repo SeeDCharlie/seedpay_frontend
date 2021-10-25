@@ -60,7 +60,7 @@ export class NavService {
 		{ path: '/inicio', title: 'Inicio', type: 'link' },
 		{ path: '/compra', title: 'Categorias', type: 'sub',  children: this.categorias},
 
-		{ path: '/adquiere', title: 'Adquiere SeeDPay', type: 'link' },
+		{ path: '/aboutus', title: 'Adquiere SeeDPay', type: 'link' },
 
 	];
 

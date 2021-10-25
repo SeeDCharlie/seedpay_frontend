@@ -4,6 +4,8 @@ import { isPlatformBrowser } from '@angular/common';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from "../../../services/product.service";
 import { Product } from "../../../classes/product";
+import { CarritoComprasLocalService } from 'src/app/services/carrito-compras-local.service';
+import { Producto } from 'src/app/interfaces/producto';
 
 @Component({
   selector: 'app-cart-modal',
@@ -12,7 +14,7 @@ import { Product } from "../../../classes/product";
 })
 export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() product: Product;
+  @Input() product: Producto;
   @Input() currency : any;
   
   @ViewChild("cartModal", { static: false }) CartModal: TemplateRef<any>;
@@ -23,7 +25,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private modalService: NgbModal,
-    private productService: ProductService) {
+    private productService: CarritoComprasLocalService) {
   }
 
   ngOnInit(): void {
@@ -33,8 +35,6 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async openModal(product) {
-    await this.productService.getProducts.subscribe(response => this.products = response);
-    this.products = await this.products.filter(items => items.category == product.category && items.id != product.id);
     const status = await this.productService.addToCart(product);
     if(status) {
       this.modalOpen = true;

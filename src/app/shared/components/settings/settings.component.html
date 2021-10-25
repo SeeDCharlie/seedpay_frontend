@@ -16,11 +16,8 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" (keyup)="0" #searchWord placeholder="Busca productos o servicios">
                                 </div>
-                                <button type="submit" class="btn btn-primary" [routerLink]="['/buscar/']" (click)="guardarPalabraBusqueda(searchWord.value)"
-                                ><i class="fa fa-search"></i>Buscar</button>
-                                <div>
-                                  {{searchWord.value}}asdsa
-                                </div>
+                                <a type="submit" class="btn btn-primary" [routerLink]="['/buscar/']" (click)="guardarPalabraBusqueda(searchWord.value)"
+                                ><i class="fa fa-search"></i>Buscar</a>
                             </form>
                         </div>
                     </div>
@@ -49,7 +46,7 @@
     </li> -->
     <li class="onhover-div mobile-cart">
       <div>
-        <a [routerLink]="['/shop/cart']">
+        <a [routerLink]="['/cart']">
           <img src="assets/images/icon/shopping-cart.png" class="img-fluid" alt="">
           <i class="ti-shopping-cart"></i>
         </a>
@@ -61,17 +58,17 @@
       <ul class="show-div shopping-cart" *ngIf='products.length'>
         <li *ngFor="let product of products">
           <div class="media">
-            <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-              <img class="mr-3" [src]="product?.images[0].src" [alt]="product?.images[0].alt">
+            <a [routerLink]="['/shop/product/left/sidebar/', product.nombre.replace(' ', '-')]">
+              <img class="mr-3" [src]="product?.imagen_64" [alt]="product?.imagen_64">
             </a>
             <div class="media-body">
-              <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                <h4>{{ product?.title }}</h4>
+              <a [routerLink]="['/shop/product/left/sidebar/', product.nombre.replace(' ', '-')]">
+                <h4>{{ product?.nombre }}</h4>
               </a>
               <h4>
                 <span>
-                  {{ product?.quantity }} x 
-                  {{ product?.price * productService?.Currency.price | discount:product | currency:productService?.Currency.currency:'symbol' }}
+                  {{ product?.precio }} x {{product?.quantity}}
+                  {{ product?.precio * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
                 </span>
               </h4>
             </div>
@@ -87,8 +84,8 @@
         </li>
         <li>
           <div class="buttons">
-            <a [routerLink]="['/shop/cart']" class="view-cart">view cart</a>
-            <a [routerLink]="['/shop/checkout']" class="checkout">checkout</a>
+            <a [routerLink]="['/cart']" class="view-cart">Ver Carrito</a>
+            <a [routerLink]="['/preCompra']" class="checkout">Comprar</a>
           </div>
         </li>
       </ul>

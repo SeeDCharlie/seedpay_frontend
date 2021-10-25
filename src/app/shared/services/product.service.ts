@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
 
 const state = {
-  products: JSON.parse(localStorage['products'] || '[]'),
+  //products: JSON.parse(localStorage['products'] || '[]'),
   wishlist: JSON.parse(localStorage['wishlistItems'] || '[]'),
   compare: JSON.parse(localStorage['compareItems'] || '[]'),
   cart: JSON.parse(localStorage['cartItems'] || '[]')
@@ -142,11 +142,11 @@ export class ProductService {
   // Add to Cart
   public addToCart(product): any {
     const cartItem = state.cart.find(item => item.id === product.id);
-    const qty = product.quantity ? product.quantity : 1;
+    const qty = product.precio ? product.precio : 1;
     const items = cartItem ? cartItem : product;
-    const stock = this.calculateStockCounts(items, qty);
+    //const stock = this.calculateStockCounts(items, qty);
     
-    if(!stock) return false
+    //if(!stock) return false
 
     if (cartItem) {
         cartItem.quantity += qty    
