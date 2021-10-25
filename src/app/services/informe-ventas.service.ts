@@ -2,21 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ProductoCarrito, registrarVenta } from '../interfaces/productoCarrito';
+import { PetInforme, ReqInforme } from '../interfaces/informeVentas';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CarritoComprasService {
+export class InformeVentasService {
 
-  private _url = environment.url + '/ventas/';
+  private _url = environment.url + '/informeVentas/';
 
   constructor(
     private _http: HttpClient
   ) { }
 
-  registrarVenta(carrito: registrarVenta): Observable<any> {
-    return this._http.post<any>(`${this._url}`, carrito);
-
+  consultarInforme(petInforme: PetInforme): Observable<any>{
+    return this._http.post<ReqInforme>(`${this._url}`, petInforme)
   }
+
 }

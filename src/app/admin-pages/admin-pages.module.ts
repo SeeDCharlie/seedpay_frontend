@@ -24,6 +24,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { NegocioComponent } from './negocio/negocio.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
+import { InformeVentaComponent } from './informe-venta/informe-venta.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     ProductoComponent,
     NegocioComponent,
     CuentaComponent,
-    
+    InformeVentaComponent,
+
   ],
   imports: [
     FormsModule,
