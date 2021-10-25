@@ -38,10 +38,10 @@ export const content: Routes = [
     }
   },
   {
-    path: 'sales',
+    path: 'ventas',
     loadChildren: () => import('../../components/sales/sales.module').then(m => m.SalesModule),
     data: {
-      breadcrumb: "Sales"
+      breadcrumb: "Ventas"
     }
   },
   {

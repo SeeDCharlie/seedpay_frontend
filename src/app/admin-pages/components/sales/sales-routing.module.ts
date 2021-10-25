@@ -8,11 +8,11 @@ const routes: Routes = [
     path: '',
     children: [
       {
-        path: 'orders',
+        path: 'pedidos',
         component: OrdersComponent,
         data: {
-          title: "Orders",
-          breadcrumb: "Orders"
+          title: "Pedido",
+          breadcrumb: "Pedidos"
         }
       },
       {
