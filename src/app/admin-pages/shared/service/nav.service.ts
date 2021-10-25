@@ -46,8 +46,12 @@ export class NavService {
 				{
 					path: '/registrarVenta', title: 'Registrar Venta', type: 'link', badgeType: 'primary', active: false
 				},
+				{
+					path: '/informeVenta', title: 'Informe de Ventas', icon: 'clipboard', type: 'link', badgeType: 'primary', active: false
+				}
 			]
 		},
+
 		{
 			path: '/negocio', title: 'Negocio', icon: 'archive', type: 'link', badgeType: 'primary', active: false
 		},
