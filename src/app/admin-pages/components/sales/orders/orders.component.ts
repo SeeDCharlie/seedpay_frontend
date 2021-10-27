@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from "@swimlane/ngx-datatable";
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { orderDB } from "../../../shared/tables/order-list";
 @Component({
   selector: 'app-orders',
@@ -7,12 +8,14 @@ import { orderDB } from "../../../shared/tables/order-list";
   styleUrls: ['./orders.component.scss']
 })
 export class OrdersComponent implements OnInit {
-  public order = [];
+  public pedidos = [];
   public temp = [];
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
-  constructor() {
-    this.order = orderDB.list_order;
+  constructor(private pedidosService: PedidosService) {
+    pedidosService.consultarPedidos().subscribe( response => {
+      this.pedidos = response;
+    });
   }
 
   updateFilter(event) {
@@ -24,7 +27,7 @@ export class OrdersComponent implements OnInit {
     });
 
     // update the rows
-    this.order = temp;
+    this.pedidos = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
   }
