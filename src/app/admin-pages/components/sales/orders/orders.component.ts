@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from "@swimlane/ngx-datatable";
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { orderDB } from "../../../shared/tables/order-list";
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -10,6 +11,22 @@ import { orderDB } from "../../../shared/tables/order-list";
 export class OrdersComponent implements OnInit {
   public pedidos = [];
   public temp = [];
+  public colorEstadoPedido = {
+    1:"#FFDA33",
+    2:"#25FF4D",
+    3:"#D20000",
+    4:"#E36B07",
+    5:"#07D9E3",
+    6:"#61E307",
+    7:"#3C07E3",
+    8:"#E30707",
+  }
+  public colorEstadoFactura = {
+    1:"#FFDA33",
+    2:"#07D9E3",
+    3:"#E30780",
+    4:"#E30707",
+  }
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   constructor(private pedidosService: PedidosService) {
