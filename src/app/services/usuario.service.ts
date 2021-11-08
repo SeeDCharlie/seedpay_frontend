@@ -31,6 +31,11 @@ export class UsuarioService {
     return this._http.post<any>(`${this._url}/token-auth/`, request);
   }
 
+  //Logout
+  logoutUsuario():Observable<any>{
+    return this._http.get<any>(`${this._url}/logout/`);
+  }
+
   // REGISTRO
   registrarUsuario(request: Usuario): Observable<any> {
     return this._http.post<any>(`${this._url}/usuarios/`, request);

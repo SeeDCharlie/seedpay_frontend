@@ -23,4 +23,8 @@ export class PedidosService {
     return this._http.get<any>(`${this._url}${id}`);
   }
 
+  consultarPedidosPorIdVendedor(id: number){
+    return this._http.get<any>(`${this._url}vendedor/${id}`);
+  }
+
 }

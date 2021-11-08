@@ -30,7 +30,8 @@ export class OrdersComponent implements OnInit {
 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   constructor(private pedidosService: PedidosService) {
-    pedidosService.consultarPedidos().subscribe( response => {
+
+    pedidosService.consultarPedidosPorIdVendedor(Number(sessionStorage.getItem('id'))).subscribe( response => {
       this.pedidos = response;
     });
   }

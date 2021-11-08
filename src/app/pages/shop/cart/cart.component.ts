@@ -13,13 +13,13 @@ export class CartComponent implements OnInit {
   public products: Producto[] = [];
 
   constructor(public productService: CarritoComprasLocalService) {
-    this.productService.cartItems.subscribe(response => this.products = response);
+    this.products = this.productService.cartItems;
   }
 
   ngOnInit(): void {
   }
 
-  public get getTotal(): Observable<number> {
+  getTotal(): number {
     return this.productService.cartTotalAmount();
   }
 

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-header-one',
@@ -14,10 +16,17 @@ export class HeaderOneComponent implements OnInit {
   @Input() sticky: boolean = false; // Default false
 
   public stick: boolean = false;
+  public usuario: Usuario;
 
   constructor(
-    private _route: Router
-  ) { }
+    private _route: Router,
+    private usuarioService: UsuarioService,
+  ) { 
+    this._route.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
+    this.usuario = JSON.parse(sessionStorage.getItem('usuario')) || null;
+  }
 
   ngOnInit(): void {
   }
@@ -31,6 +40,14 @@ export class HeaderOneComponent implements OnInit {
   	} else {
   	  this.stick = false;
   	}
+  }
+
+  logout(){
+    this.usuarioService.logoutUsuario().subscribe(_response => {
+      sessionStorage.removeItem('id')
+      sessionStorage.removeItem('usuario')
+      this._route.navigate(['inicio']);
+    });
   }
 
 }

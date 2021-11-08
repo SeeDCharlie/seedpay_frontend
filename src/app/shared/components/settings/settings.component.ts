@@ -46,7 +46,7 @@ export class SettingsComponent implements OnInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
     public productService: CarritoComprasLocalService) {
-    this.productService.cartItems.subscribe(response => this.products = response);
+      this.products  = this.productService.cartItems;
   }
 
   ngOnInit(): void {
@@ -62,7 +62,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  get getTotal(): Observable<number> {
+  getTotal(): number {
     return this.productService.cartTotalAmount();
   }
 

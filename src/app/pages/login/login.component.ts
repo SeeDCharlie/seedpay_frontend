@@ -51,9 +51,10 @@ export class LoginComponent implements OnInit {
 
       this._usuarioService.loginUsuario(usuario).subscribe(
         data => {
-          this._router.navigate(['inicio']);
 
           sessionStorage.setItem("id", data.id);
+          sessionStorage.setItem("usuario", JSON.stringify(data));
+          this._router.navigate(['inicio']);
         },
         error => {
           this._toast.error("Los datos no coinciden con un usuario existente.", "Ha sucedido un inconveniente", {

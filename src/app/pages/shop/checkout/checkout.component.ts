@@ -6,6 +6,14 @@ import { CarritoComprasLocalService } from 'src/app/services/carrito-compras-loc
 import { Producto } from 'src/app/interfaces/producto';
 import { OrderService } from 'src/app/shared/services/order.service';
 import { environment } from 'src/environments/environment';
+import { Departamento } from 'src/app/interfaces/departamento';
+import { Ciudad } from 'src/app/interfaces/ciudad';
+import { DepartamentoService } from 'src/app/services/departamento.service';
+import { CiudadService } from 'src/app/services/ciudad.service';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { TipoTransporte } from 'src/app/interfaces/tipoTransporte';
+import { TipoTransporteService } from 'src/app/services/tipoTransporte.service';
+import { PedidoVentaOnline, ProductoPedido } from 'src/app/interfaces/pedidoVentaOnline';
 
 @Component({
   selector: 'app-checkout',
@@ -19,30 +27,49 @@ export class CheckoutComponent implements OnInit {
   public payPalConfig ? : IPayPalConfig;
   public payment: string = 'Stripe';
   public amount:  any;
+  public departamentos: Departamento[];
+  public ciudades: Ciudad[];
+  public usuario: Usuario;
+  public tiposTransporte: TipoTransporte[];
+  public pedidoVentaOnline: PedidoVentaOnline = new PedidoVentaOnline();
 
   constructor(private fb: FormBuilder,
     public productService: CarritoComprasLocalService,
-    private orderService: OrderService) { 
+    private orderService: OrderService,
+    private departamentoService: DepartamentoService,
+    private ciudadService: CiudadService,
+    private tipoTransporteService: TipoTransporteService) { 
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(50)]],
-      country: ['', Validators.required],
-      town: ['', Validators.required],
-      state: ['', Validators.required],
-      postalcode: ['', Validators.required]
-    })
+      // metodoPago: ['', [Validators.required]],
+    });
+    this.departamentoService.consultarDepartamentos().subscribe(response => {
+      this.departamentos = response;
+      console.log('deps : ' + this.departamentos);
+    });
+    this.ciudadService.consultarCiudades().subscribe(response => {
+      this.ciudades = response;
+      console.log('ciudades : ' + this.ciudades)
+    });
+    this.tipoTransporteService.getTiposTransporte().subscribe( response => {
+      this.tiposTransporte = response;
+    });
+    this.usuario = JSON.parse(sessionStorage.getItem('usuario')) || {};
+    this.pedidoVentaOnline.usuario = this.usuario;
+    this.pedidoVentaOnline.total=this.getTotal();
+    this.setCartItems();
   }
 
   ngOnInit(): void {
-    this.productService.cartItems.subscribe(response => this.products = response);
-    this.getTotal.subscribe(amount => this.amount = amount);
+    this.products = this.productService.cartItems;
     this.initConfig();
   }
 
-  public get getTotal(): Observable<number> {
+  public getTotal(): number {
     return this.productService.cartTotalAmount();
   }
 
@@ -112,6 +139,29 @@ export class CheckoutComponent implements OnInit {
             console.log('onClick', data, actions);
         }
     };
+  }
+
+
+  tipoTransporte(evt){
+    var target = evt.target;
+    if (target.checked) {
+
+    } 
+  }
+
+  realizarPedido(){
+
+      return true
+
+  }
+
+  setCartItems(){
+    this.productService.cartItems.forEach( itm =>{
+      let productoCantidad: ProductoPedido = new ProductoPedido();
+      productoCantidad.producto = itm.id;
+      productoCantidad.cantidad = itm.quantity;
+      this.pedidoVentaOnline.productos.push(productoCantidad);
+    });
   }
 
 }

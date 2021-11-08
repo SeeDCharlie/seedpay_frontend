@@ -10,4 +10,5 @@ export interface Usuario {
   tipo_identificacion?: number;
   password?: string;
   token?: string;
+  ciudad?: number;
 }
