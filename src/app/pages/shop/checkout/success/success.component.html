@@ -42,39 +42,39 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="product-order">
-                    <h3>your order details</h3>
-                    <div class="row product-order-detail" *ngFor="let product of orderDetails.product">
+                    <h3>Detalle de la orden</h3>
+                    <div class="row product-order-detail" *ngFor="let product of orderDetails">
                         <div class="col-3">
-                            <img [src]="product.images[0].src" alt="" class="img-fluid">
+                            <img [src]="product.imagen_64" alt="" class="img-fluid">
                         </div>
                         <div class="col-3 order_detail">
                             <div>
-                                <h4>product name</h4>
-                                <h5>{{ product.title }}</h5>
+                                <h4>producto</h4>
+                                <h5>{{ product.nombre }}</h5>
                             </div>
                         </div>
                         <div class="col-3 order_detail">
                             <div>
-                                <h4>quantity</h4>
+                                <h4>cantidad</h4>
                                 <h5>{{ product.quantity }}</h5>
                             </div>
                         </div>
                         <div class="col-3 order_detail">
                             <div>
-                                <h4>price</h4>
-                                <h5>{{ product?.price * productService?.Currency?.price | discount:product | currency:productService?.Currency.currency:'symbol' }}</h5>
+                                <h4>precio</h4>
+                                <h5>{{ product?.precio * productService?.Currency?.price | currency:productService?.Currency.currency:'symbol' }}</h5>
                             </div>
                         </div>
                     </div>
                     <div class="total-sec">
                         <ul>
-                            <li>Subtotal <span>{{ orderDetails.totalAmount | currency:productService?.Currency.currency:'symbol' }}</span></li>
+                            <li>Subtotal <span>{{ respuestaEpayco.x_amount | currency:productService?.Currency.currency:'symbol' }}</span></li>
                             <li>Shipping <span>$00.00</span></li>
-                            <li>Tax <span>$00.00</span></li>
+                            <li>iva <span>$00.00</span></li>
                         </ul>
                     </div>
                     <div class="final-total">
-                        <h3>total <span>{{ orderDetails.totalAmount | currency:productService?.Currency.currency:'symbol' }}</span></h3>
+                        <h3>total <span>{{ respuestaEpayco.x_amount | currency:productService?.Currency.currency:'symbol' }}</span></h3>
                     </div>
                 </div>
             </div>
@@ -83,18 +83,18 @@
                     <div class="col-sm-6">
                         <h4>summery</h4>
                         <ul class="order-detail">
-                            <li>order ID: {{ orderDetails.orderId }}</li>
-                            <li>Order Date: October 22, 2021</li>
-                            <li>Order Total: {{ orderDetails.totalAmount | currency:productService?.Currency.currency:'symbol' }}</li>
+                            <li>Orden ID: {{ respuestaEpayco.x_id_invoice }}</li>
+                            <li>Fecha de transaccion: {{ respuestaEpayco.x_transaction_date }}</li>
+                            <li>Total: {{ respuestaEpayco.x_amount  | currency:productService?.Currency.currency:'symbol' }}</li>
                         </ul>
                     </div>
                     <div class="col-sm-6">
                         <h4>shipping address</h4>
                         <ul class="order-detail">
-                            <li>{{ orderDetails.shippingDetails.address }}</li>
-                            <li>{{ orderDetails.shippingDetails.state }}</li>
-                            <li>{{ orderDetails.shippingDetails.country }}, {{ orderDetails.shippingDetails.postalcode }}</li>
-                            <li>Contact No. {{ orderDetails.shippingDetails.phone }}</li>
+                            <li>{{ respuestaEpayco.x_id_invoice }}</li>
+                            <li>{{ respuestaEpayco.x_id_invoice }}</li>
+                            <li>{{ respuestaEpayco.x_id_invoice }}, {{ respuestaEpayco.x_id_invoice }}</li>
+                            <li>Contact No. {{ respuestaEpayco.x_id_invoice }}</li>
                         </ul>
                     </div>
 

@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Producto } from 'src/app/interfaces/producto';
 import { ResponseEpayco } from 'src/app/interfaces/responseEpayco';
 import { VentasOnline } from 'src/app/services/ventas-online.service';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -13,19 +14,22 @@ import { OrderService } from '../../../../shared/services/order.service';
 })
 export class SuccessComponent implements OnInit, AfterViewInit{
 
-  public orderDetails : Order = {};
+  public orderDetails : Producto[];
   public respuestaEpayco: ResponseEpayco;
 
   constructor(public productService: ProductService,
               private route: ActivatedRoute,
               private ventasOnlineService: VentasOnline) { 
+                var referencia:string = "";
                 this.route.queryParams.subscribe(params => {
-
-                  this.ventasOnlineService.responseEstateEpayco(params['ref_payco']).subscribe(response=>{
-                    this.respuestaEpayco = response;
-                  });
+                    referencia = params['ref_payco']
                 });
 
+                this.ventasOnlineService.responseEstateEpayco(referencia).subscribe(response=>{
+                  this.respuestaEpayco = response['data'];
+                });
+
+                this.orderDetails = JSON.parse(localStorage.getItem('cartItems')) || null
                 
 
               }

@@ -149,8 +149,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   realizarPedido() {
-    alert("usuario :" + JSON.stringify(this.pedidoVentaOnline.usuario))
-
     let handler = ePayco.checkout.configure({
       key: 'e45e28fb95e0375d361735837ed3f402',
       test: true
@@ -161,7 +159,6 @@ export class CheckoutComponent implements OnInit {
     });
 
     return true
-
   }
 
   setCartItems() {
