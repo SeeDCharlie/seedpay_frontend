@@ -7,12 +7,10 @@ export class ProductoPedido{
 }
 
 export class PedidoVentaOnline{
-    usuario?: Usuario;
-    direccion: string;
-    descripcion:string;
+    usuario: Usuario;
     transporte:number;
+    negocio:number;
     metodo_pago:number;
-    tel_contacto:number;
     productos:ProductoPedido[]= [];
     total:number;
 }

@@ -25,6 +25,7 @@ import { PaginationComponent } from './shop/collection/widgets/pagination/pagina
 import { ImageOutsideComponent } from './shop/product/image-outside/image-outside.component';
 import { StockInventoryComponent } from './shop/product/widgets/stock-inventory/stock-inventory.component';
 import { SocialComponent } from './shop/product/widgets/social/social.component';
+import { SuccessComponent } from './shop/checkout/success/success.component';
 
 
 
@@ -43,6 +44,7 @@ import { SocialComponent } from './shop/product/widgets/social/social.component'
     ImageOutsideComponent,
     StockInventoryComponent,
     SocialComponent,
+    SuccessComponent,
     //wigets components
     SliderComponent,
     BlogComponent,

@@ -1,0 +1,28 @@
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          searchPaths: /
+          skip-ssl-validation: 'true'
+          username: hellocarloscastillo
+          uri: https://gitlab.com/hellocarloscastillo/configdata_seedpay.git
+          default-label: main
+          password: caremo1997
+        bootstrap: 'true'
+  application:
+    name: config-server
+  security:
+    user:
+      password: secret
+      name: root
+  profiles:
+    active: git
+  info:
+    build:
+      encoding: UTF-8
+server:
+  error:
+    include-binding-errors: always
+    include-message: always
+  port: '8080'

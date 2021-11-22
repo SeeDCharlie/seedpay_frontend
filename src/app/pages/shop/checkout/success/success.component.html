@@ -1,16 +1,16 @@
 <!-- breadcrumb start -->
-<app-breadcrumb [title]="'404 page'" [breadcrumb]="'404 page'" *ngIf="!orderDetails"></app-breadcrumb>
+<app-breadcrumb [title]="'404 page'" [breadcrumb]="'404 page'" *ngIf="!respuestaEpayco"></app-breadcrumb>
 <!-- breadcrumb End -->
 
 <!-- section start -->
-<section class="p-0" *ngIf="!orderDetails">
+<section class="p-0" *ngIf="!respuestaEpayco">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
                 <div class="error-section">
                     <h1>404</h1>
                     <h2>page not found</h2>
-                    <a [routerLink]="'/home/fashion'" class="btn btn-solid">back to home</a>
+                    <a [routerLink]="'inicio'" class="btn btn-solid">back to home</a>
                 </div>
             </div>
         </div>
@@ -19,15 +19,16 @@
 <!-- Section ends -->
 
 <!-- thank-you section start -->
-<section class="section-b-space light-layout" *ngIf="orderDetails">
+<section class="section-b-space light-layout" *ngIf="respuestaEpayco">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="success-text">
                     <i class="fa fa-check-circle" aria-hidden="true"></i>
-                    <h2>thank you</h2>
-                    <p>Payment is has been received Order Placed Successfully</p>
-                    <p>Transaction ID:{{ orderDetails.orderId }}</p>
+                    <h2>Gracias</h2>
+                    <p>estado cod : {{respuestaEpayco.x_cod_transaction_state}}</p>
+                    <p>estado : {{respuestaEpayco.x_transaction_state}}</p>
+                    <p>Transaction ID:{{ respuestaEpayco.x_id_invoice }}</p>
                 </div>
             </div>
         </div>

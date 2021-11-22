@@ -59,29 +59,7 @@
                                         Email invalido
                                     </div>
                                 </div>
-                                <!-- <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">Departamento</div>
-                                    <select name="department" [formControl]="checkoutForm.controls['department']">
-                                        <option *ngFor="let dep of departamentos" value="{{dep.id}}">{{dep.nombre}}
-                                        </option>
-                                    </select>
-                                    <div *ngIf="checkoutForm.controls.department.touched && checkoutForm.controls.department.errors?.required"
-                                        class="text text-danger">
-                                        El departamento es requerido
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                    <div class="field-label">Municipio/Ciudad</div>
-                                    <select name="city" [formControl]="checkoutForm.controls['city']"
-                                        [(ngModel)]="usuario.ciudad">
-                                        <option *ngFor="let ciudad of ciudades" value="{{ciudad.id}}">{{ciudad.nombre}}
-                                        </option>
-                                    </select>
-                                    <div *ngIf="checkoutForm.controls.city.touched && checkoutForm.controls.city.errors?.required"
-                                        class="text text-danger">
-                                        La ciudad es requerida
-                                    </div>
-                                </div> -->
+                                
                                 <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                     <div class="field-label">Direccion</div>
                                     <input type="text" name="address" [formControl]="checkoutForm.controls['address']"
@@ -128,7 +106,7 @@
                                             Transporte
                                             <div class="shipping">
                                                 <div *ngFor="let tpTrsns of tiposTransporte" class="shopping-option">
-                                                    <input type="radio" name="shipping" value="{{tpTrsns.id}}" [(ngModel)]="pedidoVentaOnline.transporte" checked="checked" (change)="tipoTransporte($event)">
+                                                    <input type="radio" [formControl]="checkoutForm.controls['transporte']" name="shipping" value="{{tpTrsns.id}}" [(ngModel)]="pedidoVentaOnline.transporte" checked="checked" (change)="tipoTransporte($event)">
                                                     <label  for="shipping">{{tpTrsns.nombre}}</label>
                                                 </div>
                                             </div>
@@ -137,12 +115,12 @@
                                             Metodo De Pago
                                             <div class="shipping">
                                                 <div class="shopping-option">
-                                                    <input type="radio" name="metodoPago"  value="1" [(ngModel)]="pedidoVentaOnline.metodo_pago" class="col-2">
+                                                    <input type="radio" name="metodoPago"  [formControl]="checkoutForm.controls['metodoPago']"  value="1" [(ngModel)]="pedidoVentaOnline.metodo_pago" checked="checked" class="col-2">
                                                     <label class="col-auto"  for="metodoPago">Efectivo</label>
                                                     <img style="max-width:54px" class="img-fluid" src="assets/images/icon/dinero.png">
                                                 </div>
                                                 <div class="shopping-option">
-                                                    <input type="radio" value=2 [(ngModel)]="pedidoVentaOnline.metodo_pago" name="metodoPago"  class="col-2">
+                                                    <input type="radio" [formControl]="checkoutForm.controls['metodoPago']" value=2 [(ngModel)]="pedidoVentaOnline.metodo_pago" name="metodoPago"  class="col-2">
                                                     <label class="col-auto" for="pseMethod">pse </label>
                                                     <img class="img-fluid" src="assets/images/icon/visa+mastercard.png" style="max-width:100px">
                                                 </div>
@@ -166,28 +144,8 @@
                                             <button  class="btn-solid btn" [disabled]="!checkoutForm.valid" (click)="realizarPedido()">
                                                 Realizar pedido
                                             </button>
-                                            <!-- <ngx-paypal [config]="payPalConfig" *ngIf="payment == 'Paypal'"></ngx-paypal> -->
-                                            <!-- <form>
-                                                <script
-                                                    src="https://checkout.epayco.co/checkout.js"
-                                                    class="epayco-button"
-                                                    data-epayco-key="00afefc81d6536b846710bd2f8d1213e"
-                                                    data-epayco-amount="50000"
-                                                    data-epayco-name="Vestido Mujer Primavera"
-                                                    data-epayco-description="Vestido Mujer Primavera"
-                                                    data-epayco-currency="cop"
-                                                    data-epayco-country="co"
-                                                    data-epayco-test="true"
-                                                    data-epayco-external="false"
-                                                    data-epayco-response="https://ejemplo.com/respuesta.html"
-                                                    data-epayco-confirmation="https://ejemplo.com/confirmacion">
-                                                </script>
-                                            </form> -->
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>

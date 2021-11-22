@@ -1,7 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Order } from '../../../shared/classes/order';
-import { OrderService } from '../../../shared/services/order.service';
-import { ProductService } from '../../../shared/services/product.service';
+import { ActivatedRoute } from '@angular/router';
+import { ResponseEpayco } from 'src/app/interfaces/responseEpayco';
+import { VentasOnline } from 'src/app/services/ventas-online.service';
+import { ProductService } from 'src/app/shared/services/product.service';
+import { Order } from '../../../../shared/classes/order';
+import { OrderService } from '../../../../shared/services/order.service';
 
 @Component({
   selector: 'app-success',
@@ -11,12 +14,24 @@ import { ProductService } from '../../../shared/services/product.service';
 export class SuccessComponent implements OnInit, AfterViewInit{
 
   public orderDetails : Order = {};
+  public respuestaEpayco: ResponseEpayco;
 
   constructor(public productService: ProductService,
-    private orderService: OrderService) { }
+              private route: ActivatedRoute,
+              private ventasOnlineService: VentasOnline) { 
+                this.route.queryParams.subscribe(params => {
+
+                  this.ventasOnlineService.responseEstateEpayco(params['ref_payco']).subscribe(response=>{
+                    this.respuestaEpayco = response;
+                  });
+                });
+
+                
+
+              }
 
   ngOnInit(): void {	
-    this.orderService.checkoutItems.subscribe(response => this.orderDetails = response);
+    
   }
 
   ngAfterViewInit() {

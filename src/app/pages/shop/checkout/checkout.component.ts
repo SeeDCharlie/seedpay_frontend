@@ -14,6 +14,7 @@ import { Usuario } from 'src/app/interfaces/usuario';
 import { TipoTransporte } from 'src/app/interfaces/tipoTransporte';
 import { TipoTransporteService } from 'src/app/services/tipoTransporte.service';
 import { PedidoVentaOnline, ProductoPedido } from 'src/app/interfaces/pedidoVentaOnline';
+import { VentasOnline } from 'src/app/services/ventas-online.service';
 declare const ePayco: any;
 declare const testalert: any;
 
@@ -41,30 +42,23 @@ export class CheckoutComponent implements OnInit {
   constructor(private fb: FormBuilder,
     public productService: CarritoComprasLocalService,
     private orderService: OrderService,
-    private departamentoService: DepartamentoService,
-    private ciudadService: CiudadService,
-    private tipoTransporteService: TipoTransporteService) {
+    private tipoTransporteService: TipoTransporteService,
+    private ventaOnlineService: VentasOnline) {
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       email: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(50)]],
-      // metodoPago: ['', [Validators.required]],
-    });
-    this.departamentoService.consultarDepartamentos().subscribe(response => {
-      this.departamentos = response;
-      console.log('deps : ' + this.departamentos);
-    });
-    this.ciudadService.consultarCiudades().subscribe(response => {
-      this.ciudades = response;
-      console.log('ciudades : ' + this.ciudades)
+      metodoPago: ['', [Validators.required]],
+      transporte: ['', [Validators.required]],
     });
     this.tipoTransporteService.getTiposTransporte().subscribe(response => {
       this.tiposTransporte = response;
     });
     this.usuario = JSON.parse(sessionStorage.getItem('usuario')) || {};
     this.pedidoVentaOnline.usuario = this.usuario;
+    this.pedidoVentaOnline.negocio = Number(localStorage.getItem('negocioCatalogo'));
     this.pedidoVentaOnline.total = this.getTotal();
     this.setCartItems();
   }
@@ -155,48 +149,16 @@ export class CheckoutComponent implements OnInit {
   }
 
   realizarPedido() {
+    alert("usuario :" + JSON.stringify(this.pedidoVentaOnline.usuario))
 
     let handler = ePayco.checkout.configure({
       key: 'e45e28fb95e0375d361735837ed3f402',
       test: true
     })
-    var data = {
-      //Parámetros compra (obligatorio)
-      name: "Vestido Mujer Primavera",
-      description: "Vestido Mujer Primavera",
-      invoice: "1234",
-      currency: "cop",
-      amount: "12000",
-      tax_base: "0",
-      tax: "0",
-      tax_ico: "0", //Hace referencia al impuesto nacional al consumo
-      country: "co",
-      lang: "en",
 
-      //Onpage="false" - Standard="true"
-      external: "false",
-
-
-      //Atributos opcionales, los parámetros extras deben ser enviados como un string
-      extra1: "extra1",
-      extra2: "extra2",
-      extra3: "extra3",
-      confirmation: "http://secure2.payco.co/prueba_curl.php",
-      response: "http://secure2.payco.co/prueba_curl.php",
-
-      //Atributos cliente
-      name_billing: "Andres Perez",
-      address_billing: "Carrera 19 número 14 91",
-      type_doc_billing: "cc",
-      mobilephone_billing: "3050000000",
-      number_doc_billing: "100000000",
-
-      //atributo deshabilitación método de pago
-      // methodsDisable: ["TDC", "PSE", "SP", "CASH", "DP"]
-
-    }
-    handler.open(data)
-
+    this.ventaOnlineService.responseEpayco(this.pedidoVentaOnline).subscribe(response =>{
+      handler.open(response)
+    });
 
     return true
 
