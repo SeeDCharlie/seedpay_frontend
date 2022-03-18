@@ -149,11 +149,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   realizarPedido() {
+    alert("dats : " + JSON.stringify(this.pedidoVentaOnline))
+    console.log("dats : " + JSON.stringify(this.pedidoVentaOnline))
     let handler = ePayco.checkout.configure({
       key: 'e45e28fb95e0375d361735837ed3f402',
       test: true
     })
-
+    this.pedidoVentaOnline.negocio=1
+    this.pedidoVentaOnline.transporte=1
     this.ventaOnlineService.responseEpayco(this.pedidoVentaOnline).subscribe(response =>{
       handler.open(response)
     });

@@ -1,7 +1,8 @@
 export const environment = {
-  url: "https://seedpaymain.seedcharlie.co/api",
-  urlS3: "https://seedpaystorage.seedcharlie.co/uploadimage",
-  amazonS3: "https://seedpaybuck.s3.sa-east-1.amazonaws.com/",
+  url: "http://ec2-3-84-86-225.compute-1.amazonaws.com/api",
+  urlS3: "http://ec2-3-84-86-225.compute-1.amazonaws.com/storageService/uploadimage",
+//  amazonS3: "http://sstorage-seedpay.s3.sa-east-1.amazonaws.com/",
+  amazonS3:"https://sstorage-seedpay.s3.amazonaws.com/",
   production: true,
   instagram_token: 'INSTA_TOKEN',
   stripe_token: 'STRIPE_TOKEN',

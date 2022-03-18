@@ -3,9 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  url: "http://127.0.0.1:8000/api",
-  urlS3: "http://127.0.0.1:8081/uploadimage",
-  amazonS3: "https://seedpaybuck.s3.sa-east-1.amazonaws.com/",
+  url: "http://ec2-3-84-86-225.compute-1.amazonaws.com/api",
+  //url: "http://localhost:8000/api",
+  urlS3: "http://ec2-3-84-86-225.compute-1.amazonaws.com/storageService/uploadimage",
+//  amazonS3: "http://sstorage-seedpay.s3.sa-east-1.amazonaws.com/",
+  amazonS3:"https://sstorage-seedpay.s3.amazonaws.com/",
   production: false,
   instagram_token: 'INSTA_TOKEN',
   stripe_token: 'STRIPE_TOKEN',

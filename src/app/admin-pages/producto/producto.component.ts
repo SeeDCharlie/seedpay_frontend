@@ -178,10 +178,9 @@ export class ProductoComponent implements OnInit {
 
       let listaIdCategoria: number[] = [];
       listaIdCategoria = this.getListadoIdForm(this.formProducto.controls.categorias.value);
-
+      alert("lista id categoria : "+ listaIdCategoria)
       let producto: Producto = {
         negocio: Number(this.idNegocio),
-
         nombre: this.formProducto.controls.nombre.value,
         precio: this.formProducto.controls.precio.value,
         disponible: this.formProducto.controls.disponible.value,

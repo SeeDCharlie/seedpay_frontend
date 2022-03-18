@@ -20,7 +20,7 @@ export class S3ImagenesService {
     const formData = new FormData();
     formData.append("media", archivo);
 
-    return this._http.post<any>(`${this._url}/negocios`, formData)
+    return this._http.post<any>(`${this._url}/negocios/`, formData)
   }
 
   // PRODUCTO
@@ -28,7 +28,7 @@ export class S3ImagenesService {
     const formData = new FormData();
     formData.append("media", archivo);
 
-    return this._http.post<any>(`${this._url}/productos`, formData)
+    return this._http.post<any>(`${this._url}/productos/`, formData)
   }
 
 }

@@ -122,7 +122,9 @@ export class NegocioComponent implements OnInit {
 
         this.img = environment.amazonS3 + dtImg.urlImagen;
 
-        // console.log(environment.amazonS3 + dtImg.urlImagen);
+       console.log(environment.amazonS3 + dtImg.urlImagen);
+
+      
       });
 
       let listaIdCategoria: number[] = [];
@@ -168,6 +170,8 @@ export class NegocioComponent implements OnInit {
           }
         },
       );
+
+      
       // CAMPOS OBLIGATORIOS
     } else {
       this._toast.error("Todos los campos son obligatorios.", "Ha sucedido un inconveniente", {
@@ -191,14 +195,15 @@ export class NegocioComponent implements OnInit {
         // console.log(environment.amazonS3 + dtImg.urlImagen);
       });
 
-
-      let lisCategorias: number[] = [];
-
-      lisCategorias.push(this.formNegocio.controls.categorias.value);
-
       let listCiiu: number[] = [];
-
-      lisCategorias.push(this.formNegocio.controls.ciiu.value);
+      let lisCategorias: number[] = [];
+      
+      this.formNegocio.controls.ciiu.value.forEach(element => {
+        listCiiu.push(element.id)
+      });
+      this.formNegocio.controls.categorias.value.forEach(element => {
+        lisCategorias.push(element.id)
+      });
 
       let negocio: Negocio = {
         nombre: this.formNegocio.controls.nombre.value,
@@ -210,6 +215,9 @@ export class NegocioComponent implements OnInit {
         categorias: lisCategorias,
         negocio_ciiu: listCiiu,
       }
+      alert(
+        "negocio a actualizar" + JSON.stringify(negocio.categorias)
+      )
       this._negocioService.actualizarNegocio(this.idNegocio, negocio).subscribe(
         data => {
           // NEGOCIO ACTUALIZADO
