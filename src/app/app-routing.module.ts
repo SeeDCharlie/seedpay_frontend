@@ -10,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./admin-pages/admin-pages.module').then(m => m.AdminPagesModule)
+    loadChildren: () => import('./admin-pages/admin-pages.module').then(m => m.AdminPagesModule),
+
   },
   {
     path: '', redirectTo: '', pathMatch: 'full'

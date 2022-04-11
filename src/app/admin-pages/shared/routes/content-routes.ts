@@ -10,27 +10,27 @@ export const content: Routes = [
   // CUENTA
   {
     path: 'cuenta', component: CuentaComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+    //canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // NEOGIO
   {
     path: 'negocio', component: NegocioComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+    //canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // PRODUCTO
   {
     path: 'producto', component: ProductoComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+    //canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // REGISTRAR VENTA
   {
     path: 'registrarVenta', component: RegistrarVentaComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+    //canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   // INFORME VENTA
   {
     path: 'informeVenta', component: InformeVentaComponent,
-    canLoad: [AuthGuard], canActivate: [AuthGuard]
+    //canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
   {
     path: 'dashboard',

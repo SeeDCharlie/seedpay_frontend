@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthGuard } from 'src/app/auth/auth.guard';
+import { TkConfirm } from 'src/app/interfaces/tk-confirm';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 import { UsuarioService } from 'src/app/services/usuario.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,8 +22,20 @@ export class LoginComponent implements OnInit {
     private _toast: ToastrService,
     private _usuarioService: UsuarioService,
     private _router: Router,
+    private usuarioService: UsuarioService
   ) {
-    sessionStorage.removeItem('id');
+      let usuarioSe:UsuarioSession = JSON.parse(sessionStorage.getItem("user") || "{}" ) as UsuarioSession
+      let tkConf: TkConfirm = {usuario: usuarioSe.id, token:sessionStorage.getItem('token')}
+      this.usuarioService.tokenConfirm(tkConf).subscribe(
+        data => {
+          if(data as boolean){
+            this._router.navigate(['/inicio'])
+          }
+        },
+        error => {
+          console.log(error.error)
+        }
+      )
    }
 
   ngOnInit(): void {
@@ -53,7 +67,7 @@ export class LoginComponent implements OnInit {
         data => {
 
           sessionStorage.setItem("token", data.token);
-          sessionStorage.setItem("user", JSON.stringify(data.usuario));
+          sessionStorage.setItem("user", JSON.stringify(data.user as UsuarioSession));
           this._router.navigate(['inicio']);
         },
         error => {

@@ -4,6 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStat
 import { Observable } from 'rxjs';
 import { TkConfirm } from '../interfaces/tk-confirm';
 import { Usuario } from '../interfaces/usuario';
+import { UsuarioSession } from '../interfaces/usuario-session';
 import { UsuarioService } from '../services/usuario.service';
 
 @Injectable({
@@ -32,19 +33,19 @@ export class AuthGuard implements CanActivate, CanLoad {
   }
 
   checkToken():boolean{
-    let usuarioSe:Usuario = JSON.parse(sessionStorage.getItem("user") || "{}" ) as Usuario
+    let usuarioSe:UsuarioSession = JSON.parse(sessionStorage.getItem("user") || "{}" ) as UsuarioSession
     this.tkConfirm.usuario = usuarioSe.id
     this.tkConfirm.token = sessionStorage.getItem('token') || ''
     this.authService.tokenConfirm(this.tkConfirm).subscribe(
       data => {
         this.confirmTk = data
         if(this.confirmTk){
-          this._router.navigate(['/inicio'])
+          this._router.navigate(['/cuenta'])
         }
       }, error => {
         console.log("Fallo al conectarse : " + JSON.stringify(error.error));
         this.confirmTk = false
-        this._router.navigate(['auth/login'])
+        this._router.navigate(['/login'])
       });
     return this.confirmTk
   }

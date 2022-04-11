@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TipoIdentificacion } from 'src/app/interfaces/tipoIdentificacion';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 import { TipoIdentificacionService } from 'src/app/services/tipo-identificacion.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
@@ -16,7 +17,7 @@ export class CuentaComponent implements OnInit {
   formCuenta: FormGroup;
   formUsuario: FormGroup;
 
-  idUsuario: string = sessionStorage.getItem('id');
+  usuarioSession: UsuarioSession = JSON.parse(sessionStorage.getItem('user') )   || ''  ;
   usuario: Usuario;
   listTipoIdentificacion: TipoIdentificacion[] = [];
   private _passC: string = "";
@@ -50,15 +51,15 @@ export class CuentaComponent implements OnInit {
 
     })
 
-    this.buscarUsuarioId(this.idUsuario);
+    /*this.buscarUsuarioId(this.usuarioSession.id);
     this.getTipoIdentificacion();
-    this.formCuenta.controls.correo.disable;
+    this.formCuenta.controls.correo.disable;*/
   }
 
 
 
   //METODO BUSCAR USUARIO ID
-  buscarUsuarioId(id: string) {
+  buscarUsuarioId(id: number) {
     this._usuarioService.buscarUsuarioId(id).subscribe(
       data => {
         this.usuario = data;
@@ -98,7 +99,7 @@ export class CuentaComponent implements OnInit {
         data => {
           this.usuario.password = this._passC;
           // CONTRASEÑA VALIDA
-          this._usuarioService.actualizarUsuario(this.idUsuario, this.usuario).subscribe(
+          this._usuarioService.actualizarUsuario(this.usuarioSession.id, this.usuario).subscribe(
             data => {
               // DATOS ACTUALIZADOS
               this._toast.success("Datos actualizados exitosamente.", "Actualización exitosa", {
