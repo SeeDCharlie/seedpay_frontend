@@ -9,7 +9,7 @@ import { TipoIdentificacion } from '../interfaces/tipoIdentificacion';
 })
 export class TipoIdentificacionService {
 
-  private _url = environment.url + "/tipoIdentificacion/";
+  private _url = environment.url_useracount + "/tipoIdentificacion/";
 
   constructor(
     private _http: HttpClient

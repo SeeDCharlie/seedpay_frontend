@@ -10,7 +10,7 @@ import { Ciiu } from '../interfaces/ciiu';
 export class CiiuService {
 
 
-  private _url = environment.url + '/ciiu/';
+  private _url = environment.url_business + '/ciiu/';
 
   constructor(
     private _http: HttpClient

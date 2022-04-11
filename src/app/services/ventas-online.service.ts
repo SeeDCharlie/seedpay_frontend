@@ -11,7 +11,7 @@ import { ResponseEpayco } from '../interfaces/responseEpayco';
 })
 export class VentasOnline {
 
-  private _url = environment.url ;
+  private _url = environment.url_business ;
 
   constructor(
     private _http: HttpClient

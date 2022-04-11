@@ -9,6 +9,5 @@ export interface Usuario {
   identificacion?: string;
   tipo_identificacion?: number;
   password?: string;
-  token?: string;
   ciudad?: number;
 }

@@ -9,7 +9,7 @@ import { Negocio } from '../interfaces/negocio';
 })
 export class NegocioService {
 
-  private _url = environment.url + "/negocio/";
+  private _url = environment.url_business + "/negocio/";
 
   constructor(
     private _http: HttpClient

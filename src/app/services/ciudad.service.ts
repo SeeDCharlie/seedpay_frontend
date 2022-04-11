@@ -9,7 +9,7 @@ import { Pedidos } from '../interfaces/pedido';
 })
 export class CiudadService {
 
-  private _url = environment.url + "/ciudad/";
+  private _url = environment.url_useracount + "/ciudad/";
 
   constructor(
     private _http: HttpClient

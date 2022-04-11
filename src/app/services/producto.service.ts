@@ -9,8 +9,8 @@ import { Producto } from '../interfaces/producto';
 })
 export class ProductoService {
 
-  private _url = environment.url + "/producto/";
-  public Currency = { name: 'Peso', currency: 'COP', price: 1 } 
+  private _url = environment.url_business + "/producto/";
+  public Currency = { name: 'Peso', currency: 'COP', price: 1 }
 
   constructor(
     private _http: HttpClient

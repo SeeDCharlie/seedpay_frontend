@@ -9,7 +9,7 @@ import { ProductoCarrito, registrarVenta } from '../interfaces/productoCarrito';
 })
 export class CarritoComprasService {
 
-  private _url = environment.url + '/ventas/';
+  private _url = environment.url_business + '/ventas/';
 
   constructor(
     private _http: HttpClient

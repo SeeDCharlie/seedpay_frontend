@@ -52,8 +52,8 @@ export class LoginComponent implements OnInit {
       this._usuarioService.loginUsuario(usuario).subscribe(
         data => {
 
-          sessionStorage.setItem("id", data.id);
-          sessionStorage.setItem("usuario", JSON.stringify(data));
+          sessionStorage.setItem("token", data.token);
+          sessionStorage.setItem("user", JSON.stringify(data.usuario));
           this._router.navigate(['inicio']);
         },
         error => {

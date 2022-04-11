@@ -10,7 +10,7 @@ import { Negocio } from '../interfaces/negocio';
 })
 export class CategoriaNegocioService {
 
-  private _url = environment.url + '/categoriaNegocio/';
+  private _url = environment.url_business + '/categoriaNegocio/';
 
   constructor(
     private _http: HttpClient

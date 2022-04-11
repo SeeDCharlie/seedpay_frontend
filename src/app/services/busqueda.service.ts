@@ -9,7 +9,7 @@ import { Negocio } from '../interfaces/negocio';
 })
 export class BusquedaService {
 
-    private _url = environment.url 
+    private _url = environment.url_business
 
     constructor(
         private _http: HttpClient

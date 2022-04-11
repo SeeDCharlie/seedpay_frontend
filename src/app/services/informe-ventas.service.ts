@@ -9,7 +9,7 @@ import { PetInforme, ReqInforme } from '../interfaces/informeVentas';
 })
 export class InformeVentasService {
 
-  private _url = environment.url + '/informeVentas/';
+  private _url = environment.url_business + '/informeVentas/';
 
   constructor(
     private _http: HttpClient

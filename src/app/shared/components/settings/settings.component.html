@@ -67,8 +67,8 @@
               </a>
               <h4>
                 <span>
-                  {{ product?.precio }} x {{product?.quantity}}
-                  {{ product?.precio * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
+                  {{ product?.precio }} ud (x {{product?.quantity}})
+                  {{ product?.precio * product?.quantity | currency:productService?.Currency.currency:'symbol' }}
                 </span>
               </h4>
             </div>

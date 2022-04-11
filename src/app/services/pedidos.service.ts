@@ -9,7 +9,7 @@ import { Pedidos } from '../interfaces/pedido';
 })
 export class PedidosService {
 
-  private _url = environment.url + "/pedidos/";
+  private _url = environment.url_business + "/pedidos/";
 
   constructor(
     private _http: HttpClient

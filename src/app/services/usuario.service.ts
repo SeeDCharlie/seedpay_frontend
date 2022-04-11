@@ -3,6 +3,7 @@ import { CoreEnvironment } from '@angular/compiler/src/compiler_facade_interface
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { TkConfirm } from '../interfaces/tk-confirm';
 import { Usuario } from '../interfaces/usuario';
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Usuario } from '../interfaces/usuario';
 })
 export class UsuarioService {
 
-  private _url = environment.url;
+  private _url = environment.url_useracount;
 
   constructor(
     private _http: HttpClient
@@ -28,7 +29,11 @@ export class UsuarioService {
 
   // LOGIN
   loginUsuario(request: Usuario): Observable<any> {
-    return this._http.post<any>(`${this._url}/token-auth/`, request);
+    return this._http.post<any>(`${this._url}/login/`, request);
+  }
+
+  tokenConfirm(dats:TkConfirm):Observable<boolean>{
+    return this._http.post<boolean>(`${this._url}isAuthenticate/`,dats)
   }
 
   //Logout

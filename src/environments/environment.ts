@@ -3,9 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  url: "http://ec2-3-84-86-225.compute-1.amazonaws.com/api",
-  //url: "http://localhost:8000/api",
-  urlS3: "http://ec2-3-84-86-225.compute-1.amazonaws.com/storageService/uploadimage",
+  //url: "http://ec2-3-84-86-225.compute-1.amazonaws.com/api",
+  url_useracount: "http://localhost:8000/api",
+  url_business: "http://localhost:8002/api",
+  urlS3: "http://localhost:8000/uploadimage",
+  //urlS3: "http://ec2-3-84-86-225.compute-1.amazonaws.com/storageService/uploadimage",
 //  amazonS3: "http://sstorage-seedpay.s3.sa-east-1.amazonaws.com/",
   amazonS3:"https://sstorage-seedpay.s3.amazonaws.com/",
   production: false,

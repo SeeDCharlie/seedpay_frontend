@@ -10,7 +10,7 @@ import { TipoTransporte } from '../interfaces/tipoTransporte';
 })
 export class TipoTransporteService {
 
-  private _url = environment.url + "/tipoTransporte/";
+  private _url = environment.url_business + "/tipoTransporte/";
 
   constructor(
     private _http: HttpClient

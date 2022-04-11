@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CategoriaProductoService {
 
-  private _url = environment.url + '/categoriaProducto/negocio/';
+  private _url = environment.url_business + '/categoriaProducto/negocio/';
 
 
   constructor(

@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class QrService {
 
-  private _url = environment.url + "/qr/";
+  private _url = environment.url_business + "/qr/";
 
   constructor(
     private _http: HttpClient
