@@ -13,13 +13,10 @@ const routes: Routes = [
     loadChildren: () => import('./admin-pages/admin-pages.module').then(m => m.AdminPagesModule),
 
   },
+
   {
-    path: '', redirectTo: '', pathMatch: 'full'
+    path: '', redirectTo: 'inicio', pathMatch: 'full'
   },
-
-
-
-
 
 ];
 

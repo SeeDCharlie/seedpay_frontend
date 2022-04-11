@@ -25,7 +25,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   declarations: [
-    AppComponent,    
+    AppComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -49,7 +49,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     ElementsModule,
     AppRoutingModule,
-    AdminPagesModule,
 
 
   ],

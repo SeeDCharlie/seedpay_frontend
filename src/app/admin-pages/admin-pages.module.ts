@@ -19,21 +19,16 @@ import { AdminpagesComponent } from './admin-pages.component';
 
 import { AdminPagesRoutingModule } from './admin-pages-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegistrarVentaComponent } from './registrar-venta/registrar-venta.component';
-import { ProductoComponent } from './producto/producto.component';
-import { NegocioComponent } from './negocio/negocio.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
-import { InformeVentaComponent } from './informe-venta/informe-venta.component';
+import { NegociosModule } from './negocios/negocios.module';
+import { ListaNegociosComponent } from './negocios/lista-negocios/lista-negocios.component';
 
 @NgModule({
   declarations: [
     AdminpagesComponent,
-    RegistrarVentaComponent,
-    ProductoComponent,
-    NegocioComponent,
     CuentaComponent,
-    InformeVentaComponent,
+
 
   ],
   imports: [
@@ -58,6 +53,7 @@ import { InformeVentaComponent } from './informe-venta/informe-venta.component';
     UsersModule,
     SelectDropDownModule,
     PagesModule,
+    NegociosModule,
 
   ],
   providers: [],

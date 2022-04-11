@@ -1,36 +1,18 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { CuentaComponent } from '../../cuenta/cuenta.component';
-import { InformeVentaComponent } from '../../informe-venta/informe-venta.component';
-import { NegocioComponent } from '../../negocio/negocio.component';
-import { ProductoComponent } from '../../producto/producto.component';
-import { RegistrarVentaComponent } from '../../registrar-venta/registrar-venta.component';
 
 export const content: Routes = [
   // CUENTA
   {
     path: 'cuenta', component: CuentaComponent,
-    //canLoad: [AuthGuard], canActivate: [AuthGuard]
   },
-  // NEOGIO
   {
-    path: 'negocio', component: NegocioComponent,
-    //canLoad: [AuthGuard], canActivate: [AuthGuard]
-  },
-  // PRODUCTO
-  {
-    path: 'producto', component: ProductoComponent,
-    //canLoad: [AuthGuard], canActivate: [AuthGuard]
-  },
-  // REGISTRAR VENTA
-  {
-    path: 'registrarVenta', component: RegistrarVentaComponent,
-    //canLoad: [AuthGuard], canActivate: [AuthGuard]
-  },
-  // INFORME VENTA
-  {
-    path: 'informeVenta', component: InformeVentaComponent,
-    //canLoad: [AuthGuard], canActivate: [AuthGuard]
+    path: 'negocios',
+    loadChildren: () => import('../../negocios/negocios.module').then(m => m.NegociosModule),
+    data: {
+      breadcrumb: "Negocios"
+    }
   },
   {
     path: 'dashboard',

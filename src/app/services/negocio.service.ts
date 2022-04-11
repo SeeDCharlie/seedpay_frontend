@@ -19,8 +19,8 @@ export class NegocioService {
     return this._http.get<any>(`${this._url}?categorias__nombre=${palabra}`);
   }
 
-  buscarNegocioIdUsuario(id: any): Observable<any>{
-    return this._http.get<any>(`${this._url}?usuario=${id}`);
+  buscarNegocioIdUsuario(id: number): Observable<Negocio[]>{
+    return this._http.get<Negocio[]>(`${this._url}?usuario=${id}`);
   }
 
   buscarNegocioId(id: any): Observable<any>{

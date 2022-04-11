@@ -52,7 +52,13 @@ export class NavService {
 			]
 		},
 		{
-			path: '/negocio', title: 'Negocios', icon: 'archive', type: 'link', badgeType: 'primary', active: false
+			path: '/negocios', title: 'Negocios', icon: 'archive', type: 'sub', badgeType: 'primary', active: false, children: [
+        { path: '/negocios/lista', title: 'Mis negocios', type: 'link' },
+        { path: '/negocios/negocio', title: 'Nuevo', type: 'link',icon: 'archive', badgeType: 'primary' },
+      ]
+		},
+    {
+			path: '/produtos', title: 'Negocios', icon: 'archive', type: 'link', badgeType: 'primary', active: false
 		}
 	]
 	// Array
