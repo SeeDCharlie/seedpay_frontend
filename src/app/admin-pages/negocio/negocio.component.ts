@@ -13,6 +13,7 @@ import { CiiuService } from 'src/app/services/ciiu.service';
 import { S3ImagenesService } from 'src/app/services/s3-imagenes.service';
 import { Archivo } from 'src/app/interfaces/archivo';
 import { environment } from 'src/environments/environment';
+import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 
 @Component({
   selector: 'app-negocio',
@@ -24,7 +25,7 @@ export class NegocioComponent implements OnInit {
   // ATRIBUTOS
   formNegocio: FormGroup;
 
-  idUsuario: string = sessionStorage.getItem('id');
+  usuarioSession: UsuarioSession = JSON.parse(sessionStorage.getItem('user') || '{}') as UsuarioSession;
   idNegocio: string = null;
 
   img: any = null;
@@ -124,7 +125,7 @@ export class NegocioComponent implements OnInit {
 
        console.log(environment.amazonS3 + dtImg.urlImagen);
 
-      
+
       });
 
       let listaIdCategoria: number[] = [];
@@ -134,7 +135,7 @@ export class NegocioComponent implements OnInit {
       listaIdCiiu = this.getListadoIdForm(this.formNegocio.controls.ciiu.value);
 
       let negocio: Negocio = {
-        usuario: Number(this.idUsuario),
+        usuario: Number(this.usuarioSession.id),
 
         nombre: this.formNegocio.controls.nombre.value,
         correo: this.formNegocio.controls.correo.value,
@@ -171,7 +172,7 @@ export class NegocioComponent implements OnInit {
         },
       );
 
-      
+
       // CAMPOS OBLIGATORIOS
     } else {
       this._toast.error("Todos los campos son obligatorios.", "Ha sucedido un inconveniente", {
@@ -197,7 +198,7 @@ export class NegocioComponent implements OnInit {
 
       let listCiiu: number[] = [];
       let lisCategorias: number[] = [];
-      
+
       this.formNegocio.controls.ciiu.value.forEach(element => {
         listCiiu.push(element.id)
       });
@@ -254,7 +255,7 @@ export class NegocioComponent implements OnInit {
 
   // METODO CARGAR TABLA
   async buscarNegociosId() {
-    await this._negocioService.buscarNegocioIdUsuario(this.idUsuario).subscribe(
+    await this._negocioService.buscarNegocioIdUsuario(this.usuarioSession.id).subscribe(
       data => {
         this.listNegocios = data;
         if (this.listNegocios.length > 0) {

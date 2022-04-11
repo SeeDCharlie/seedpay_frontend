@@ -15,7 +15,7 @@ export class QrService {
   ) { }
 
   qrNegocio(idNegocio): Observable<any> {
-    return this._http.get(`${this._url}${idNegocio}`)
+    return this._http.get(`${this._url}${idNegocio}/`)
   }
 
 

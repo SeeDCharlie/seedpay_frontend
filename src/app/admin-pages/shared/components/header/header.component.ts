@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 import { NavService } from '../../service/nav.service';
 
 @Component({
@@ -11,10 +12,13 @@ export class HeaderComponent implements OnInit {
   public open: boolean = false;
   public openNav: boolean = false;
   public isOpenMobile : boolean;
+  usuarioSession:UsuarioSession = JSON.parse('{}')
 
   @Output() rightSidebarEvent = new EventEmitter<boolean>();
 
-  constructor(public navServices: NavService) { }
+  constructor(public navServices: NavService) {
+    this.usuarioSession = JSON.parse(sessionStorage.getItem('user') || '{}')
+  }
 
   collapseSidebar() {
     this.open = !this.open;

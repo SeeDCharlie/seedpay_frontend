@@ -96,18 +96,18 @@
                   <div class="row btn-negocios" style="margin-top: 30px;">
                     <!-- GUARDAR -->
                     <div *ngIf="!idNegocio" class="col-md-6 btn-negocio">
-                      <button class="btn btn-sm btn-solid btn-green" type="submit" (click)="guardarDatos()">Guardar
-                        datos</button>
+                      <button class="btn btn-primary" type="submit" (click)="guardarDatos()">
+                        <app-feather-icons [icon]="'save'"> </app-feather-icons> Guardar datos</button>
                     </div>
                     <!-- ACTUALIZAR -->
                     <div *ngIf="idNegocio" class="col-md-6 btn-negocio">
                       <button class="btn btn-sm btn-solid btn-green" type="submit"
-                        (click)="actualizarDatos()">Actualizar datos</button>
+                        (click)="actualizarDatos()"> <app-feather-icons [icon]="'edit'"> </app-feather-icons> Actualizar datos</button>
                     </div>
-                    <!-- LIMPIAR -->
+                    <!-- LIMPIAR  -->
                     <div class="col-md-6 btn-negocio">
-                      <button class="btn btn-sm btn-solid btn-yellow" style="float: right;"
-                        (click)=limpiar()>Limpiar</button>
+                      <button class="btn btn-secondary" style="float: right;"
+                        (click)='limpiar()'><app-feather-icons [icon]="'x-circle'"> </app-feather-icons> Limpiar</button>
 
                     </div>
                     <h3 class="mt-4">Mis negocios</h3>

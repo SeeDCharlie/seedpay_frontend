@@ -1,6 +1,7 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Usuario } from 'src/app/interfaces/usuario';
+import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 import { NavService, Menu } from '../../service/nav.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class SidebarComponent {
   public menuItems: Menu[];
   public url: any;
   public fileurl: any;
-  public usuario: Usuario;
+  public usuario: UsuarioSession;
 
   constructor(private router: Router, public navServices: NavService) {
     this.navServices.items.subscribe(menuItems => {
@@ -38,11 +39,11 @@ export class SidebarComponent {
         }
       })
     });
-    var usrAux = sessionStorage.getItem('usuario') || null;
+    var usrAux = sessionStorage.getItem('user') || null;
     if(usrAux != null){
       this.usuario = JSON.parse(usrAux);
     }
-    
+
   }
 
   // Active Nave state

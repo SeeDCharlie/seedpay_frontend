@@ -51,9 +51,9 @@ export class CuentaComponent implements OnInit {
 
     })
 
-    /*this.buscarUsuarioId(this.usuarioSession.id);
+    this.buscarUsuarioId(this.usuarioSession.id);
     this.getTipoIdentificacion();
-    this.formCuenta.controls.correo.disable;*/
+    this.formCuenta.controls.correo.disable;
   }
 
 

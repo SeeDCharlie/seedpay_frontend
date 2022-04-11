@@ -286,7 +286,7 @@ export class ProductoComponent implements OnInit {
   }
 
   consultarQrNegocio() {
-    this.qr = "http://127.0.0.1:8000/api/qr/" + this.idNegocio
+    this.qr = environment.url_business + '/qr/' + this.idNegocio
   }
 
 

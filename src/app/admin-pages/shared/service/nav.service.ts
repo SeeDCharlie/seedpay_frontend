@@ -53,12 +53,6 @@ export class NavService {
 		},
 		{
 			path: '/negocio', title: 'Negocios', icon: 'archive', type: 'link', badgeType: 'primary', active: false
-		},
-		{
-			path: '/cuenta', title: 'Cuenta', icon: 'settings', type: 'link', badgeType: 'primary', active: false
-		},
-		{
-			title: 'Login',path: '/auth/login', icon: 'log-in', type: 'link', active: false
 		}
 	]
 	// Array
