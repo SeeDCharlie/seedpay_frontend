@@ -16,25 +16,33 @@
             <ngx-datatable class="bootstrap" [rows]="lista_productos" [columnMode]="'force'" [headerHeight]="50"
               [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
               <ngx-datatable-column name="">
-                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template >
-                  <img src="{{row.imagen_64}}"  alt="" class="img-fluid" style="max-height: 60px;">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <img src="{{row.imagen_64}}" alt="{{row.nombre}}" class="img-fluid" style="max-height: 60px;">
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column prop="nombre" name="Nombre"></ngx-datatable-column>
-              <ngx-datatable-column prop="direccion" name="Dirección"></ngx-datatable-column>
+              <ngx-datatable-column prop="precio" name="Precio">
+                <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                  $ {{ value }}
+                </ng-template>
+              </ngx-datatable-column>
               <ngx-datatable-column prop="descripcion" name="Descripción"></ngx-datatable-column>
               <ngx-datatable-column prop="fecha_creacion" name="Fecha de creación"></ngx-datatable-column>
               <ngx-datatable-column name="Acciones">
                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                   <div style="display: flex; align-items: center; justify-content: start;">
                     <a style="color:rgb(194, 110, 0);margin: 5px; display: flex; justify-content: center;max-width: 50px;"
-                    [routerLink]="['/productos/producto', {id:row.id}]" >
-                      <app-feather-icons [icon]="'edit'"></app-feather-icons> </a>
+                      [routerLink]="['/productos/producto', {id:row.id}]">
+                      <app-feather-icons [icon]="'edit'"></app-feather-icons>
+                    </a>
                     <a style="color:rgb(146, 0, 0);margin: 5px;display: flex;align-items: center; justify-content: center;max-width: 50px;"
-                    (click)="eliminarProducto(row.id)">
-                      <app-feather-icons [icon]="'trash-2'"></app-feather-icons> </a>
-                    <a style="color:rgb(29, 167, 11);margin: 5px; display: flex; justify-content: center;max-width: 50px;">
-                      <app-feather-icons [icon]="'eye'"></app-feather-icons> </a>
+                      (click)="eliminarProducto(row.id)">
+                      <app-feather-icons [icon]="'trash-2'"></app-feather-icons>
+                    </a>
+                    <a
+                      style="color:rgb(29, 167, 11);margin: 5px; display: flex; justify-content: center;max-width: 50px;">
+                      <app-feather-icons [icon]="'eye'"></app-feather-icons>
+                    </a>
                   </div>
                 </ng-template>
               </ngx-datatable-column>

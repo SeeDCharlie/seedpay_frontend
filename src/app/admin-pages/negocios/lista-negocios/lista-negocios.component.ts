@@ -53,13 +53,7 @@ export class ListaNegociosComponent implements OnInit {
         this._toast.success(JSON.stringify("Negocio ELiminado"), "Accion Exitosa", {
         timeOut: 5000
       });
-      this.lista_negocios = this.lista_negocios.map(
-        as => {
-          if(as.id !== id){
-            return as
-          }
-        }
-      )
+      this.cargarNegocios()
     },
       error: (error:any) => {}
     })

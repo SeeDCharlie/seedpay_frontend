@@ -1,0 +1,40 @@
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="card">
+              <div class="card-header">
+                  <h5>Pedidos</h5>
+              </div>
+              <div class="card-body">
+                  <div class="custom-datatable">
+                      <input type='text' class="filter-ngx form-control" placeholder='Buscar...'
+                          (keyup)='updateFilter($event)' />
+                      <ngx-datatable class="bootstrap" [rows]="pedidos" [columnMode]="'force'" [headerHeight]="50"
+                          [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
+                          <ngx-datatable-column name="Cod" prop="id"></ngx-datatable-column>
+
+                          <ngx-datatable-column name="metodo pago" prop="factura.metodo_pago.nombre"></ngx-datatable-column>
+                          <ngx-datatable-column name="creacion" prop="fecha_creacion"></ngx-datatable-column>
+                          <ngx-datatable-column name="valor pedido" prop="factura.valor_total"></ngx-datatable-column>
+                          <ngx-datatable-column name="estado pedido" prop="estado" >
+                              <ng-template let-value="value"  ngx-datatable-cell-template>
+                                  <span class="estadoTablaPedido"  style="background-color:{{colorEstadoPedido[value.id]}}">
+                                  {{value.nombre}}
+                                  </span>
+                                </ng-template>
+                          </ngx-datatable-column>
+                          <ngx-datatable-column name="estado pago" prop="factura.estado" >
+                              <ng-template let-value="value"  ngx-datatable-cell-template>
+                                  <span class="estadoTablaPedido"  style="background-color:{{colorEstadoFactura[value.id]}}">
+                                  {{value.nombre}}
+                                  </span>
+                                </ng-template>
+                          </ngx-datatable-column>
+                      </ngx-datatable>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Container-fluid Ends-->

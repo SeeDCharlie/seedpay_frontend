@@ -1,1 +1,145 @@
-<p>producto works!</p>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Nuevo Producto</h5>
+        </div>
+        <div class="card-body">
+          <div class="row product-adding">
+            <div class="col-xl-4">
+              <label class="col-form-label pt-0">
+                <span style="color: red">*</span>Imagen</label>
+
+
+              <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'" style="height: 90%; -webkit-box-shadow: 1px 1px 15px 0px #FF8084;
+                box-shadow: 1px 1px 10px 0px #FF8084;">
+                <ngx-dropzone-label color="red">Carga una imagen para tu producto
+                  <div *ngIf="idProducto > 0" style="max-width: 80%;">
+                    <img class="img-fluid" src="{{producto.imagen_64}}" alt="">
+                  </div>
+                </ngx-dropzone-label>
+                <ngx-dropzone-image-preview *ngFor="let f of files" ngProjectAs="ngx-dropzone-preview"
+                  [removable]="true" [file]="f" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>
+                    {{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+
+
+
+            </div>
+            <div class="col-xl-8">
+              <form class="needs-validation" [formGroup]="productForm">
+                <div class="add-product-form">
+                  <div class="form-group row">
+                    <label for="validationCustom01" class="col-xl-3 col-sm-4 mb-0">
+                      <span *ngIf="productForm.controls.nombre.errors?.required" class="text text-danger">* </span>
+                      Nombre:</label>
+                    <input class="form-control col-xl-8 col-sm-7" id="validationCustom01" type="text"
+                      formControlName='nombre' required>
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="validationCustom02" class="col-xl-3 col-sm-4 mb-0"><span
+                        *ngIf="productForm.controls.precio.errors?.required" class="text text-danger">* </span> Precio
+                      :</label>
+                    <input class="form-control col-xl-8 col-sm-7" id="validationCustom02" type="number"
+                      formControlName='precio' required="">
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="validationCustom03" class="col-xl-3 col-sm-4 mb-0"><span
+                        *ngIf=" productForm.controls.descripcion.errors?.required" class="text text-danger">* </span>
+                      Descripción:</label>
+                    <textarea class="form-control col-xl-8 col-sm-7" id="validationCustom03"
+                      formControlName='descripcion' required style="height: 150px;"></textarea>
+
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleFormControlSelect1" class="col-xl-3 col-sm-4 mb-0">
+                      <span *ngIf=" productForm.controls.negocio.errors?.required" class="text text-danger">*
+                      </span>Negocio al que pertenece:</label>
+                    <select class="form-control digits col-xl-8 col-sm-7" id="exampleFormControlSelect1"
+                      formControlName='negocio' (change)="cargarCategorias($event.target.value)">
+                      <option *ngFor="let negocio of lista_negocios" value="{{negocio.id}}">{{negocio.nombre}}</option>
+
+                    </select>
+                  </div>
+                  <!-- CATEGORIAS NEGOCIO -->
+                  <div class="form-group row">
+                    <label class="col-xl-3 col-sm-4 mb-0">
+                      <span *ngIf=" productForm.controls.categorias.errors?.required" class="text text-danger">*
+                      </span>Categoría del negocio </label>
+                    <ngx-select-dropdown [multiple]="true" [config]="config" [options]="categoriasProducto"
+                      formControlName='categorias' required class="col-xl-8 col-sm-7">
+                    </ngx-select-dropdown>
+                  </div>
+                  <div class="form-group row">
+
+                    <div class="col-12 col-md-6">
+                      <div class="form-group row">
+                        <label class="col-xl-6 col-sm-6 mb-0">Unidades disponibles :</label>
+                        <div class="qty-box1">
+                          <div class="input-group">
+                            <i class="fa fa-minus btnGtr1" (click)="decrement()"></i>
+                            <input class="touchspin1 text-center" name="counter" [(value)]="counter" disabled="true"
+                              type="text" formControlName='stock'>
+                            <i class="fa fa-plus btnLess1" (click)="increment()"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 jus">
+                      <div class="form-group row">
+                        <div class="checkbox checkbox-primary ">
+                          <input id="checkbox-primary-2" formControlName="status" type="checkbox" data-original-title=""
+                            title="" formControlName='disponible'>
+                          <label for="checkbox-primary-2">Publico</label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </form>
+              <div class="form-group row mb-0">
+                <div class="product-buttons col-sm-8 offset-xl-3 offset-sm-4">
+                  <div class="form-group mb-0">
+                    <button *ngIf="productForm.invalid && !producto.id" [disabled]="productForm.invalid" type="button"
+                      class="btn btn-primary mr-1">
+                      Guardar
+                    </button>
+                    <button *ngIf="productForm.valid && !producto.id" type="button" class="btn btn-primary mr-1"
+                      (click)="guardarProducto()">
+                      Guardar
+                    </button>
+
+                    <button *ngIf="productForm.invalid && producto.id" [disabled]="productForm.invalid" type="button"
+                      class="btn btn-primary mr-1">
+                      Actualizar
+                    </button>
+                    <button *ngIf="productForm.valid && producto.id" type="button" class="btn btn-primary mr-1"
+                      (click)="actualizarProductoConImagen()">
+                      Actualizar
+                    </button>
+
+
+
+                    <button type="button" class="btn btn-light">
+                      Cancelar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->

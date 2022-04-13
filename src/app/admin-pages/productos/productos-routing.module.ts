@@ -7,10 +7,10 @@ import { ProductosComponent } from './productos.component';
 const routes: Routes = [
   { path: '', component: ProductosComponent },
   {
-    path: 'lista', component: ListaProductosComponent
+    path: 'lista', component: ListaProductosComponent, data:{breadcrumb: "Lista"}
   },
   {
-    path:'producto', component: ProductoComponent
+    path:'producto', component: ProductoComponent, data:{breadcrumb: "Producto"}
   }
 ];
 

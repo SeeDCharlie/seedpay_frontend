@@ -5,9 +5,9 @@ export interface Producto {
   precio?: number;
   negocio?: number;
   disponible?: boolean;
-  categorias?: any[];
+  categorias?: number[];
   imagen_64?: string;
-  cantidad?: number;
+  stock?: number;
   precioCantidad?: number;
   quantity?: number;
 }

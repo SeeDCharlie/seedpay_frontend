@@ -44,10 +44,10 @@ export class NavService {
 			title: 'Ventas', icon: 'dollar-sign', type: 'sub', active: false, children: [
 				{ path: '/ventas/pedidos', title: 'Pedidos', type: 'link' },
 				{
-					path: '/registrarVenta', title: 'Registrar Venta', type: 'link', badgeType: 'primary', active: false
+					path: '/ventas/venta', title: 'Registrar Venta', type: 'link', badgeType: 'primary', active: false
 				},
 				{
-					path: '/informeVenta', title: 'Informe de Ventas', icon: 'clipboard', type: 'link', badgeType: 'primary', active: false
+					path: '/ventas/informeVentas', title: 'Informe de Ventas', icon: 'clipboard', type: 'link', badgeType: 'primary', active: false
 				}
 			]
 		},

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Producto } from '../interfaces/producto';
+import { ProductoRequest } from '../interfaces/producto-request';
 
 @Injectable({
   providedIn: 'root'
@@ -20,20 +21,24 @@ export class ProductoService {
     return this._http.get<any>(`${this._url}?negocio=${id}`);
   }
 
-  buscarProductoId(id: any): Observable<any> {
-    return this._http.get<any>(`${this._url}${id}`);
+  buscarProductoId(id: number): Observable<Producto> {
+    return this._http.get<Producto>(`${this._url}${id}`);
   }
 
-  guardarProducto(request: any): Observable<any> {
-    return this._http.post(`${this._url}`, request);
+  guardarProducto(request: Producto): Observable<Producto> {
+    return this._http.post<Producto>(`${this._url}`, request);
   }
 
-  actualizarProducto(id: string, request: any): Observable<any> {
+  actualizarProducto(id: number, request: Producto): Observable<Producto> {
     return this._http.put(`${this._url}${id}/`, request);
   }
 
   buscarProductosPorUsuario(id:number):Observable<Producto[]>{
     return this._http.get<Producto[]>(`${this._url}?negocio__usuario=${id}`);
+  }
+
+  buscarProductosFullPorUsuario(id:number):Observable<ProductoRequest[]>{
+    return this._http.get<ProductoRequest[]>(`${this._url}productosadmin/?negocio__usuario=${id}`);
   }
 
   eliminarProducto(id:number):Observable<any>{

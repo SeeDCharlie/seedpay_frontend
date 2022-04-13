@@ -4,7 +4,13 @@ import { CuentaComponent } from '../../cuenta/cuenta.component';
 
 export const content: Routes = [
   // CUENTA
-
+  {
+    path: 'ventas',
+    loadChildren: () => import('../../ventas/ventas.module').then(m => m.VentasModule),
+    data: {
+      breadcrumb: "Ventas"
+    }
+  },
   {
     path: 'negocios',
     loadChildren: () => import('../../negocios/negocios.module').then(m => m.NegociosModule),
@@ -31,13 +37,6 @@ export const content: Routes = [
     loadChildren: () => import('../../components/products/products.module').then(m => m.ProductsModule),
     data: {
       breadcrumb: "Products"
-    }
-  },
-  {
-    path: 'ventas',
-    loadChildren: () => import('../../components/sales/sales.module').then(m => m.SalesModule),
-    data: {
-      breadcrumb: "Ventas"
     }
   },
   {

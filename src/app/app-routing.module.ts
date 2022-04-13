@@ -19,6 +19,9 @@ const routes: Routes = [
   },
 
 
+  { path: 'ventas', loadChildren: () => import('./admin-pages/ventas/ventas.module').then(m => m.VentasModule) },
+
+
 
 
 ];
