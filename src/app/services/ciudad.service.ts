@@ -19,5 +19,9 @@ export class CiudadService {
     return this._http.get<Ciudad[]>(`${this._url}`);
   }
 
+  consultarCiudadesPorDepartamento(idDepartamento:number){
+    return this._http.get<Ciudad[]>(`${this._url}?departamento=${idDepartamento}`);
+  }
+
 
 }

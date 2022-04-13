@@ -1,1 +1,164 @@
-<p>negocio works!</p>
+<div class="container-fluid">
+  <div class="row product-adding" [formGroup]="formNegocio">
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Datos</h5>
+        </div>
+        <div class="card-body">
+          <div class="digital-add needs-validation">
+            <div class="row">
+              <div class="col-6">
+                <div class="form-group">
+                  <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Nombre</label>
+                  <input class="form-control" id="validationCustom01" type="text" formControlName="nombre" required
+                    placeholder="Ej. Negocio de Comida" />
+                </div>
+                <div class="form-group">
+                  <label for="validationCustomtitle" class="col-form-label pt-0"><span>*</span> Email comercial</label>
+                  <input class="form-control" id="validationCustomtitle" type="email" formControlName="correo" required
+                    placeholder="Ej. correo@correo.com" />
+                </div>
+              </div>
+
+              <div class="col-6">
+                <label class="col-form-label pt-0">
+                  <span style="color: red">*</span>Imagen</label>
+                <div class="card-body dropzone-custom p-0">
+                  <ngx-dropzone (change)="onSelect($event)" [accept]="'image/*'">
+                    <ngx-dropzone-label>Carga una imagen para tu negocio
+                      <div *ngIf="idNegocio > 0">
+                        <img style="max-width: 90px;" class="img-fluid" src="{{negocio.imagen_64}}" alt="">
+                      </div>
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-image-preview *ngFor="let f of files" ngProjectAs="ngx-dropzone-preview"
+                      [removable]="true" [file]="f" (removed)="onRemove(f)">
+                      <ngx-dropzone-label>
+                        {{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-image-preview>
+                  </ngx-dropzone>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label"><span>*</span>Descripción</label>
+              <textarea rows="5" cols="12" formControlName="descripcion" required placeholder="..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h5>Telefonos de Contacto</h5>
+        </div>
+        <div class="card-body">
+          <div class="digital-add needs-validation">
+            <div class="form-group">
+              <label for="validationCustom05" class="col-form-label pt-0">
+                <span>*</span>Telefono # 1</label>
+              <input class="form-control" id="validationCustom05" type="number" formControlName="telefono" required />
+            </div>
+            <div class="form-group">
+              <label for="validationCustom05" class="col-form-label pt-0">
+                Telefono # 2</label>
+              <input class="form-control" id="validationCustom05" type="number" formControlName="telefono1" />
+            </div>
+            <div class="form-group">
+              <label for="validationCustom05" class="col-form-label pt-0">
+                Telefono # 3</label>
+              <input class="form-control" id="validationCustom05" type="number" formControlName="telefono2" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Informacion de la ubicacion</h5>
+        </div>
+        <div class="card-body">
+          <div class="digital-add needs-validation">
+            <div class="form-group">
+              <label for="validationCustom01" class="col-form-label pt-0"><span>*</span> Direccion</label>
+              <input class="form-control" id="validationCustom01" type="text" formControlName="direccion" required
+                placeholder="Ej. dir 33 #33-33" />
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label"><span>*</span> Departamento</label>
+              <select class="custom-select" required (change)="cargarCiudades($event.target.value)">
+                <option value="">--Select--</option>
+                <option *ngFor="let dep of departamentos" value="{{ dep.id }}">
+                  {{ dep.nombre }}
+                </option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="col-form-label"><span>*</span> Ciudad</label>
+              <select class="custom-select" formControlName="ciudad" required>
+                <option value="">--Select--</option>
+                <option *ngFor="let city of ciudades" value="{{ city.id }}">
+                  {{ city.nombre }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5>Meta Datos</h5>
+        </div>
+        <div class="card-body">
+          <div class="digital-add needs-validation">
+            <!-- CATEGORIAS NEGOCIO -->
+            <div class="form-group ">
+              <label class="col-form-label pt-0">Categoría del negocio </label>
+              <ngx-select-dropdown [multiple]="true" [config]="config" [options]="categoriasNegocio"
+                formControlName="categorias" required>
+              </ngx-select-dropdown>
+            </div>
+
+            <!-- CIIU NEGOCIO -->
+            <div class="form-group ">
+              <label class="col-form-label pt-0">Código CIIU del negocio </label>
+              <ngx-select-dropdown [multiple]="true" [config]="configCiiu" [options]="ciiuNegocio"
+                formControlName="negocio_ciiu" required>
+              </ngx-select-dropdown>
+            </div>
+
+            <div class="form-group mb-0">
+              <div class="product-buttons text-center">
+                <button *ngIf="formNegocio.invalid && !negocio.id" [disabled]="formNegocio.invalid" type="button"
+                  class="btn btn-primary mr-1">
+                  Guardar
+                </button>
+                <button *ngIf="formNegocio.valid && !negocio.id" type="button" class="btn btn-primary mr-1"
+                  (click)="guardarNegocioConImagen()">
+                  Guardar
+                </button>
+
+                <button *ngIf="formNegocio.invalid && negocio.id" [disabled]="formNegocio.invalid" type="button"
+                  class="btn btn-primary mr-1">
+                  Actualizar
+                </button>
+                <button *ngIf="formNegocio.valid && negocio.id" type="button" class="btn btn-primary mr-1"
+                  (click)="actualizarNegocioConImagen()">
+                  Actualizar
+                </button>
+
+                <button type="button" class="btn btn-light">
+                  Cancelar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

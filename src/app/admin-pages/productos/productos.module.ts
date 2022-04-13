@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { NegociosRoutingModule } from './negocios-routing.module';
-import { NegociosComponent } from './negocios.component';
-import { ListaNegociosComponent } from './lista-negocios/lista-negocios.component';
-import { NegocioComponent } from './negocio/negocio.component';
+import { ProductosRoutingModule } from './productos-routing.module';
+import { ProductosComponent } from './productos.component';
+import { ListaProductosComponent } from './lista-productos/lista-productos.component';
+import { ProductoComponent } from './producto/producto.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -14,15 +14,16 @@ import { CKEditorModule } from 'ngx-ckeditor';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 
+
 @NgModule({
   declarations: [
-    NegociosComponent,
-    ListaNegociosComponent,
-    NegocioComponent
+    ProductosComponent,
+    ListaProductosComponent,
+    ProductoComponent
   ],
   imports: [
     CommonModule,
-    NegociosRoutingModule,
+    ProductosRoutingModule,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
@@ -32,7 +33,6 @@ import { SelectDropDownModule } from 'ngx-select-dropdown';
     CKEditorModule,
     NgxDropzoneModule,
     SelectDropDownModule,
-
   ]
 })
-export class NegociosModule { }
+export class ProductosModule { }

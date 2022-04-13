@@ -27,16 +27,20 @@ export class NegocioService {
     return this._http.get<any>(`${this._url}${id}`);
   }
 
-  guardarNegocio(request: Negocio): Observable<any>{
-    return this._http.post(`${this._url}`, request);
+  guardarNegocio(request: Negocio): Observable<Negocio>{
+    return this._http.post<Negocio>(`${this._url}`, request);
   }
 
-  actualizarNegocio(id: string ,request: Negocio): Observable<any>{
-    return this._http.put(`${this._url}${id}/`, request);
+  actualizarNegocio(id: number ,request: Negocio): Observable<Negocio>{
+    return this._http.put<Negocio>(`${this._url}${id}/`, request);
   }
 
   getNegocios():Observable<Negocio[]>{
     return this._http.get<Negocio[]>(`${this._url}`);
+  }
+
+  eliminarNegocio(id:number):Observable<any>{
+    return this._http.delete<any>(`${this._url}${id}`);
   }
 
 }

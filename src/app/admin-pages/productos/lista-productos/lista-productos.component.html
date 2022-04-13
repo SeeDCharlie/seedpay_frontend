@@ -4,16 +4,16 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5>Mis Negocios</h5>
+          <h5>Mis productos</h5>
         </div>
         <div class="card-body">
           <div class="custom-datatable">
-            <button class="btn btn-primary mr-1 mb-3" [routerLink]="['/negocios/negocio']"
+            <button class="btn btn-primary mr-1 mb-3" [routerLink]="['/productos/producto']"
               style="display: flex; float: right; align-items: center">
               <app-feather-icons [icon]="'save'"></app-feather-icons> Agregar
             </button>
             <div class="clearfix"></div>
-            <ngx-datatable class="bootstrap" [rows]="lista_negocios" [columnMode]="'force'" [headerHeight]="50"
+            <ngx-datatable class="bootstrap" [rows]="lista_productos" [columnMode]="'force'" [headerHeight]="50"
               [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
               <ngx-datatable-column name="">
                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template >
@@ -28,10 +28,10 @@
                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                   <div style="display: flex; align-items: center; justify-content: start;">
                     <a style="color:rgb(194, 110, 0);margin: 5px; display: flex; justify-content: center;max-width: 50px;"
-                    [routerLink]="['/negocios/negocio', {id:row.id}]" >
+                    [routerLink]="['/productos/producto', {id:row.id}]" >
                       <app-feather-icons [icon]="'edit'"></app-feather-icons> </a>
                     <a style="color:rgb(146, 0, 0);margin: 5px;display: flex;align-items: center; justify-content: center;max-width: 50px;"
-                    (click)="eliminarNegocio(row.id)">
+                    (click)="eliminarProducto(row.id)">
                       <app-feather-icons [icon]="'trash-2'"></app-feather-icons> </a>
                     <a style="color:rgb(29, 167, 11);margin: 5px; display: flex; justify-content: center;max-width: 50px;">
                       <app-feather-icons [icon]="'eye'"></app-feather-icons> </a>

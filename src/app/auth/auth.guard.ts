@@ -40,7 +40,8 @@ export class AuthGuard implements CanActivate, CanLoad {
       data => {
         this.confirmTk = data
         if(this.confirmTk){
-          this._router.navigate(['/cuenta'])
+          this._router.navigate(['/dashboard/default'])
+          //return this.confirmTk
         }
       }, error => {
         console.log("Fallo al conectarse : " + JSON.stringify(error.error));

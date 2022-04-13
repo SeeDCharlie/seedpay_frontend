@@ -18,6 +18,9 @@ const routes: Routes = [
     path: '', redirectTo: 'inicio', pathMatch: 'full'
   },
 
+
+
+
 ];
 
 @NgModule({

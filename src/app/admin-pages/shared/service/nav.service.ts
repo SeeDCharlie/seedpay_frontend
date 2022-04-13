@@ -58,7 +58,10 @@ export class NavService {
       ]
 		},
     {
-			path: '/produtos', title: 'Negocios', icon: 'archive', type: 'link', badgeType: 'primary', active: false
+			path: '/productos', title: 'Productos', icon: 'box', type: 'sub', badgeType: 'primary', active: false, children: [
+        { path: '/productos/lista', title: 'Mis productos', type: 'link' },
+        { path: '/productos/producto', title: 'Nuevo', type: 'link',icon: 'archive', badgeType: 'primary' },
+      ]
 		}
 	]
 	// Array

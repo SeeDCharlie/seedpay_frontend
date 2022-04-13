@@ -32,6 +32,14 @@ export class ProductoService {
     return this._http.put(`${this._url}${id}/`, request);
   }
 
+  buscarProductosPorUsuario(id:number):Observable<Producto[]>{
+    return this._http.get<Producto[]>(`${this._url}?negocio__usuario=${id}`);
+  }
+
+  eliminarProducto(id:number):Observable<any>{
+    return this._http.delete<any>(`${this._url}${id}`);
+  }
+
 
   // Sorting Filter
   public sortProducts(products: Producto[], payload: string): any {

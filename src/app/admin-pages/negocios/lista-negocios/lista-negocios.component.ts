@@ -5,7 +5,7 @@ import { Negocio } from 'src/app/interfaces/negocio';
 import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 import { NegocioService } from 'src/app/services/negocio.service';
 import { listPagesDB } from '../../shared/tables/list-pages';
-
+import { environment } from 'src/environments/environment';
 @Component({
   templateUrl: './lista-negocios.component.html',
   styleUrls: ['./lista-negocios.component.scss']
@@ -14,7 +14,6 @@ export class ListaNegociosComponent implements OnInit {
 
   lista_negocios: Negocio[] = []
   usuarioSession: UsuarioSession = JSON.parse('{}')
-  public list_pages = [];
   public selected = [];
 
   constructor(
@@ -22,7 +21,6 @@ export class ListaNegociosComponent implements OnInit {
     private _toast: ToastrService,
   ) {
     this.usuarioSession = JSON.parse(sessionStorage.getItem('user') || '{}')
-    this.list_pages = listPagesDB.list_pages;
   }
   onSelect({ selected }) {
     this.selected.splice(0, this.selected.length);
@@ -46,6 +44,24 @@ export class ListaNegociosComponent implements OnInit {
           timeOut: 5000
         });
       }
+    })
+  }
+
+  async eliminarNegocio(id:number){
+    this.negocioService.eliminarNegocio(id).subscribe({
+      next: () => {
+        this._toast.success(JSON.stringify("Negocio ELiminado"), "Accion Exitosa", {
+        timeOut: 5000
+      });
+      this.lista_negocios = this.lista_negocios.map(
+        as => {
+          if(as.id !== id){
+            return as
+          }
+        }
+      )
+    },
+      error: (error:any) => {}
     })
   }
 }

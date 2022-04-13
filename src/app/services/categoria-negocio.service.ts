@@ -20,8 +20,8 @@ export class CategoriaNegocioService {
     return this._http.get<CategoriaNegocio[]>(this._url);
   }
 
-  buscarCategoriaPorId(id: any): Observable<any>{
-    return this._http.get<any>(`${this._url}${id}`);
+  buscarCategoriaPorId(id: any): Observable<CategoriaNegocio>{
+    return this._http.get<CategoriaNegocio>(`${this._url}${id}`);
   }
 
 }

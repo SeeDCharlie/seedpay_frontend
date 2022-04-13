@@ -4,9 +4,7 @@ import { CuentaComponent } from '../../cuenta/cuenta.component';
 
 export const content: Routes = [
   // CUENTA
-  {
-    path: 'cuenta', component: CuentaComponent,
-  },
+
   {
     path: 'negocios',
     loadChildren: () => import('../../negocios/negocios.module').then(m => m.NegociosModule),
@@ -15,8 +13,18 @@ export const content: Routes = [
     }
   },
   {
+    path: 'productos',
+    loadChildren: () => import('../../productos/productos.module').then(m => m.ProductosModule),
+    data:{
+      breadcrumb: "Productos"
+    }
+  },
+  {
     path: 'dashboard',
     loadChildren: () => import('../../components/dashboard/dashboard.module').then(m => m.DashboardModule),
+  },
+  {
+    path: 'cuenta', component: CuentaComponent,
   },
   {
     path: 'products',
