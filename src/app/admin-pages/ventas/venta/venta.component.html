@@ -1,1 +1,113 @@
-<p>venta works!</p>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Registrar Venta</h5>
+        </div>
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-12 col-md-8">
+              <div class="col-12 itenCartScreen">
+                <form class="form-inline md-form form-sm">
+                  <app-feather-icons [icon]="'search'"></app-feather-icons>
+                  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Buscar"
+                    aria-label="Search" mdbInput>
+                </form>
+              </div>
+
+              <div class="row itenCartScreen itencardproducts">
+
+
+                  <div class="card item-product-cart" *ngFor="let product of productos">
+                    <div class="card-header">
+                      <img class="img-fluid"
+                        src="{{product.imagen_64}}" alt="">
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-12 col-lg-7">
+                          <span class="nombre-product-cart">{{product.nombre}}</span> <br>
+                          <span class="precio-product-cart">$ {{product.precio}}</span>
+                        </div>
+                        <div class="col-12 col-lg-5 buttons-product">
+                          <button class="btn-view-product"><img class="img-fluid" src="assets/images/eye.png"
+                              alt=""></button>
+                          <button class="btn-add-to-cart" (click)="addToCart(product)">
+                            <img class="img-fluid" src="assets/images/add-to-cart.png" alt="" ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+              <div class="col-12 itenCartScreen negocios-capsule">
+                <div class="item-negocio"
+                *ngFor="let negocio of negocios">
+                  <img class="img-fluid" src="{{negocio.imagen_64}}" alt="">
+                  <span class="nom-product">{{negocio.nombre}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-4 itenCartScreen cart-cart-cart">
+
+              <div class="header-cart row align-items-start justify-content-betwee">
+                <h5 class="title-cart">Carrito</h5>
+                <img src="assets/images/cart-cart.gif" alt="">
+              </div>
+
+              <div class="body-cart">
+
+                <div class="item-cart" *ngFor="let itemCart of productosCarrito">
+                  <span (click)="removeItemCart(itemCart.producto.id)" class="remove-item-cart"><img class="img-fluid" src="assets/images/close-24.png" alt=""></span>
+                  <div class="cart-item-cart">
+                    <div class="left-cart">
+                      <img class="img-fluid" src="{{itemCart.producto.imagen_64}}" alt="">
+                      <div class="info-item-cart">
+                        <span class="nombre-pitem-cart">{{itemCart.producto.nombre}}</span> <br>
+                        <span class="precio-pitem-cart">$ {{itemCart.producto.precio}}</span>
+                      </div>
+                    </div>
+
+                    <div class="rigth-cart">
+                      <span (click)="disminuirCantidad(itemCart)"><img class="img-fluid" src="assets/images/minus-24.png" alt=""></span>
+                      <span>{{itemCart.cantidad}}</span>
+                      <span (click)="aumentarCantidad(itemCart)" ><img class="img-fluid" src="assets/images/add-24.png" alt=""></span>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+              <div class="footer-cart">
+                <div class="sub-result-cart">
+                  <div class="sub-result-item-cart">
+                    <span>Sub Total</span>
+                    <span>$ {{this.venta.valor_total}}</span>
+                  </div>
+
+                  <div class="sub-result-item-cart">
+                    <span>Total</span>
+                    <span>$ {{this.venta.valor_total}}</span>
+                  </div>
+                </div>
+                <div class="options-cart">
+                  <button class="btn btn-secondary">Vender</button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->

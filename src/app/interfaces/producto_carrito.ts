@@ -1,12 +1,13 @@
 import { Producto } from "./producto";
+import { ProductoRequest } from "./producto-request";
 
-export interface ProductoCarrito{
-    producto: Producto;
+export interface ProductoCarritoFull{
+    producto: ProductoRequest;
     cantidad: number;
 }
 
 export interface CarritoCompra{
-    productos: ProductoCarrito[];
+    productos: ProductoCarritoFull[];
     total:number;
 }
 

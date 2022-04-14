@@ -3,8 +3,8 @@ export interface ProductoCarrito {
   producto: number;
 }
 
-export interface registrarVenta {
-  productos: ProductoCarrito[];
+export interface RegistrarVenta {
+  productos: any[];
   usuario?: number;
   valor_total: number;
   valor_recibido: number;
