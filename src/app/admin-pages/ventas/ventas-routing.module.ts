@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FacturasComponent } from './facturas/facturas.component';
 import { InformeVentasComponent } from './informe-ventas/informe-ventas.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { VentaComponent } from './venta/venta.component';
@@ -23,7 +24,12 @@ const routes: Routes = [
     path: 'informeVentas', component: InformeVentasComponent, data:{
       breadcrumb : "Informe de ventas"
     }
-  }
+  },
+  {
+    path: 'facturas', component: FacturasComponent,    data: {
+      breadcrumb: "Facturas"
+    }
+  },
 ];
 
 @NgModule({

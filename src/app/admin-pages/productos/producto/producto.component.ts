@@ -58,7 +58,7 @@ export class ProductoComponent implements OnInit {
       descripcion: ['', [Validators.required, Validators.maxLength(200)]],
       stock: ['', [Validators.nullValidator, ]],
       categorias:['', [Validators.required, ]],
-      disponible : ['', [Validators.nullValidator, ]],
+      disponible : [true, [Validators.required, ]],
 
     })
     this.usuarioSession = JSON.parse(sessionStorage.getItem('user') || '{}')
@@ -168,10 +168,10 @@ export class ProductoComponent implements OnInit {
 
   actualizarProductoConImagen(){
     let img = this.producto.imagen_64
+    this.producto = this.productForm.value as Producto
+    this.producto.categorias = this.getListadoIdForm(this.producto.categorias)
+    this.producto.stock = this.counter
       if(this.files[0]){
-        this.producto = this.productForm.value as Producto
-        this.producto.categorias = this.getListadoIdForm(this.producto.categorias)
-        this.producto.stock = this.counter
         this.storaService.cargarImagenProducto(this.files[0]).subscribe({
           next: (data:ResponseUploadImage) => {
             this.producto.imagen_64 = data.urlImagen

@@ -12,43 +12,59 @@
 
             <div class="col-12 col-md-8">
               <div class="col-12 itenCartScreen">
-                <form class="form-inline md-form form-sm">
+                <div class="searchbar">
                   <app-feather-icons [icon]="'search'"></app-feather-icons>
-                  <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Buscar"
-                    aria-label="Search" mdbInput>
-                </form>
+                  <input class="form-control form-control-sm ml-3" type="text" placeholder="Buscar" aria-label="Search"
+                    mdbInput>
+                </div>
               </div>
 
-              <div class="row itenCartScreen itencardproducts">
+              <div class="itenCartScreen itencardproducts">
+                <div class="header-itencardproducts">
+                  <h5>{{productos.length}} Productos</h5>
+                </div>
 
+                <div class="list-product-card-products">
 
-                  <div class="card item-product-cart" *ngFor="let product of productos">
+                  <div class="card item-product-cart" *ngFor="let product of productos" >
                     <div class="card-header">
-                      <img class="img-fluid"
-                        src="{{product.imagen_64}}" alt="">
+                      <img class="img-fluid img-item-cart" src="{{product.imagen_64}}" alt="">
                     </div>
                     <div class="card-body">
                       <div class="row">
-                        <div class="col-12 col-lg-7">
+                        <div class="col-12 col-lg-8">
                           <span class="nombre-product-cart">{{product.nombre}}</span> <br>
-                          <span class="precio-product-cart">$ {{product.precio}}</span>
+                          <span class="precio-product-cart">$ {{product.precio}}</span> <br>
+                          <span *ngIf="product.stock" class="stock-product-cart"><strong>{{product.stock}}</strong> Disponibles</span>
+                          <span *ngIf="!product.stock" class="stock-product-cart"><strong>AGOTADO</strong></span>
                         </div>
-                        <div class="col-12 col-lg-5 buttons-product">
+                        <div class="col-12 col-lg-4 buttons-product">
+                          <button *ngIf="product.stock" class="btn-add-to-cart" (click)="addToCart(product)">
+                            <img class="img-fluid" src="assets/images/add-to-cart.png"
+                              alt="añardir al carrito"></button>
                           <button class="btn-view-product"><img class="img-fluid" src="assets/images/eye.png"
-                              alt=""></button>
-                          <button class="btn-add-to-cart" (click)="addToCart(product)">
-                            <img class="img-fluid" src="assets/images/add-to-cart.png" alt="" ></button>
+                              alt="ver"></button>
                         </div>
                       </div>
                     </div>
                   </div>
 
+
+                </div>
+
               </div>
               <div class="col-12 itenCartScreen negocios-capsule">
-                <div class="item-negocio"
-                *ngFor="let negocio of negocios">
-                  <img class="img-fluid" src="{{negocio.imagen_64}}" alt="">
-                  <span class="nom-product">{{negocio.nombre}}</span>
+                <h5 style="font-size: 1.2rem; font-weight: 600; color: rgb(99, 99, 99);">Negocios</h5>
+
+                <div class="listNegocio">
+                  <div class="item-negocio" (click)="cargarProductos()">
+                    <h5>Todos</h5>
+                  </div>
+                  <div class="item-negocio" *ngFor="let negocio of negocios"
+                    (click)="filtroProductosPorNegocio(negocio.id)">
+                    <img class="img-fluid" src="{{negocio.imagen_64}}" alt="">
+                    <span class="nom-product">{{negocio.nombre}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -63,7 +79,8 @@
               <div class="body-cart">
 
                 <div class="item-cart" *ngFor="let itemCart of productosCarrito">
-                  <span (click)="removeItemCart(itemCart.producto.id)" class="remove-item-cart"><img class="img-fluid" src="assets/images/close-24.png" alt=""></span>
+                  <span (click)="removeItemCart(itemCart.producto.id)" class="remove-item-cart"><img class="img-fluid"
+                      src="assets/images/close-24.png" alt=""></span>
                   <div class="cart-item-cart">
                     <div class="left-cart">
                       <img class="img-fluid" src="{{itemCart.producto.imagen_64}}" alt="">
@@ -74,14 +91,19 @@
                     </div>
 
                     <div class="rigth-cart">
-                      <span (click)="disminuirCantidad(itemCart)"><img class="img-fluid" src="assets/images/minus-24.png" alt=""></span>
+                      <span (click)="disminuirCantidad(itemCart)"><img class="img-fluid"
+                          src="assets/images/minus-24.png" alt=""></span>
                       <span>{{itemCart.cantidad}}</span>
-                      <span (click)="aumentarCantidad(itemCart)" ><img class="img-fluid" src="assets/images/add-24.png" alt=""></span>
+                      <span (click)="aumentarCantidad(itemCart)"><img class="img-fluid" src="assets/images/add-24.png"
+                          alt=""></span>
                     </div>
                   </div>
 
                 </div>
 
+                <img style="width: 50px; margin: 50%;" class="img-fluid"
+                  *ngIf="!productosCarrito || productosCarrito.length === 0" src="assets/images/shopping-cart-50.png"
+                  alt="">
 
               </div>
 
@@ -89,16 +111,18 @@
                 <div class="sub-result-cart">
                   <div class="sub-result-item-cart">
                     <span>Sub Total</span>
-                    <span>$ {{this.venta.valor_total}}</span>
+                    <span>$ {{venta.valor_total}}</span>
                   </div>
 
                   <div class="sub-result-item-cart">
                     <span>Total</span>
-                    <span>$ {{this.venta.valor_total}}</span>
+                    <span>$ {{venta.valor_total}}</span>
                   </div>
                 </div>
                 <div class="options-cart">
-                  <button class="btn btn-secondary">Vender</button>
+                  <button *ngIf="venta.valor_total > 0" class="btn btn-lg btn-outline-primary"
+                    (click)="registrarVenta(content)">Continuar</button>
+                  <button *ngIf="!venta.valor_total" disabled class="btn btn-lg btn-primary">Continuar</button>
                 </div>
               </div>
 
@@ -106,8 +130,54 @@
 
           </div>
 
+
         </div>
       </div>
     </div>
   </div>
   <!-- Container-fluid Ends-->
+
+  <!-- modal ir a pagar -->
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <img src="assets/images/invoice-64.png" alt="">
+      <h3 class="modal-title" id="modal-basic-title">Resumen</h3>
+      <button type="button" class="btn btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <app-feather-icons [icon]="'x'"></app-feather-icons>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="resumen-items">
+        <div class="row item-resume">
+          <pre class="col-4">Producto</pre>
+          <pre class="col-4">Cantidad</pre>
+          <pre class="col-4">Total</pre>
+        </div>
+        <div class="body-item-resume">
+          <div *ngFor="let item of productosCarrito" class="row item-resume">
+            <pre class="col-4">{{item.producto.nombre}}</pre>
+            <pre class="col-4">{{item.cantidad}} * $ {{item.producto.precio}} u</pre>
+            <pre class="col-4">$ {{item.cantidad * item.producto.precio}}</pre>
+          </div>
+        </div>
+
+      </div>
+      <div class="footer-resumen-cart">
+        <h5>Total: ${{venta.valor_total}}</h5>
+        <div class="form-group row">
+          <label for="valorRecibido" class="col-sm-2 col-form-label">Valor Recibido</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" [(ngModel)]="venta.valor_recibido" id="valorRecibido" >
+          </div>
+        </div>
+
+        <h5 *ngIf="venta.valor_recibido > venta.valor_total">Valor devuelto: ${{venta.valor_recibido - venta.valor_total + 0}}</h5>
+
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <button *ngIf="venta.valor_recibido > venta.valor_total" type="button" class="btn btn-outline-success" (click)="registrarFactura()">Confirmar</button>
+      <button *ngIf="venta.valor_recibido < venta.valor_total" type="button" class="btn btn-outline-success" disabled>Confirmar</button>
+    </div>
+  </ng-template>

@@ -24,11 +24,11 @@ export class CatalogoNegociosComponent implements OnInit {
               private router:Router) {
 
     this.palabra = localStorage.getItem('palabraBusqueda');
-    
+
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
     };
-    
+
   }
 
   ngOnInit(): void {
@@ -39,8 +39,17 @@ export class CatalogoNegociosComponent implements OnInit {
   private cargarNegocios(){
     this.busquedaService.buscarNegocioFiltroGeneral(this.palabra).subscribe(
 
-      data => {
-				this.negocios = data;
+      (data:Negocio[]) => {
+
+				this.negocios = data.map(obj => {
+          for(var idx = 0; idx < obj.productos.length; idx++){
+            if(obj.productos[idx].disponible == 0){
+              obj.productos.splice(idx, 1);
+              idx--;
+            }
+          }
+          return obj
+        });
         console.log(this.negocios);
 			},
 			error => {

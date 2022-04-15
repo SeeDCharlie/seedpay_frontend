@@ -41,6 +41,18 @@ export class ProductoService {
     return this._http.get<ProductoRequest[]>(`${this._url}productosadmin/?negocio__usuario=${id}`);
   }
 
+  buscarProductosFullDisponiblesPorUsuario(id:number):Observable<ProductoRequest[]>{
+    return this._http.get<ProductoRequest[]>(`${this._url}disponibles/?negocio__usuario=${id}`);
+  }
+
+  buscarProductosFullPorIdNegocio(id: any): Observable<ProductoRequest[]> {
+    return this._http.get<ProductoRequest[]>(`${this._url}?negocio=${id}`);
+  }
+
+  buscarProductosFullDisponiblesPorIdNegocio(id: any): Observable<ProductoRequest[]> {
+    return this._http.get<ProductoRequest[]>(`${this._url}disponibles/?negocio=${id}`);
+  }
+
   eliminarProducto(id:number):Observable<any>{
     return this._http.delete<any>(`${this._url}${id}`);
   }

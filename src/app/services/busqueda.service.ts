@@ -18,7 +18,7 @@ export class BusquedaService {
 
 
   buscarNegocioFiltroGeneral(palabra: String){
-    return this._http.get<any>(`${this._url}/buscar/${palabra}`);
+    return this._http.get<Negocio[]>(`${this._url}/buscar/${palabra}`);
   }
 
 }

@@ -47,7 +47,11 @@ export class NavService {
 					path: '/ventas/venta', title: 'Registrar Venta', type: 'link', badgeType: 'primary', active: false
 				},
 				{
-					path: '/ventas/informeVentas', title: 'Informe de Ventas', icon: 'clipboard', type: 'link', badgeType: 'primary', active: false
+					path: '/ventas/informeVentas', title: 'Informe de Ventas', type: 'link', badgeType: 'primary', active: false
+				}
+        ,
+				{
+					path: '/ventas/facturas', title: 'Facturas', type: 'link', badgeType: 'primary', active: false
 				}
 			]
 		},

@@ -11,6 +11,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { InformeVentasComponent } from './informe-ventas/informe-ventas.component';
+import { FacturasComponent } from './facturas/facturas.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { InformeVentasComponent } from './informe-ventas/informe-ventas.componen
     VentasComponent,
     VentaComponent,
     PedidosComponent,
-    InformeVentasComponent
+    InformeVentasComponent,
+    FacturasComponent
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ProductoCarrito, registrarVenta } from '../interfaces/productoCarrito';
+import { Factura } from '../interfaces/factura';
+import { ProductoCarrito, RegistrarVenta } from '../interfaces/productoCarrito';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,7 @@ export class CarritoComprasService {
     private _http: HttpClient
   ) { }
 
-  registrarVenta(carrito: registrarVenta): Observable<any> {
-    return this._http.post<any>(`${this._url}`, carrito);
-
+  registrarVenta(carrito: RegistrarVenta): Observable<Factura> {
+    return this._http.post<Factura>(`${this._url}`, carrito);
   }
 }

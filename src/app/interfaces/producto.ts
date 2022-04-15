@@ -4,7 +4,7 @@ export interface Producto {
   descripcion?: string;
   precio?: number;
   negocio?: number;
-  disponible?: boolean;
+  disponible?: number;
   categorias?: number[];
   imagen_64?: string;
   stock?: number;
