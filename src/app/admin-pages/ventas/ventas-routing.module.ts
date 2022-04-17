@@ -26,8 +26,8 @@ const routes: Routes = [
     }
   },
   {
-    path: 'facturas', component: FacturasComponent,    data: {
-      breadcrumb: "Facturas"
+    path: 'historial', component: FacturasComponent,    data: {
+      breadcrumb: "Historial"
     }
   },
 ];

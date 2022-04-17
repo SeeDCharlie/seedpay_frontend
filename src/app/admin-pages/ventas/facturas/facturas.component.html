@@ -1,1 +1,46 @@
-<p>facturas works!</p>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Historial de Ventas</h5>
+        </div>
+        <div class="card-body">
+          <div class="custom-datatable">
+            <input type='text' class="filter-ngx form-control" placeholder='Buscar...' (keyup)='updateFilter($event)' />
+            <ngx-datatable class="bootstrap" [rows]="facturas" [columnMode]="'force'" [headerHeight]="50"
+              [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
+              <ngx-datatable-column name="Id" prop="id"></ngx-datatable-column>
+              <ngx-datatable-column name="Metodo de Pago" prop="metodo_pago.nombre"></ngx-datatable-column>
+              <ngx-datatable-column name="Estado" prop="estado">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                  <span style="background-color: blue;">
+                    {{value.nombre}}
+                  </span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Valor Total" prop="valor_total"></ngx-datatable-column>
+              <ngx-datatable-column name="Creacion" prop="fecha_creacion"></ngx-datatable-column>
+              <ngx-datatable-column name="Acciones">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <div style="display: flex; align-items: center; justify-content: start;">
+                    <a style="color:rgb(194, 110, 0);margin: 5px; display: flex; justify-content: center;max-width: 50px;"
+                      [routerLink]="['/productos/producto', {id:row.id}]">
+                      <app-feather-icons [icon]="'edit'"></app-feather-icons>
+                    </a>
+                    <a style="color:rgb(146, 0, 0);margin: 5px;display: flex;align-items: center; justify-content: center;max-width: 50px;"
+                      (click)="eliminarFactura(row.id)">
+                      <app-feather-icons [icon]="'trash-2'"></app-feather-icons>
+                    </a>
+
+                  </div>
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Container-fluid Ends-->

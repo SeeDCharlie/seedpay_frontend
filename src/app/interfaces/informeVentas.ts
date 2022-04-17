@@ -1,7 +1,7 @@
 export interface PetInforme {
   usuario: number;
   mes:     number;
-  año:     number;
+  ano:     number;
 }
 
 export interface ReqInforme {

@@ -5,8 +5,9 @@ export interface ProductoCarrito {
 
 export interface RegistrarVenta {
   productos: ProductoCarrito[];
-  cliente?: number;
+  cliente: number;
+  vendedor:number,
   valor_total: number;
   valor_recibido: number;
-  metodo_pago?: number;
+  metodo_pago: number;
 }

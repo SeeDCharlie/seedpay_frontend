@@ -12,6 +12,10 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { InformeVentasComponent } from './informe-ventas/informe-ventas.component';
 import { FacturasComponent } from './facturas/facturas.component';
+import { ChartsModule } from 'ng2-charts';
+import { ChartistModule } from 'ng-chartist';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 
 @NgModule({
@@ -31,6 +35,11 @@ import { FacturasComponent } from './facturas/facturas.component';
     NgxDatatableModule,
     RouterModule,
     SharedModule,
+    ChartsModule,
+    Ng2GoogleChartsModule,
+    NgxChartsModule,
+    ChartistModule
+
   ]
 })
 export class VentasModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { UsuarioSession } from 'src/app/interfaces/usuario-session';
 import { PedidosService } from 'src/app/services/pedidos.service';
 
 @Component({
@@ -8,9 +9,9 @@ import { PedidosService } from 'src/app/services/pedidos.service';
 })
 export class PedidosComponent implements OnInit {
 
-  public pedidos = [];
-  public temp = [];
-  public colorEstadoPedido = {
+  pedidos = [];
+  temp = [];
+  colorEstadoPedido = {
     1:"#FFDA33",
     2:"#25FF4D",
     3:"#D20000",
@@ -20,17 +21,20 @@ export class PedidosComponent implements OnInit {
     7:"#3C07E3",
     8:"#E30707",
   }
-  public colorEstadoFactura = {
+  colorEstadoFactura = {
     1:"#FFDA33",
     2:"#07D9E3",
     3:"#E30780",
     4:"#E30707",
   }
 
+
+  usuarioSession:UsuarioSession = {} as UsuarioSession
+
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
   constructor(private pedidosService: PedidosService) {
-
-    pedidosService.consultarPedidosPorIdVendedor(Number(sessionStorage.getItem('id'))).subscribe( response => {
+    this.usuarioSession = JSON.parse(sessionStorage.getItem('user') || '{}')
+    pedidosService.consultarPedidosPorIdVendedor(this.usuarioSession.id).subscribe( response => {
       this.pedidos = response;
     });
   }

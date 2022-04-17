@@ -1,1 +1,83 @@
-<p>informe-ventas works!</p>
+<div class="container-fluid card">
+  <div class="card-header">
+    <h5>Informe de Ventas en el Mes</h5><br><br>
+    <div class="optionhead">
+      <h4>
+        A continuacion seleccione un mes
+      </h4>
+      <div class="btn-group me-3">
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button type="button" class="btn btn-outline-danger" ngbDropdownToggle>{{anoAux}}</button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button *ngFor="let anoAx of anos;let idx = index" value="{{idx}}" (click)="getAno(anoAx, idx)"
+              ngbDropdownItem>{{anoAx}}</button>
+          </div>
+        </div>
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button type="button" class="btn btn-outline-success" ngbDropdownToggle>{{mesAux}}</button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <button *ngFor="let mesAx of meses;let idx = index" value="{{idx}}" (click)="getMes(mesAx, idx)"
+              ngbDropdownItem>{{mesAx}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+
+      <div class="col-12 col-lg-7">
+        <div class="col-12">
+          <h3 class="font-info">
+            <pre>Total Vendido en el mes : $ {{informe.total}}</pre>
+          </h3>
+        </div><br>
+        <div class="col-12">
+          <ngb-accordion [closeOthers]="true" activeIds="static-1">
+            <ngb-panel *ngFor="let negocio of informe.negocios; let idx = index" id="static-{{idx + 1}}">
+              <ng-template ngbPanelTitle>
+                <img src="" alt=""><span>&#9733; {{negocio.negocio.nombre}} </span>
+              </ng-template>
+              <ng-template ngbPanelContent>
+
+                <div *ngIf="negocio.total > 0" class="user-status table-responsive latest-order-table">
+                  <h4 style="margin-top: 10px;">Total acumulado $ {{negocio.total}}</h4>
+
+
+                  <ngx-datatable class="bootstrap" [rows]="negocio.productos" [columnMode]="'force'" [headerHeight]="50"
+                    [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
+
+                    <ngx-datatable-column prop="producto" name="Producto"></ngx-datatable-column>
+                    <ngx-datatable-column prop="unidadesVendidas" name="Unidades Vendidas"></ngx-datatable-column>
+                    <ngx-datatable-column prop="valorTotal" name="Total Vendido"></ngx-datatable-column>
+                  </ngx-datatable>
+                </div>
+                <ng-container *ngIf="+negocio.total <= 0">
+                  <h5 style="width: 100%; text-align: center;" class="font-secondary">No se vendio nada <br>Pronto te
+                    recuperaras!</h5>
+                </ng-container>
+              </ng-template>
+            </ngb-panel>
+
+          </ngb-accordion>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-5 grafica">
+        <div *ngIf="+informe.total > 0" class="order-graph sm-order-space">
+          <div class="peity-chart-dashboard text-center chart-vertical-center">
+            <ngx-charts-pie-chart class="pie-colours-1" [scheme]="doughnutChartColorScheme"
+              [results]="getValoresGrafica()" [explodeSlices]="true" [labels]="true" [arcWidth]=0.99 [doughnut]="true"
+              [animations]="false" [tooltipDisabled]="doughnutChartTooltip" maxLabelLength=20
+              [gradient]="doughnutChartGradient" [legend]="true" [labels]="true" legendPosition="bottom" [legendTitle]="'Ventas Por Negocios'" >
+            </ngx-charts-pie-chart>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

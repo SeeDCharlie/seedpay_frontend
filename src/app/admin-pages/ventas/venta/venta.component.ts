@@ -128,6 +128,7 @@ export class VentaComponent implements OnInit {
   registrarFactura(){
     this.venta.metodo_pago = 2
     this.venta.productos = this.getIdsProductosCarrito()
+    this.venta.vendedor = this.usuarioSession.id
 
     this.carritoVentaService.registrarVenta(this.venta).subscribe({
       next: (data:Factura) => {
@@ -135,7 +136,7 @@ export class VentaComponent implements OnInit {
           timeOut: 5000
         });
         this.modalService.dismissAll()
-        this._router.navigate(['/ventas/facturas'])
+        this._router.navigate(['/ventas/historial'])
       },
       error: (error: any) => {
         this._toast.error(JSON.stringify(error.error), "Ha sucedido un inconveniente", {

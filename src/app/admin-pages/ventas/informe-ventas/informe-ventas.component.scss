@@ -1,0 +1,46 @@
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f3555a;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f5464c;
+}
+
+.containermain{
+  width: 100vh;
+  max-width: 100vh;
+  background-color: aquamarine;
+}
+
+.optionhead{
+  display: flex;
+  align-items: center;
+
+  h4{
+    margin-right: 15px;
+  }
+}
+
+ngb-accordion {
+  height: 600px;
+  display: block;
+  overflow-y: scroll;
+
+}
+ngx-charts-pie-chart{
+  max-height: 500px;
+}
+.grafica{
+  padding: 20px;
+}

@@ -51,7 +51,7 @@ export class NavService {
 				}
         ,
 				{
-					path: '/ventas/facturas', title: 'Facturas', type: 'link', badgeType: 'primary', active: false
+					path: '/ventas/historial', title: 'Historial', type: 'link', badgeType: 'primary', active: false
 				}
 			]
 		},
