@@ -37,8 +37,8 @@ export class NavService {
 	}
 
 	MENUITEMS: Menu[] = [
-		{
-			path: '/dashboard/default', title: 'Dashboard', icon: 'home', type: 'link', badgeType: 'primary', active: false
+    {
+			path: '/home', title: 'Inicio', icon: 'home', type: 'link', badgeType: 'primary', active: false
 		},
 		{
 			title: 'Ventas', icon: 'dollar-sign', type: 'sub', active: false, children: [

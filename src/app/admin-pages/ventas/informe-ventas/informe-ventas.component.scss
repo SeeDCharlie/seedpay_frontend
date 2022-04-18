@@ -3,7 +3,7 @@
   width: 5px;
 }
 /* Track */
-::-webkit-scrollbar-track {
+::-webkit-scrollbar-track:hover {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
@@ -15,6 +15,26 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #f5464c;
+}
+
+/*datepicker*/
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
 }
 
 .containermain{
@@ -35,12 +55,50 @@
 ngb-accordion {
   height: 600px;
   display: block;
-  overflow-y: scroll;
-
 }
 ngx-charts-pie-chart{
-  max-height: 500px;
+  max-height: 600px;
 }
 .grafica{
   padding: 20px;
+}
+
+.acordionNegocios{
+  background-color: #F6F6F9;
+  overflow-y: scroll;
+  padding: 20px;
+}
+
+.titleAcordion{
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  img{
+    max-width: 70px;
+    max-height: 70px;
+    border-radius: 15px;
+    margin-right: 15px;
+  }
+}
+
+.titleAcordion::after {
+  content: none;
+}
+
+.tiNegocioAcordion{
+  text-align: left;
+}
+
+.headerPaneAcordeon{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bodyModalBarGraphic{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,0 +1,227 @@
+<div class="container-fluid">
+  <div class="row justify-content-around">
+
+    <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-secondary card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icons [icon]="'navigation'" class="font-secondary"></app-feather-icons>
+              </div>
+            </div>
+            <div class="media-body col-8"><span class="m-0">Tus Ventas</span>
+              <h3 class="mb-0"> <span class="counter" [CountTo]="500" [from]="0" [duration]="2"></span><small>
+                  ventas este mes</small></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-success card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icons [icon]="'navigation'" class="font-success"></app-feather-icons>
+              </div>
+            </div>
+            <div class="media-body col-8"><span class="m-0">Tus Ganancias</span>
+              <h3 class="mb-0">$ <span class="counter" [CountTo]="750000" [from]="0" [duration]="2">6659</span><small>
+                  COP este mes</small></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card o-hidden widget-cards">
+        <div class="bg-warning card-body">
+          <div class="media static-top-widget row">
+            <div class="icons-widgets col-4">
+              <div class="align-self-center text-center">
+                <app-feather-icons [icon]="'navigation'" class="font-warning"></app-feather-icons>
+              </div>
+            </div>
+            <div class="media-body col-8"><span class="m-0">Tu Catalogo</span>
+              <h3 class="mb-0"> <span class="counter" [CountTo]="50" [from]="0" [duration]="2"></span><small>
+                  Productos Disponibles</small></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Tus ventas este mes</h5>
+        </div>
+        <div class="card-body sell-graph">
+          <canvas baseChart id="myGraph" [datasets]="lineChartData" [labels]="lineChartLabels"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+            [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-xl-6 xl-100">
+      <div class="card height-equal">
+        <div class="card-header">
+          <h5>Products Cart</h5>
+        </div>
+        <div class="card-body">
+          <div class="user-status table-responsive products-table">
+            <table class="table table-bordernone mb-0">
+              <thead>
+                <tr>
+                  <th scope="col">Details</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Simply dummy text of the printing</td>
+                  <td class="digits">1</td>
+                  <td class="font-primary">Pending</td>
+                  <td class="digits">$6523</td>
+                </tr>
+                <tr>
+                  <td>Long established</td>
+                  <td class="digits">5</td>
+                  <td class="font-secondary">Cancle</td>
+                  <td class="digits">$6523</td>
+                </tr>
+                <tr>
+                  <td>sometimes by accident</td>
+                  <td class="digits">10</td>
+                  <td class="font-secondary">Cancle</td>
+                  <td class="digits">$6523</td>
+                </tr>
+                <tr>
+                  <td>Classical Latin literature</td>
+                  <td class="digits">9</td>
+                  <td class="font-primary">Return</td>
+                  <td class="digits">$6523</td>
+                </tr>
+                <tr>
+                  <td>keep the site on the Internet</td>
+                  <td class="digits">8</td>
+                  <td class="font-primary">Pending</td>
+                  <td class="digits">$6523</td>
+                </tr>
+                <tr>
+                  <td>Molestiae consequatur</td>
+                  <td class="digits">3</td>
+                  <td class="font-secondary">Cancle</td>
+                  <td class="digits">$6523</td>
+                </tr>
+                <tr>
+                  <td>Pain can procure</td>
+                  <td class="digits">8</td>
+                  <td class="font-primary">Return</td>
+                  <td class="digits">$6523</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card order-graph sales-carousel">
+        <div class="card-header">
+          <h6>Total Sales</h6>
+          <div class="row">
+            <div class="col-6">
+              <div class="small-chartjs">
+                <canvas baseChart id="small-graph-1" height="60vw" width="140vw" [datasets]="smallLineChartData"
+                  [labels]="smallLineChartLabels" [options]="smallLineChartOptions" [colors]="smallLineChartColors"
+                  [legend]="smallLineChartLegend" [chartType]="smallLineChartType" (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="value-graph">
+                <h3>42% <span><i class="fa fa-angle-up font-primary"></i></span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body">
+              <span>Sales Last Month</span>
+              <h2 class="mb-0">9054</h2>
+              <p>0.25% <span><i class="fa fa-angle-up"></i></span></p>
+              <h5 class="f-w-600">Gross sales of August</h5>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+            </div>
+            <div class="bg-primary b-r-8">
+              <div class="small-box">
+
+                <i data-feather="briefcase"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 xl-50">
+      <div class="card order-graph sales-carousel">
+        <div class="card-header">
+          <h6>Total purchase</h6>
+          <div class="row">
+            <div class="col-6">
+              <div class="small-chartjs">
+                <canvas baseChart id="small-graph-2" height="60vw" width="140vw" [datasets]="smallLine2ChartData"
+                  [labels]="smallLine2ChartLabels" [options]="smallLine2ChartOptions" [colors]="smallLine2ChartColors"
+                  [legend]="smallLine2ChartLegend" [chartType]="smallLine2ChartType" (chartHover)="chartHovered($event)"
+                  (chartClick)="chartClicked($event)"></canvas>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="value-graph">
+                <h3>20% <span><i class="fa fa-angle-up font-secondary"></i></span></h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body">
+              <span>Monthly purchase</span>
+              <h2 class="mb-0">2154</h2>
+              <p>0.13% <span><i class="fa fa-angle-up"></i></span></p>
+              <h5 class="f-w-600">Avg Gross purchase</h5>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+            </div>
+            <div class="bg-secondary b-r-8">
+              <div class="small-box">
+                <i data-feather="credit-card"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+
+</div>

@@ -22,14 +22,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { SelectDropDownModule } from 'ngx-select-dropdown';
 import { NegociosModule } from './negocios/negocios.module';
-import { ListaNegociosComponent } from './negocios/lista-negocios/lista-negocios.component';
+import { HomeAdminComponent } from './home-admin/home-admin.component';
+import { CountToModule } from 'angular-count-to';
+import { ChartsModule } from 'ng2-charts';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ChartistModule } from 'ng-chartist';
 
 @NgModule({
   declarations: [
     AdminpagesComponent,
     CuentaComponent,
-
-
+    HomeAdminComponent,
   ],
   imports: [
     FormsModule,
@@ -54,6 +58,11 @@ import { ListaNegociosComponent } from './negocios/lista-negocios/lista-negocios
     SelectDropDownModule,
     PagesModule,
     NegociosModule,
+    CountToModule,
+    ChartsModule,
+    Ng2GoogleChartsModule,
+    NgxChartsModule,
+    ChartistModule
 
   ],
   providers: [],

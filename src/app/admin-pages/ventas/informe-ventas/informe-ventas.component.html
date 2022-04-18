@@ -3,22 +3,31 @@
     <h5>Informe de Ventas en el Mes</h5><br><br>
     <div class="optionhead">
       <h4>
-        A continuacion seleccione un mes
+        A continuacion seleccione un rango de fechas
       </h4>
       <div class="btn-group me-3">
-        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-          <button type="button" class="btn btn-outline-danger" ngbDropdownToggle>{{anoAux}}</button>
-          <div class="dropdown-menu" ngbDropdownMenu>
-            <button *ngFor="let anoAx of anos;let idx = index" value="{{idx}}" (click)="getAno(anoAx, idx)"
-              ngbDropdownItem>{{anoAx}}</button>
+        <div class="dp-hidden position-absolute">
+          <div class="input-group">
+            <input type="button" name="datepicker" class="btn" ngbDatepicker #datepicker="ngbDatepicker"
+              [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+              outsideDays="hidden" [startDate]="toDate!" tabindex="-1">
+
+            <ng-template #t let-date let-focused="focused">
+              <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                (mouseleave)="hoveredDate = null">
+                {{ date.day }}
+              </span>
+            </ng-template>
           </div>
         </div>
         <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
-          <button type="button" class="btn btn-outline-success" ngbDropdownToggle>{{mesAux}}</button>
-          <div class="dropdown-menu" ngbDropdownMenu>
-            <button *ngFor="let mesAx of meses;let idx = index" value="{{idx}}" (click)="getMes(mesAx, idx)"
-              ngbDropdownItem>{{mesAx}}</button>
-          </div>
+          <button type="button" class="btn btn-outline-danger calendar" (click)="datepicker.toggle()">{{ getFromDate()
+            ||
+            'Desde'}}</button>
+
+          <button type="button" class="btn btn-outline-success calendar" (click)="datepicker.toggle()">{{ getToDate() ||
+            'Hasta'}}</button>
         </div>
       </div>
     </div>
@@ -33,22 +42,62 @@
             <pre>Total Vendido en el mes : $ {{informe.total}}</pre>
           </h3>
         </div><br>
-        <div class="col-12">
+        <div class="col-12 acordionNegocios">
           <ngb-accordion [closeOthers]="true" activeIds="static-1">
             <ngb-panel *ngFor="let negocio of informe.negocios; let idx = index" id="static-{{idx + 1}}">
-              <ng-template ngbPanelTitle>
-                <img src="" alt=""><span>&#9733; {{negocio.negocio.nombre}} </span>
+
+              <!--modal grafica de barras-->
+              <ng-template #content let-modal backdrop="'static">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">{{negocio.negocio.nombre}}</h4>
+                  <button type="button" class="btn btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <app-feather-icons [icon]="'x'"></app-feather-icons>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="bodyModalBarGraphic">
+                    <ngx-charts-bar-vertical [view]="[500,400]" [results]="getValoresProductosNegocioGrafica(idx)" [xAxisLabel]="'Productos'"
+                  [animations]="false" [legendTitle]="'Ventas por Producto'" [yAxisLabel]="'Ventas'" [legend]="true" [showXAxisLabel]="true"
+                    [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [gradient]="true" legendPosition="bottom">
+                  </ngx-charts-bar-vertical>
+                  </div>
+                </div>
               </ng-template>
+
+              <!--header item acordeon-->
+              <ng-template ngbPanelHeader>
+                <div class="headerPaneAcordeon">
+                  <button ngbPanelToggle ngbPanelToggle class="titleAcordion btn">
+                    <img src="{{negocio.negocio.imagen_64}}" alt="{{negocio.negocio.imagen_64}}" class="img-fluid">
+                    <div class="tiNegocioAcordion">
+                      <span class="font-secondary">&#9733; {{negocio.negocio.nombre}} </span> <br>
+                      <h4 class="font-success">Total acumulado $ {{negocio.total}}</h4>
+                    </div>
+                  </button>
+                  <button *ngIf="+negocio.total > 0" class="btn btn-outline-success" (click)="openModalGraficaBarras(content)">
+                    <app-feather-icons [icon]="'bar-chart-2'"></app-feather-icons>
+                  </button>
+
+                  <button *ngIf="+negocio.total <= 0" class="btn btn-outline-success" disabled>
+                    <app-feather-icons [icon]="'bar-chart-2'"></app-feather-icons>
+                  </button>
+                </div>
+
+              </ng-template>
+
               <ng-template ngbPanelContent>
 
                 <div *ngIf="negocio.total > 0" class="user-status table-responsive latest-order-table">
-                  <h4 style="margin-top: 10px;">Total acumulado $ {{negocio.total}}</h4>
-
 
                   <ngx-datatable class="bootstrap" [rows]="negocio.productos" [columnMode]="'force'" [headerHeight]="50"
                     [footerHeight]="50" [rowHeight]="'auto'" [limit]="5">
-
-                    <ngx-datatable-column prop="producto" name="Producto"></ngx-datatable-column>
+                    <ngx-datatable-column name="">
+                      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                        <img src="{{row.imagen}}" alt="{{row.nombreProducto}}" class="img-fluid"
+                          style="max-height: 60px;">
+                      </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column prop="nombreProducto" name="Producto"></ngx-datatable-column>
                     <ngx-datatable-column prop="unidadesVendidas" name="Unidades Vendidas"></ngx-datatable-column>
                     <ngx-datatable-column prop="valorTotal" name="Total Vendido"></ngx-datatable-column>
                   </ngx-datatable>
@@ -70,7 +119,8 @@
             <ngx-charts-pie-chart class="pie-colours-1" [scheme]="doughnutChartColorScheme"
               [results]="getValoresGrafica()" [explodeSlices]="true" [labels]="true" [arcWidth]=0.99 [doughnut]="true"
               [animations]="false" [tooltipDisabled]="doughnutChartTooltip" maxLabelLength=20
-              [gradient]="doughnutChartGradient" [legend]="true" [labels]="true" legendPosition="bottom" [legendTitle]="'Ventas Por Negocios'" >
+              [gradient]="doughnutChartGradient" [legend]="true" [labels]="true" legendPosition="bottom"
+              [legendTitle]="'Ventas Por Negocios'">
             </ngx-charts-pie-chart>
           </div>
 
@@ -81,3 +131,4 @@
     </div>
   </div>
 </div>
+

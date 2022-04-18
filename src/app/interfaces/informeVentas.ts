@@ -1,7 +1,9 @@
+import { Producto } from "./producto";
+
 export interface PetInforme {
   usuario: number;
-  mes:     number;
-  ano:     number;
+  fechaInicio:     string;
+  fechaFin:     string;
 }
 
 export interface ReqInforme {
@@ -22,10 +24,13 @@ export interface NegocioInforme {
   usuario:     number;
   correo:      string;
   direccion:   string;
+  imagen_64:   string;
 }
 
 export interface ProductoInforme {
-  producto:         string;
+  producto:         number;
+  nombreProducto:    string;
+  imagen:           string;
   unidadesVendidas: number;
   valorTotal:       string;
 }

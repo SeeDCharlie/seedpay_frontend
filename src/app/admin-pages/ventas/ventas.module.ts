@@ -38,7 +38,7 @@ import { Ng2GoogleChartsModule } from 'ng2-google-charts';
     ChartsModule,
     Ng2GoogleChartsModule,
     NgxChartsModule,
-    ChartistModule
+    ChartistModule,
 
   ]
 })

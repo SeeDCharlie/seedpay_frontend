@@ -1,9 +1,18 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/auth/auth.guard';
 import { CuentaComponent } from '../../cuenta/cuenta.component';
+import { HomeAdminComponent } from '../../home-admin/home-admin.component';
 
 export const content: Routes = [
   // CUENTA
+  {
+    path: 'home',
+    component: HomeAdminComponent,
+    data: {
+      title: "ultimos indicativos",
+      breadcrumb: "Inicio"
+    }
+  },
   {
     path: 'ventas',
     loadChildren: () => import('../../ventas/ventas.module').then(m => m.VentasModule),

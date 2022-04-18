@@ -32,7 +32,7 @@
                 <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                   <div style="display: flex; align-items: center; justify-content: start;">
                     <a style="color:rgb(194, 110, 0);margin: 5px; display: flex; justify-content: center;max-width: 50px;"
-                      >
+                      [routerLink]="['/productos/producto', {id:row.id}]">
                       <app-feather-icons [icon]="'edit'"></app-feather-icons>
                     </a>
                     <a style="color:rgb(146, 0, 0);margin: 5px;display: flex;align-items: center; justify-content: center;max-width: 50px;"
