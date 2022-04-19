@@ -47,7 +47,6 @@ export class CuentaComponent implements OnInit {
       'direccion': ['', Validators.required],
       'telefono': ['', Validators.required],
       'identificacion': ['', Validators.required],
-      'TipoIdentificacion': [''],
 
     })
 
