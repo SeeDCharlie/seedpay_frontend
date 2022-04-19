@@ -11,7 +11,8 @@
               </div>
             </div>
             <div class="media-body col-8"><span class="m-0">Tus Ventas</span>
-              <h3 class="mb-0"> <span class="counter" [CountTo]="500" [from]="0" [duration]="2"></span><small>
+              <h3 class="mb-0"> <span class="counter" [CountTo]="getNoVentasTotal()" [from]="0"
+                  [duration]="2"></span><small>
                   ventas este mes</small></h3>
             </div>
           </div>
@@ -29,7 +30,8 @@
               </div>
             </div>
             <div class="media-body col-8"><span class="m-0">Tus Ganancias</span>
-              <h3 class="mb-0">$ <span class="counter" [CountTo]="750000" [from]="0" [duration]="2">6659</span><small>
+              <h3 class="mb-0">$ <span class="counter" [CountTo]="informe.total" [from]="0"
+                  [duration]="2">6659</span><small>
                   COP este mes</small></h3>
             </div>
           </div>
@@ -48,7 +50,7 @@
               </div>
             </div>
             <div class="media-body col-8"><span class="m-0">Tu Catalogo</span>
-              <h3 class="mb-0"> <span class="counter" [CountTo]="50" [from]="0" [duration]="2"></span><small>
+              <h3 class="mb-0"> <span class="counter" [CountTo]="noProductosDisponibles" [from]="0" [duration]="2"></span><small>
                   Productos Disponibles</small></h3>
             </div>
           </div>
@@ -60,11 +62,42 @@
     <div class="col-sm-12">
       <div class="card">
         <div class="card-header">
-          <h5>Tus ventas este mes</h5>
+          <div class="optionhead">
+            <h4>
+              Asi van tus ventas este mes
+            </h4>
+            <div class="btn-group me-3">
+              <div class="dp-hidden position-absolute">
+                <div class="input-group">
+                  <input type="button" name="datepicker" class="btn" ngbDatepicker #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'" (dateSelect)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+                    outsideDays="hidden" [startDate]="toDate!" tabindex="-1">
+
+                  <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                      [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                      (mouseleave)="hoveredDate = null">
+                      {{ date.day }}
+                    </span>
+                  </ng-template>
+                </div>
+              </div>
+              <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="btn btn-outline-danger calendar" (click)="datepicker.toggle()">Desde {{
+                  getFromDate()
+                  ||
+                  ''}}</button>
+
+                <button type="button" class="btn btn-outline-success calendar" (click)="datepicker.toggle()">Hasta {{
+                  getToDate() ||
+                  ''}}</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="card-body sell-graph">
           <canvas baseChart id="myGraph" [datasets]="lineChartData" [labels]="lineChartLabels"
-            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+            [options]="lineChartOptions" [legend]="true"
             [chartType]="lineChartType" (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
         </div>
@@ -75,64 +108,34 @@
     <div class="col-xl-6 xl-100">
       <div class="card height-equal">
         <div class="card-header">
-          <h5>Products Cart</h5>
+          <h5>Asi se encuentran tus negocios</h5>
         </div>
         <div class="card-body">
-          <div class="user-status table-responsive products-table">
-            <table class="table table-bordernone mb-0">
-              <thead>
-                <tr>
-                  <th scope="col">Details</th>
-                  <th scope="col">Quantity</th>
-                  <th scope="col">Status</th>
-                  <th scope="col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Simply dummy text of the printing</td>
-                  <td class="digits">1</td>
-                  <td class="font-primary">Pending</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>Long established</td>
-                  <td class="digits">5</td>
-                  <td class="font-secondary">Cancle</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>sometimes by accident</td>
-                  <td class="digits">10</td>
-                  <td class="font-secondary">Cancle</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>Classical Latin literature</td>
-                  <td class="digits">9</td>
-                  <td class="font-primary">Return</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>keep the site on the Internet</td>
-                  <td class="digits">8</td>
-                  <td class="font-primary">Pending</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>Molestiae consequatur</td>
-                  <td class="digits">3</td>
-                  <td class="font-secondary">Cancle</td>
-                  <td class="digits">$6523</td>
-                </tr>
-                <tr>
-                  <td>Pain can procure</td>
-                  <td class="digits">8</td>
-                  <td class="font-primary">Return</td>
-                  <td class="digits">$6523</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="tablaNego">
+            <div class="user-status table-responsive products-table">
+              <table class="table table-bordernone mb-0 ">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Negocio</th>
+                    <th scope="col">Productos vendidos</th>
+                    <th scope="col">Recaudado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let nego of informe.negocios; let idxNegocio = index">
+                    <td><img class="img-fluid imgNegocioDash" src="{{nego.negocio.imagen_64}}" alt=""></td>
+                    <td class="digits"><strong>{{nego.negocio.nombre}}</strong></td>
+                    <td class="font-primary">{{getNoVentasNegocio(idxNegocio)}}</td>
+                    <td class="digits">$ {{informe.negocios[idxNegocio].total}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="btnReportFull" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-outline-secondary" [routerLink]="['/ventas/informeVentas']">
+              Ver reporte completo</button>
           </div>
         </div>
       </div>

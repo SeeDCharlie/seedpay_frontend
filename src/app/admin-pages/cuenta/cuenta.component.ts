@@ -39,7 +39,7 @@ export class CuentaComponent implements OnInit {
     this.formCuenta = this._formBuilder.group({
       'nombre': ['', Validators.required],
       'apellido': ['', Validators.required],
-      'correo': ['', Validators.required],
+      'correo': [''],
       'passw': ['', Validators.required],
     });
 
@@ -47,7 +47,7 @@ export class CuentaComponent implements OnInit {
       'direccion': ['', Validators.required],
       'telefono': ['', Validators.required],
       'identificacion': ['', Validators.required],
-      'TipoIdentificacion': ['', Validators.required],
+      'TipoIdentificacion': [''],
 
     })
 

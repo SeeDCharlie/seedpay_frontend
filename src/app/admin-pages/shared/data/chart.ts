@@ -94,6 +94,7 @@ export var lineChartOptions: any = {
   datasetFill: true,
   responsive: true,
   maintainAspectRatio: false,
+  title:"tu mama"
 
 };
 export var lineChartColors: Array<any> = [

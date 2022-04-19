@@ -1,3 +1,5 @@
+import { Factura } from "./factura";
+import { Negocio } from "./negocio";
 import { Producto } from "./producto";
 
 export interface PetInforme {
@@ -7,8 +9,8 @@ export interface PetInforme {
 }
 
 export interface ReqInforme {
-  total?:    string;
-  negocios?: NegociosInforme[];
+  total:    string;
+  negocios: NegociosInforme[];
 }
 
 export interface NegociosInforme {
@@ -35,4 +37,12 @@ export interface ProductoInforme {
   valorTotal:       string;
 }
 
+export interface FacturasAux {
+  x:string,
+  y:number
+}
 
+export interface RespVentasPorNegocios{
+  negocio:Negocio;
+  facturas:FacturasAux[];
+}

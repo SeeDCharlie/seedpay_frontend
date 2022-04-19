@@ -1,0 +1,68 @@
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track:hover {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f3555a;
+  border-radius: 10px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f5464c;
+}
+/*datepicker*/
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.custom-day.range, .custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+
+.optionhead{
+  display: flex;
+  align-items: center;
+
+  h4{
+    margin-right: 15px;
+  }
+}
+
+
+.imgNegocioDash{
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 10px;
+}
+
+.tablaNego{
+
+    height: 400px;
+    overflow-y: scroll;
+
+}
+
+
+.btnReportFull{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row-reverse;
+}

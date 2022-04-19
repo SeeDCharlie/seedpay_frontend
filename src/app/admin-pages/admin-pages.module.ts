@@ -28,6 +28,9 @@ import { ChartsModule } from 'ng2-charts';
 import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ChartistModule } from 'ng-chartist';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,11 @@ import { ChartistModule } from 'ng-chartist';
     ChartsModule,
     Ng2GoogleChartsModule,
     NgxChartsModule,
-    ChartistModule
+    ChartistModule,
+    NgbModule,
+    NgxDatatableModule,
+    RouterModule,
+    SharedModule,
 
   ],
   providers: [],

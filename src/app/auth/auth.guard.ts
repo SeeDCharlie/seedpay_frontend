@@ -40,7 +40,7 @@ export class AuthGuard implements CanActivate, CanLoad {
       data => {
         this.confirmTk = data
         if(this.confirmTk){
-          this._router.navigate(['/dashboard/default'])
+          this._router.navigate(['/home'])
           //return this.confirmTk
         }
       }, error => {

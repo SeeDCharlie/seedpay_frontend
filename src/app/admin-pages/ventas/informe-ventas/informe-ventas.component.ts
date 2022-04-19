@@ -23,10 +23,6 @@ export class InformeVentasComponent implements OnInit {
   doughnutChartTooltip = chartData.doughnutChartTooltip;
   doughnutData = chartData.doughnutData;
 
-  anos: number[] = [2022,]
-  anoAux:any = "Año"
-  mesAux = "Mes"
-  meses:  string[] = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
   usuarioSession: UsuarioSession = {} as UsuarioSession
   peticionInforme: PetInforme = {} as PetInforme
   informe: ReqInforme = {} as ReqInforme
@@ -40,6 +36,7 @@ export class InformeVentasComponent implements OnInit {
   ) {
     this.usuarioSession = JSON.parse(sessionStorage.getItem('user') || '{}') as UsuarioSession
     this.peticionInforme.usuario = this.usuarioSession.id
+    //configuracion para el datepicker, no deja selecionar las fechas posteriores a la actual
     const current = new Date();
     config.maxDate = { year: current.getFullYear(), month:
     current.getMonth() + 1, day: current.getDate() };
