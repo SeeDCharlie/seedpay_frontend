@@ -26,7 +26,7 @@ import { ImageOutsideComponent } from './shop/product/image-outside/image-outsid
 import { StockInventoryComponent } from './shop/product/widgets/stock-inventory/stock-inventory.component';
 import { SocialComponent } from './shop/product/widgets/social/social.component';
 import { SuccessComponent } from './shop/checkout/success/success.component';
-
+import { PqrsfComponent } from './pqrsf/pqrsf.component';
 
 
 @NgModule({
@@ -52,13 +52,14 @@ import { SuccessComponent } from './shop/checkout/success/success.component';
     ServicesComponent,
     CollectionComponent,
     CatalogoComponent,
+    PqrsfComponent,
   ],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
     ElementsModule,
-    
+
   ]
 })
 export class PagesModule { }

@@ -5,6 +5,7 @@ import { CatalogoNegociosComponent } from './catalogo-negocios/catalogo-negocios
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { PagesComponent } from './pages.component';
+import { PqrsfComponent } from './pqrsf/pqrsf.component';
 import { CartComponent } from './shop/cart/cart.component';
 import { CheckoutComponent } from './shop/checkout/checkout.component';
 import { SuccessComponent } from './shop/checkout/success/success.component';
@@ -16,7 +17,7 @@ const routes: Routes = [
 
   // INICIO
   {
-    path: '', component: PagesComponent, children: [  
+    path: '', component: PagesComponent, children: [
       {
         path: 'inicio', component: HomeComponent
       },
@@ -46,6 +47,9 @@ const routes: Routes = [
       },
       {
         path: 'success', component: SuccessComponent
+      },
+      {
+        path: 'pqrsf', component: PqrsfComponent
       },
       {
         path: '', redirectTo: 'inicio', pathMatch: 'full'

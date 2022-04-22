@@ -1,0 +1,118 @@
+<app-breadcrumb [title]="'PETICIONES, QUEJAS, RECLAMOS, SUGERENCIAS Y FELICITACIONES'" [breadcrumb]="'PQRSF'">
+</app-breadcrumb>
+<!--section start-->
+<section class="blog-detail-page section-b-space">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-12">
+        <section class="p-0 section-b-space">
+          <div class="full-banner parallax-banner1 parallax text-center p-left"
+            [ngStyle]="{'background-image': 'url(assets/images/confident-call-center-operator-talking-with-client.jpg)', 'margin-bottom': '60px'}">
+            <div class="container" [ngStyle]="{'max-height':'200px'}">
+              <div class="row">
+                <div class="col">
+                  <div class="banner-contain">
+                    <h3 style="color: #52a3ff;">
+                      A través del siguiente formulario podrá formular las Peticiones, Quejas,
+                      Reclamos, Sugerencias y Felicitaciones que tenga
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="col-sm-12 blog-detail">
+
+        <h3 style="color: #006BE6;">¿Qué es un sistema de PQRSF?</h3>
+
+        <p>Es un sistema que permite recibir y conocer en tiempo real las diferentes percepciones que tienen las
+          personas sobre los servicios que ofrece la Universidad, con el fin de dar respuesta oportuna, monitorear la
+          calidad y reconocer el valor que merecen las opiniones, para así mejorar las relaciones con dichas personas y
+          mantener, cuidar y mejorar las relaciones con el público, cuidando así la reputación institucional.</p>
+      </div>
+    </div>
+    <!-- category -->
+    <section class="section-b-space">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+
+            <owl-carousel-o [options]="CollectionSliderConfig" class="category-m no-arrow">
+              <ng-container *ngFor="let motivo of motivos">
+                <ng-template carouselSlide>
+                  <div class="motivContainer">
+                    <div class="category-wrapper" [ngClass]="class">
+                      <div>
+                        <h4>{{motivo.nombre}}</h4>
+                        <ul class="category-link">
+                          <h5 class="cat">
+                            {{motivo.descripcion}}
+                          </h5>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- category end -->
+
+    <div class="row blog-contact">
+      <div class="col-sm-12">
+        <h2 style="color: #006BE6;">Formulario único de registro de PQRSF</h2>
+        <form class="theme-form">
+          <div class="form-row">
+            <div class="col-md-12">
+              <label for="name">nombres</label>
+              <input type="text" class="form-control" id="name" placeholder="Ingrese su nombre" required="">
+            </div>
+            <div class="col-md-12">
+              <label for="apellidos">apellidos</label>
+              <input type="text" class="form-control" id="apellidos" placeholder="Ingrese su apellido" required="">
+            </div>
+            <div class="col-md-12">
+              <label for="documento">Documento</label>
+              <input type="number" class="form-control" id="documento" placeholder="Numero de documento" required="">
+            </div>
+            <div class="col-md-12">
+              <label for="celular">Celular</label>
+              <input type="number" class="form-control" id="celular" placeholder="Numero de celular" required="">
+            </div>
+            <div class="col-md-12">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" placeholder="Email" required="">
+            </div>
+
+            <div class="col-md-12">
+              <label>Motivo</label> <br>
+              <select class="custom-select col-md-7" required="" style="width: 100%;">
+                <option value="">--Select--</option>
+                <option *ngFor="let motivo of motivos" value="{{motivo.id}}">{{motivo.nombre}}</option>
+              </select>
+
+            </div>
+
+
+            <div class="col-md-12">
+              <label for="exampleFormControlTextarea1">Comentario</label>
+              <textarea class="form-control" placeholder="Escribe tu cmentario" id="exampleFormControlTextarea1"
+                rows="6"></textarea>
+            </div>
+            <div class="col-md-12">
+              <button class="btn btn-solid" type="submit">Enviar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!--Section ends-->
